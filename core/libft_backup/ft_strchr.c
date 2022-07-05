@@ -1,29 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memset.c                                        :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/04 12:23:15 by jteoh             #+#    #+#             */
-/*   Updated: 2022/07/05 14:14:48 by jteoh            ###   ########.fr       */
+/*   Created: 2022/07/05 15:39:19 by jteoh             #+#    #+#             */
+/*   Updated: 2022/07/05 16:30:18 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
-
-void	*ft_memset(void *b, int c, size_t len)
+char	*ft_strchr(const char *s, int c)
 {
-	size_t	i;
-	char	*d;
-
-	i = 0;
-	d = (char *)b;
-	while (i != len)
+	if (c == '\0')
 	{
-		*d = c;
-		i++;
-		d++;
+		while (*s != '\0')
+			s++;
+		return ((char *)s);
 	}
-	return (b);
+	else
+	{
+		while (*s != '\0')
+		{
+			if (*s == c)
+			{
+				return ((char *)s);
+			}
+			s++;
+		}
+	}
+	return (0);
 }
