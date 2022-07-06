@@ -6,7 +6,7 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 11:20:22 by jteoh             #+#    #+#             */
-/*   Updated: 2022/07/05 14:43:55 by jteoh            ###   ########.fr       */
+/*   Updated: 2022/07/06 15:57:49 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,11 @@ void	*ft_memcpy(void *dst, const void *src, size_t n)
 	i = 0;
 	dest = (char *)dst;
 	source = (char *)src;
-	while (i != n)
+	if (!dst && !src)
+		return (0);
+	while (i < n)
 	{
-		dest[i] = source[i];
+		*(dest + i) = *(source + i);
 		i++;
 	}
 	return (dst);

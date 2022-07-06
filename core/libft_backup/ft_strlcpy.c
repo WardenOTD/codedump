@@ -1,44 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/05 11:51:12 by jteoh             #+#    #+#             */
-/*   Updated: 2022/07/06 17:38:49 by jteoh            ###   ########.fr       */
+/*   Created: 2022/07/06 10:57:36 by jteoh             #+#    #+#             */
+/*   Updated: 2022/07/06 11:32:57 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
 
-void	*ft_memmove(void *dst, const void *src, size_t len)
+static size_t	ft_strlen(char *str)
 {
-	int	i;
-	char	*dest;
-	char	*source;
+	size_t	i;
 
-	dest = (char *)dst;
-	source = (char *)src;
-	if (!dst && !src)
-		return (0);
-	if (dst > src)
+	i = 0;
+	while (str[i] != '\0')
+		i++;
+	return (i);
+}
+
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
+{
+	size_t	i;
+	size_t	len;
+
+	len = ft_strlen((char *)src);
+	i = 0;
+	if (dstsize == 0)
+		return (len);
+	while (i < dstsize - 1 && *src != '\0')
 	{
-		i = (int)len - 1;
-		while (i >= 0)
-		{
-			*(dest + i) = *(source + i);
-			i--;
-		}
+		*dst = *src;
+		dst++;
+		src++;
+		i++;
 	}
-	else
+	if (*src == '\0' || i == dstsize - 1)
 	{
-		i = 0;
-		while (i < (int)len)
-		{
-			*(dest + i) = *(source + i);
-			i++;
-		}
+		*dst = '\0';
 	}
-	return (dst);
+	return (len);
 }

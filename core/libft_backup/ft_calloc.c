@@ -1,44 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/05 11:51:12 by jteoh             #+#    #+#             */
-/*   Updated: 2022/07/06 17:38:49 by jteoh            ###   ########.fr       */
+/*   Created: 2022/07/06 14:15:04 by jteoh             #+#    #+#             */
+/*   Updated: 2022/07/06 14:37:26 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
+#include <stdlib.h>
 
-void	*ft_memmove(void *dst, const void *src, size_t len)
+void	*ft_calloc(size_t count, size_t size)
 {
-	int	i;
-	char	*dest;
-	char	*source;
+	size_t	*arr;
+	size_t	i;
 
-	dest = (char *)dst;
-	source = (char *)src;
-	if (!dst && !src)
-		return (0);
-	if (dst > src)
+	i = 0;
+	arr = (void *)malloc(count * size);
+	while (arr[i])
 	{
-		i = (int)len - 1;
-		while (i >= 0)
-		{
-			*(dest + i) = *(source + i);
-			i--;
-		}
+		arr[i] = 0;
+		i++;
 	}
-	else
-	{
-		i = 0;
-		while (i < (int)len)
-		{
-			*(dest + i) = *(source + i);
-			i++;
-		}
-	}
-	return (dst);
+	return ((void *)arr);
 }
