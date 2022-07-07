@@ -1,31 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/06 14:15:04 by jteoh             #+#    #+#             */
-/*   Updated: 2022/07/07 10:35:11 by jteoh            ###   ########.fr       */
+/*   Created: 2022/07/07 13:28:06 by jteoh             #+#    #+#             */
+/*   Updated: 2022/07/07 13:58:05 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
 #include <stdlib.h>
 
-void	*ft_calloc(size_t count, size_t size)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	size_t	*arr;
-	size_t	i;
+	char	*ss;
+	int		i;
+	int		j;
 
+	j = 0;
 	i = 0;
-	arr = (void *)malloc(count * size);
-	if (!arr)
+	ss = (char *)malloc(len + 1);
+	if (!ss)
 		return (0);
-	while (arr[i])
+	while ((char)s[i] != '\0')
 	{
-		arr[i] = 0;
+		if (i == (int)start)
+		{
+			while (j < (int)len)
+			{
+				ss[j] = (char)s[i];
+				i++;
+				j++;
+			}
+			ss[j] = '\0';
+			return (ss);
+		}
 		i++;
 	}
-	return ((void *)arr);
+	return (0);
 }

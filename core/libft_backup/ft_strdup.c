@@ -1,31 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/06 14:15:04 by jteoh             #+#    #+#             */
-/*   Updated: 2022/07/07 10:35:11 by jteoh            ###   ########.fr       */
+/*   Created: 2022/07/07 13:15:29 by jteoh             #+#    #+#             */
+/*   Updated: 2022/07/07 13:24:09 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
 #include <stdlib.h>
 
-void	*ft_calloc(size_t count, size_t size)
+static int	ft_strlen(char *str)
 {
-	size_t	*arr;
-	size_t	i;
+	int	i;
 
 	i = 0;
-	arr = (void *)malloc(count * size);
-	if (!arr)
+	while (str[i])
+		i++;
+	return (i);
+}
+
+char	*ft_strdup(const char *s1)
+{
+	char	*s1c;
+	int		i;
+
+	s1c = (char *)malloc(ft_strlen((char *)s1) + 1);
+	if (!s1c)
 		return (0);
-	while (arr[i])
+	i = 0;
+	while ((char)s1[i] != '\0')
 	{
-		arr[i] = 0;
+		s1c[i] = (char)s1[i];
 		i++;
 	}
-	return ((void *)arr);
+	return (s1c);
 }

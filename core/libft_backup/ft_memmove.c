@@ -6,7 +6,7 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 11:51:12 by jteoh             #+#    #+#             */
-/*   Updated: 2022/07/06 17:38:49 by jteoh            ###   ########.fr       */
+/*   Updated: 2022/07/07 11:52:19 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,8 @@
 
 void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	int	i;
-	char	*dest;
-	char	*source;
+	int		i;
 
-	dest = (char *)dst;
-	source = (char *)src;
 	if (!dst && !src)
 		return (0);
 	if (dst > src)
@@ -27,7 +23,7 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 		i = (int)len - 1;
 		while (i >= 0)
 		{
-			*(dest + i) = *(source + i);
+			*(char *)(dst + i) = *(char *)(src + i);
 			i--;
 		}
 	}
@@ -36,7 +32,7 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 		i = 0;
 		while (i < (int)len)
 		{
-			*(dest + i) = *(source + i);
+			*(char *)(dst + i) = *(char *)(src + i);
 			i++;
 		}
 	}
