@@ -41,37 +41,37 @@ static int	recharcheck(char *str, char c)
 	return (i);
 }
 
-static void	aloccheck(char *str, int size)
+static char	*aloccheck(int size)
 {
+	char	*str;
 	str = (char *)malloc(sizeof(char) * size + 1);
 	if (!str)
 		free(str);
+	return (str);
 }
 
-static char	*stringcpy(char *arr, char *str, int size)
+static char	**stringcpy(char **arr, char *str, int size)
 {
 	int	i;
 
 	i = 0;
 	while (i <= size)
 	{
-		arr[i] = *str;
+		*arr[i] = *str;
 		str++;
 		i++;
 	}
-	arr[i] = '\0';
+	*arr[i] = '\0';
 	return (arr);
 }
 
 char	**ft_split(char const *s, char c)
 {
 	char	**arr;
-	int		i;
 	int		j;
 	int		m;
 
 	m = 0;
-	i = 0;
 	j = 0;
 	arr = (char **)malloc(sizeof(s) * charcheck((char *)s, c) + 1);
 	if (!arr)
@@ -80,13 +80,29 @@ char	**ft_split(char const *s, char c)
 	{
 		if (recharcheck((char *)&s[j], c) > 0)
 		{
-			aloccheck(&arr[m][i], recharcheck((char *)&s[j], c) + 1);
-			arr[m][i] = *stringcpy(&arr[m][i], (char *)&s[j], c);
+			arr[m] = aloccheck(recharcheck((char *)&s[j], c) + 1);
+			arr[m] = (char *)stringcpy(&arr[m], (char *)&s[j], recharcheck((char *)&s[j], c));
 			m++;
 		}
 		if (recharcheck((char *)&s[j], c) == 0)
-			arr[m][j] = '\0';
+			arr[m] = '\0';
 		j++;
 	}
 	return (arr);
+}
+
+#include <stdio.h>
+int	main()
+{
+	char	**arr;
+	char	str[] = "alorem aipsum adorem aliptum as aa";
+	char	sep = 'a';
+	arr = ft_split(str, sep);
+	int	i;
+	i = 0;
+	while (arr[i] != '\0')
+	{
+		printf("%s\n", arr[i]);
+		i++;
+	}
 }
