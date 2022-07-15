@@ -12,81 +12,70 @@
 
 #include <stdlib.h>
 
-static int	charcheck(char *str, char c)
+static int	charcount(char *s, char c)
 {
 	int	i;
-	int	j;
 
 	i = 0;
-	j = 0;
-	while (str[j] != '\0')
+	while (*s != '\0')
 	{
-		if (str[j] == c)
+		if (*s == c)
 			i++;
-		j++;
+		s++;
 	}
 	return (i);
 }
 
-static int	recharcheck(char *str, char c)
+static int	limitedcount(char *s, char c)
 {
 	int	i;
 
 	i = 0;
-	while (*str != c && *str != '\0')
+	while (*s != c || *s != '\0')
 	{
+		s++;
 		i++;
-		str++;
 	}
 	return (i);
 }
 
-static char	*aloccheck(int size)
+static char	*copy(char **arr, int i, char *s, char c)
 {
-	char	*str;
-	str = (char *)malloc(sizeof(char) * size + 1);
-	if (!str)
-		free(str);
-	return (str);
-}
-
-static char	**stringcpy(char **arr, char *str, int size)
-{
-	int	i;
-
-	i = 0;
-	while (i <= size)
+	if (*(s + 1) == c)
 	{
-		*arr[i] = *str;
-		str++;
+		*arr[i] = '\0';
+		return (*arr);
+	}
+	s++;
+	while (*s != c)
+	{
+		*arr[i] = *s;
+		s++;
 		i++;
 	}
-	*arr[i] = '\0';
-	return (arr);
+	return (*arr);
 }
 
 char	**ft_split(char const *s, char c)
 {
 	char	**arr;
-	int		j;
-	int		m;
+	int		i;
 
-	m = 0;
-	j = 0;
-	arr = (char **)malloc(sizeof(s) * charcheck((char *)s, c) + 1);
+	arr = (char **)malloc(sizeof(s) * charcount((char *)s, c) + 1);
 	if (!arr)
 		return (0);
-	while ((char)s[j] != '\0')
+	i = 0;
+	while (*s != '\0')
 	{
-		if (recharcheck((char *)&s[j], c) > 0)
+		if ((char)*s == c)
 		{
-			arr[m] = aloccheck(recharcheck((char *)&s[j], c) + 1);
-			arr[m] = (char *)stringcpy(&arr[m], (char *)&s[j], recharcheck((char *)&s[j], c));
-			m++;
+			arr[i] = (char *)malloc(sizeof(s) * limitedcount((char *)s, c) + 1);
+			if (!arr[i])
+				return (0);
+			arr[i] = copy(arr, i, (char *)s, c);
+			i++;
 		}
-		if (recharcheck((char *)&s[j], c) == 0)
-			arr[m] = '\0';
-		j++;
+		s++;
 	}
 	return (arr);
 }
