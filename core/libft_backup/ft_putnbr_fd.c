@@ -6,7 +6,7 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 12:05:35 by jteoh             #+#    #+#             */
-/*   Updated: 2022/07/18 12:10:45 by jteoh            ###   ########.fr       */
+/*   Updated: 2022/07/18 13:27:32 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,5 @@
 
 void	ft_putnbr_fd(int n, int fd)
 {
-	if (n == 0)
-		ft_putchar_fd(n + '0', fd);
-	else
-	{
-		while (n != 0)
-		{
-			ft_putchar_fd((n % 10) + '0', fd);
-			n /= 10;
-		}
-	}
+	ft_putstr_fd(ft_itoa(n), fd);
 }
