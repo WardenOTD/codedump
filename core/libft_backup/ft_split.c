@@ -6,7 +6,7 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 15:01:06 by jteoh             #+#    #+#             */
-/*   Updated: 2022/07/18 16:47:27 by jteoh            ###   ########.fr       */
+/*   Updated: 2022/07/18 17:17:16 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int	limitedcount(char *s, char c)
 
 	j = 0;
 	i = 0;
-	while (s[j] != c || s[j] != '\0')
+	while (s[j] != c && s[j] != '\0')
 	{
 		j++;
 		i++;
@@ -46,11 +46,9 @@ static int	limitedcount(char *s, char c)
 static void	copyover(char *dest, char *src, int amt)
 {
 	int	i;
-	int	j;
 
 	i = 0;
-	j = 0;
-	while (j < amt)
+	while (i < amt)
 	{
 		dest[i] = src[i];
 		i++;
@@ -80,7 +78,7 @@ static int	copy(char **arr, char *str, char c, int count)
 				return (0);
 			}
 			copyover(arr[m], str + i, limitedcount(str + i, c));
-			i++;
+			i += limitedcount(str + i, c);
 			m++;
 		}
 	}
