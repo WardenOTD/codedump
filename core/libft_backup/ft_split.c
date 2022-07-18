@@ -6,12 +6,11 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 15:01:06 by jteoh             #+#    #+#             */
-/*   Updated: 2022/07/18 11:38:18 by jteoh            ###   ########.fr       */
+/*   Updated: 2022/07/18 16:47:27 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdlib.h>
 
 static int	charcount(char *s, char c)
 {
@@ -59,14 +58,14 @@ static void	copyover(char *dest, char *src, int amt)
 	dest[i] = '\0';
 }
 
-static int	copy(char **arr, char *str, char c)
+static int	copy(char **arr, char *str, char c, int count)
 {
 	int	i;
 	int	m;
 
 	i = 0;
 	m = 0;
-	while (str[i] != '\0')
+	while (m < count)
 	{
 		if (str[i] == c)
 			i++;
@@ -100,7 +99,7 @@ char	**ft_split(char const *s, char c)
 	if (!arr)
 		return (0);
 	arr[count + 1] = 0;
-	if (copy(arr, str, c) == 0)
+	if (copy(arr, str, c, count) == 0)
 		return (0);
 	return (arr);
 }
