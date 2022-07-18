@@ -6,10 +6,11 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 13:28:06 by jteoh             #+#    #+#             */
-/*   Updated: 2022/07/07 13:58:05 by jteoh            ###   ########.fr       */
+/*   Updated: 2022/07/18 11:41:54 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 #include <stdlib.h>
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)

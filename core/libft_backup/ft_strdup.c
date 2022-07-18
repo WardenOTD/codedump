@@ -6,21 +6,11 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 13:15:29 by jteoh             #+#    #+#             */
-/*   Updated: 2022/07/07 13:24:09 by jteoh            ###   ########.fr       */
+/*   Updated: 2022/07/18 11:44:18 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-
-static int	ft_strlen(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
-}
+#include "libft.h"
 
 char	*ft_strdup(const char *s1)
 {

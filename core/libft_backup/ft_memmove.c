@@ -6,10 +6,11 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 11:51:12 by jteoh             #+#    #+#             */
-/*   Updated: 2022/07/07 11:52:19 by jteoh            ###   ########.fr       */
+/*   Updated: 2022/07/18 11:38:12 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 #include <stddef.h>
 
 void	*ft_memmove(void *dst, const void *src, size_t len)

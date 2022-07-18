@@ -6,21 +6,11 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 14:21:21 by jteoh             #+#    #+#             */
-/*   Updated: 2022/07/07 14:51:52 by jteoh            ###   ########.fr       */
+/*   Updated: 2022/07/18 11:44:50 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-
-static int	ft_strlen(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
-}
+#include "libft.h"
 
 static int	ft_setcheck(char *str, char *set)
 {

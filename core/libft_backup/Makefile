@@ -6,7 +6,7 @@
 #    By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/04 10:34:49 by jteoh             #+#    #+#              #
-#    Updated: 2022/07/07 15:00:24 by jteoh            ###   ########.fr        #
+#    Updated: 2022/07/18 12:05:20 by jteoh            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,8 @@ FUNC	= ft_isalnum.c ft_toupper.c ft_tolower.c ft_strchr.c ft_strrchr.c \
 			ft_memcpy.c ft_memcmp.c ft_atoi.c ft_strlcpy.c ft_strlcat.c \
 			ft_bzero.c ft_isascii.c ft_strdup.c ft_memmove.c ft_strlen.c \
 			ft_isdigit.c ft_memset.c ft_isprint.c ft_substr.c ft_strjoin.c \
-			ft_strtrim.c ft_split.c ft_itoa.c \
+			ft_strtrim.c ft_split.c ft_itoa.c ft_strmapi.c ft_striteri.c \
+			ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c \
 
 OBJS	= $(FUNC:.c=.o)
 

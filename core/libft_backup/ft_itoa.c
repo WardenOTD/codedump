@@ -6,10 +6,11 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 14:56:37 by jteoh             #+#    #+#             */
-/*   Updated: 2022/07/15 14:56:37 by jteoh            ###   ########.fr       */
+/*   Updated: 2022/07/18 11:38:01 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 #include <stdlib.h>
 
 static int	digitcount(int n)
@@ -17,6 +18,8 @@ static int	digitcount(int n)
 	int	count;
 
 	count = 0;
+	if (n == 0)
+		return (count + 1);
 	while (n != 0)
 	{
 		n /= 10;

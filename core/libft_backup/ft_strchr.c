@@ -6,9 +6,11 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 15:39:19 by jteoh             #+#    #+#             */
-/*   Updated: 2022/07/05 16:30:18 by jteoh            ###   ########.fr       */
+/*   Updated: 2022/07/18 11:38:23 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
 
 char	*ft_strchr(const char *s, int c)
 {

@@ -6,22 +6,25 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 15:01:06 by jteoh             #+#    #+#             */
-/*   Updated: 2022/07/07 17:26:08 by jteoh            ###   ########.fr       */
+/*   Updated: 2022/07/18 11:38:18 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 #include <stdlib.h>
 
 static int	charcount(char *s, char c)
 {
 	int	i;
+	int	j;
 
+	j = 0;
 	i = 0;
-	while (*s != '\0')
+	while (s[j] != '\0')
 	{
-		if (*s == c)
+		if (s[j] != c && s[j + 1] == c)
 			i++;
-		s++;
+		j++;
 	}
 	return (i);
 }
@@ -29,69 +32,75 @@ static int	charcount(char *s, char c)
 static int	limitedcount(char *s, char c)
 {
 	int	i;
+	int	j;
 
+	j = 0;
 	i = 0;
-	while (*s != c || *s != '\0')
+	while (s[j] != c || s[j] != '\0')
 	{
-		s++;
+		j++;
 		i++;
 	}
 	return (i);
 }
 
-static char	*copy(char **arr, int i, char *s, char c)
+static void	copyover(char *dest, char *src, int amt)
 {
-	if (*(s + 1) == c)
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (j < amt)
 	{
-		*arr[i] = '\0';
-		return (*arr);
-	}
-	s++;
-	while (*s != c)
-	{
-		*arr[i] = *s;
-		s++;
+		dest[i] = src[i];
 		i++;
 	}
-	return (*arr);
+	dest[i] = '\0';
+}
+
+static int	copy(char **arr, char *str, char c)
+{
+	int	i;
+	int	m;
+
+	i = 0;
+	m = 0;
+	while (str[i] != '\0')
+	{
+		if (str[i] == c)
+			i++;
+		else
+		{
+			arr[m] = (char *)malloc(sizeof(char)
+					* (limitedcount(str + i, c) + 1));
+			if (!arr[m])
+			{
+				while (m > 0)
+					free(arr[--m]);
+				return (0);
+			}
+			copyover(arr[m], str + i, limitedcount(str + i, c));
+			i++;
+			m++;
+		}
+	}
+	return (1);
 }
 
 char	**ft_split(char const *s, char c)
 {
 	char	**arr;
-	int		i;
+	char	*str;
+	int		count;
 
-	arr = (char **)malloc(sizeof(s) * charcount((char *)s, c) + 1);
+	str = (char *)s;
+	count = charcount(str, c);
+	arr = (char **)malloc(sizeof(char *) * (count + 1));
 	if (!arr)
 		return (0);
-	i = 0;
-	while (*s != '\0')
-	{
-		if ((char)*s == c)
-		{
-			arr[i] = (char *)malloc(sizeof(s) * limitedcount((char *)s, c) + 1);
-			if (!arr[i])
-				return (0);
-			arr[i] = copy(arr, i, (char *)s, c);
-			i++;
-		}
-		s++;
-	}
+	arr[count + 1] = 0;
+	if (copy(arr, str, c) == 0)
+		return (0);
 	return (arr);
-}
-
-#include <stdio.h>
-int	main()
-{
-	char	**arr;
-	char	str[] = "alorem aipsum adorem aliptum as aa";
-	char	sep = 'a';
-	arr = ft_split(str, sep);
-	int	i;
-	i = 0;
-	while (arr[i] != '\0')
-	{
-		printf("%s\n", arr[i]);
-		i++;
-	}
 }

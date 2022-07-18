@@ -6,10 +6,11 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 16:08:53 by jteoh             #+#    #+#             */
-/*   Updated: 2022/07/07 09:35:21 by jteoh            ###   ########.fr       */
+/*   Updated: 2022/07/18 11:37:56 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 #include <stddef.h>
 
 void	*ft_memchr(const void *s, int c, size_t n)

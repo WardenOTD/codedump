@@ -6,10 +6,11 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 14:15:04 by jteoh             #+#    #+#             */
-/*   Updated: 2022/07/07 10:35:11 by jteoh            ###   ########.fr       */
+/*   Updated: 2022/07/18 11:37:26 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 #include <stddef.h>
 #include <stdlib.h>
 
