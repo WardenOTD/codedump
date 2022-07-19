@@ -6,7 +6,7 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 12:03:13 by jteoh             #+#    #+#             */
-/*   Updated: 2022/07/18 12:04:38 by jteoh            ###   ########.fr       */
+/*   Updated: 2022/07/19 10:18:36 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,8 @@
 
 void	ft_putendl_fd(char *s, int fd)
 {
-	int	i;
-
-	i = 0;
-	while (s[i] != '\0')
-	{
-		ft_putchar_fd(s[i], fd);
-		i++;
-	}
+	if (!s)
+		return ;
+	ft_putstr_fd(s, fd);
 	ft_putchar_fd('\n', fd);
 }

@@ -6,7 +6,7 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 12:45:06 by jteoh             #+#    #+#             */
-/*   Updated: 2022/07/18 16:08:16 by jteoh            ###   ########.fr       */
+/*   Updated: 2022/07/19 17:31:12 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,6 @@ typedef struct s_list
 	void			*content;
 	struct s_list	*next;
 }				t_list;
-
-typedef struct s_split_next
-{
-	size_t	start;
-	size_t	length;
-}				t_split_next;
 
 int				ft_atoi(const char *str);
 

@@ -6,7 +6,7 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 13:28:06 by jteoh             #+#    #+#             */
-/*   Updated: 2022/07/18 11:41:54 by jteoh            ###   ########.fr       */
+/*   Updated: 2022/07/19 10:02:02 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	j = 0;
 	i = 0;
 	ss = (char *)malloc(len + 1);
-	if (!ss)
+	if (!ss || !s)
 		return (0);
 	while ((char)s[i] != '\0')
 	{
@@ -30,8 +30,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		{
 			while (j < (int)len)
 			{
-				ss[j] = (char)s[i];
-				i++;
+				ss[j] = (char)s[i + j];
 				j++;
 			}
 			ss[j] = '\0';
@@ -39,5 +38,5 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		}
 		i++;
 	}
-	return (0);
+	return (ss);
 }

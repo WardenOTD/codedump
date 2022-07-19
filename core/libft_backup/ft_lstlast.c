@@ -6,7 +6,7 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 14:47:21 by jteoh             #+#    #+#             */
-/*   Updated: 2022/07/18 15:08:07 by jteoh            ###   ########.fr       */
+/*   Updated: 2022/07/19 10:48:24 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 t_list	*ft_lstlast(t_list *lst)
 {
+	if (lst == 0)
+		return (0);
 	while (lst->next != 0)
 		lst = lst->next;
 	return (lst);

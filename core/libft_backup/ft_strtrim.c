@@ -6,7 +6,7 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 14:21:21 by jteoh             #+#    #+#             */
-/*   Updated: 2022/07/18 11:44:50 by jteoh            ###   ########.fr       */
+/*   Updated: 2022/07/19 10:09:56 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ char	*ft_strtrim(char const *s1, char const *set)
 	int		j;
 	int		n;
 
+	if (!s1 || !set)
+		return (0);
 	i = 0;
 	j = ft_strlen((char *)s1);
 	while ((char)s1[i] && ft_setcheck((char *)&s1[i], (char *)set))

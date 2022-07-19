@@ -6,7 +6,7 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 11:58:33 by jteoh             #+#    #+#             */
-/*   Updated: 2022/07/18 12:01:51 by jteoh            ###   ########.fr       */
+/*   Updated: 2022/07/19 10:18:51 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	ft_putstr_fd(char *s, int fd)
 	int	i;
 
 	i = 0;
+	if (!s)
+		return ;
 	while (s[i] != '\0')
 	{
 		ft_putchar_fd(s[i], fd);
