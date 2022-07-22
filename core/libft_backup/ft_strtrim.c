@@ -6,7 +6,7 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 14:21:21 by jteoh             #+#    #+#             */
-/*   Updated: 2022/07/19 10:09:56 by jteoh            ###   ########.fr       */
+/*   Updated: 2022/07/22 12:52:38 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,11 @@ char	*ft_strtrim(char const *s1, char const *set)
 		i++;
 	while (j > i && ft_setcheck((char *)&s1[j - 1], (char *)set))
 		j--;
-	s1c = (char *)malloc(ft_strlen((char *)s1) * (j - i + 1));
+	s1c = (char *)ft_calloc((j - i + 1), sizeof(char));
 	if (!s1c)
 		return (0);
 	n = 0;
 	while (i < j)
 		s1c[n++] = (char)s1[i++];
-	s1c[n] = '\0';
 	return (s1c);
 }

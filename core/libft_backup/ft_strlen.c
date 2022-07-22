@@ -6,12 +6,11 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 11:54:01 by jteoh             #+#    #+#             */
-/*   Updated: 2022/07/18 11:41:34 by jteoh            ###   ########.fr       */
+/*   Updated: 2022/07/22 12:49:22 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stddef.h>
 
 size_t	ft_strlen(const char *s)
 {

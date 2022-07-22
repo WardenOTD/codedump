@@ -6,7 +6,7 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 16:09:37 by jteoh             #+#    #+#             */
-/*   Updated: 2022/07/18 16:20:33 by jteoh            ###   ########.fr       */
+/*   Updated: 2022/07/21 14:22:04 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,10 @@ void	ft_lstclear(t_list **lst, void (*del)(void *))
 
 	if (!*lst)
 		return ;
-	tmp = *lst;
 	while (*lst != 0)
 	{
-		ft_lstdelone(tmp, del);
 		tmp = (*lst)->next;
+		ft_lstdelone(*lst, del);
 		*lst = tmp;
 	}
-	*lst = 0;
 }

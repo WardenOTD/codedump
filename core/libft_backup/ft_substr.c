@@ -6,37 +6,45 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 13:28:06 by jteoh             #+#    #+#             */
-/*   Updated: 2022/07/19 10:02:02 by jteoh            ###   ########.fr       */
+/*   Updated: 2022/07/22 16:56:16 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdlib.h>
+
+static void	copy(char *s, char *ss, int start, int len)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (s[i] != '\0')
+	{
+		if (i == start)
+		{
+			while (j < len)
+			{
+				ss[j] = s[i + j];
+				j++;
+			}
+			ss[j] = 0;
+			return ;
+		}
+		i++;
+	}
+	return ;
+}
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	char	*ss;
-	int		i;
-	int		j;
 
-	j = 0;
-	i = 0;
-	ss = (char *)malloc(len + 1);
-	if (!ss || !s)
+	if (!s)
 		return (0);
-	while ((char)s[i] != '\0')
-	{
-		if (i == (int)start)
-		{
-			while (j < (int)len)
-			{
-				ss[j] = (char)s[i + j];
-				j++;
-			}
-			ss[j] = '\0';
-			return (ss);
-		}
-		i++;
-	}
+	ss = (char *)ft_calloc((len + 1), sizeof(char));
+	if (!ss)
+		return (0);
+	copy((char *)s, ss, (int)start, (int)len);
 	return (ss);
 }

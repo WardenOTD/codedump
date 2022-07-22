@@ -6,13 +6,11 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 11:07:52 by jteoh             #+#    #+#             */
-/*   Updated: 2022/07/18 11:37:14 by jteoh            ###   ########.fr       */
+/*   Updated: 2022/07/21 16:30:19 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-#include <stddef.h>
 
 void	ft_bzero(void *s, size_t n)
 {
@@ -21,7 +19,7 @@ void	ft_bzero(void *s, size_t n)
 
 	i = 0;
 	d = (char *)s;
-	while (i != n)
+	while (i < n)
 	{
 		*d = '\0';
 		i++;

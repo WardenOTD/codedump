@@ -6,7 +6,7 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 14:08:14 by jteoh             #+#    #+#             */
-/*   Updated: 2022/07/19 09:59:41 by jteoh            ###   ########.fr       */
+/*   Updated: 2022/07/22 10:26:38 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ char	*ft_strjoin(char const *s1, char const *s2)
 
 	if (!s1 || !s2)
 		return (0);
-	s3 = (char *)malloc(ft_strlen((char *)s1) + ft_strlen((char *)s2));
+	s3 = (char *)ft_calloc(ft_strlen((char *)s1) + ft_strlen((char *)s2),
+			sizeof(char));
 	if (!s3)
 		return (0);
 	i = 0;

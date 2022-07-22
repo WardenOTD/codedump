@@ -6,7 +6,7 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 15:39:19 by jteoh             #+#    #+#             */
-/*   Updated: 2022/07/18 11:38:23 by jteoh            ###   ########.fr       */
+/*   Updated: 2022/07/21 14:22:48 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	*ft_strchr(const char *s, int c)
 {
-	if (c == '\0')
+	if ((char)c == '\0')
 	{
 		while (*s != '\0')
 			s++;
@@ -24,7 +24,7 @@ char	*ft_strchr(const char *s, int c)
 	{
 		while (*s != '\0')
 		{
-			if (*s == c)
+			if (*s == (char)c)
 			{
 				return ((char *)s);
 			}

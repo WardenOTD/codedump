@@ -6,102 +6,98 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 15:01:06 by jteoh             #+#    #+#             */
-/*   Updated: 2022/07/19 15:35:57 by jteoh            ###   ########.fr       */
+/*   Updated: 2022/07/21 10:47:55 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	charcount(char *s, char c)
+static char	**setarray(char *s, char c)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
+	char	**arr;
 
 	j = 0;
 	i = 0;
-	while (s[j] != '\0')
+	while (s[i] != '\0')
 	{
-		if ((s[j] != c && s[j + 1] == c) || s[j + 1] == '\0')
-			i++;
-		j++;
+		if (s[i] != c && ((s[i + 1] == c) || s[i + 1] == '\0'))
+			j++;
+		i++;
 	}
-	return (i);
+	arr = (char **)ft_calloc(j + 1, sizeof(char *));
+	if (!arr)
+		return (0);
+	return (arr);
 }
 
-static int	limitedcount(char *s, char c)
+static void	setpointer(char *s, char c, char **arr)
 {
 	int	i;
 	int	j;
-
-	j = 0;
-	i = 0;
-	while (s[j] != c && s[j] != '\0')
-	{
-		j++;
-		i++;
-	}
-	return (i);
-}
-
-static void	copyover(char *dest, char *src, int amt)
-{
-	int	i;
-
-	i = 0;
-	while (i < amt)
-	{
-		dest[i] = src[i];
-		i++;
-	}
-}
-
-static int	copy(char **arr, char *str, char c, int count)
-{
-	int	i;
 	int	m;
 
 	i = 0;
+	j = 0;
 	m = 0;
-	while (m <= count && str[i] != 0)
+	while (s[i] != 0)
 	{
-		if (str[i] == c)
-			i++;
-		else
+		if (s[i] != c && s[i] != 0)
+			j++;
+		if (s[i] != c && (s[i + 1] == c || s[i + 1] == 0))
 		{
-			arr[m] = (char *)ft_calloc(sizeof(char),
-					(limitedcount(str + i, c) + 1));
+			arr[m] = (char *)ft_calloc(j + 1, sizeof(char));
 			if (!arr[m])
 			{
-				while (m > 0)
+				while (arr[m])
 					free(arr[--m]);
-				return (0);
 			}
-			copyover(arr[m], str + i, limitedcount(str + i, c));
-			i += limitedcount(str + i, c);
 			m++;
+			j = 0;
 		}
+		i++;
 	}
-	return (1);
+}
+
+static void	copy(char *s, char c, char **arr)
+{
+	int	i;
+	int	j;
+	int	m;
+
+	i = 0;
+	j = 0;
+	m = 0;
+	while (s[i] != 0)
+	{
+		if (s[i] != c && s[i] != 0)
+		{
+			arr[m][j] = s[i];
+			j++;
+		}
+		if (s[i] != c && (s[i + 1] == c || s[i + 1] == 0))
+		{
+			m++;
+			j = 0;
+		}
+		i++;
+	}
+	arr[m] = 0;
 }
 
 char	**ft_split(char const *s, char c)
 {
 	char	**arr;
 	char	*str;
-	int		count;
 
 	if (!s)
 		return (0);
 	str = (char *)s;
-	count = charcount(str, c);
-	arr = (char **)ft_calloc((count + 1), sizeof(char *));
+	arr = setarray(str, c);
 	if (!arr)
 		return (0);
-	arr[count] = 0;
-	if (copy(arr, str, c, count) == 0)
-	{
-		free(arr);
-		return (0);
-	}
+	setpointer(str, c, arr);
+	copy(str, c, arr);
 	return (arr);
 }
