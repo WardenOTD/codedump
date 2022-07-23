@@ -6,11 +6,12 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 15:01:06 by jteoh             #+#    #+#             */
-/*   Updated: 2022/07/21 10:47:55 by jteoh            ###   ########.fr       */
+/*   Updated: 2022/07/23 15:54:09 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdio.h>
 
 static char	**setarray(char *s, char c)
 {
@@ -32,7 +33,19 @@ static char	**setarray(char *s, char c)
 	return (arr);
 }
 
-static void	setpointer(char *s, char c, char **arr)
+static char	*callocforpointer(char **arr, int m, int j)
+{
+	arr[m] = (char *)ft_calloc(j + 1, sizeof(char));
+	if (!arr[m])
+	{
+		while (arr[m])
+			free(arr[--m]);
+		return ("error");
+	}
+	return (arr[m]);
+}
+
+static int	setpointer(char *s, char c, char **arr)
 {
 	int	i;
 	int	j;
@@ -47,17 +60,15 @@ static void	setpointer(char *s, char c, char **arr)
 			j++;
 		if (s[i] != c && (s[i + 1] == c || s[i + 1] == 0))
 		{
-			arr[m] = (char *)ft_calloc(j + 1, sizeof(char));
-			if (!arr[m])
-			{
-				while (arr[m])
-					free(arr[--m]);
-			}
+			arr[m] = callocforpointer(arr, m, j);
+			if (ft_strncmp(arr[m], "error", 5) == 0)
+				return (0);
 			m++;
 			j = 0;
 		}
 		i++;
 	}
+	return (1);
 }
 
 static void	copy(char *s, char c, char **arr)
@@ -97,7 +108,8 @@ char	**ft_split(char const *s, char c)
 	arr = setarray(str, c);
 	if (!arr)
 		return (0);
-	setpointer(str, c, arr);
+	if (setpointer(str, c, arr) == 0)
+		return (0);
 	copy(str, c, arr);
 	return (arr);
 }
