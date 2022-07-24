@@ -6,7 +6,7 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 15:01:06 by jteoh             #+#    #+#             */
-/*   Updated: 2022/07/23 15:54:09 by jteoh            ###   ########.fr       */
+/*   Updated: 2022/07/24 10:37:55 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,10 @@ static char	*callocforpointer(char **arr, int m, int j)
 	arr[m] = (char *)ft_calloc(j + 1, sizeof(char));
 	if (!arr[m])
 	{
-		while (arr[m])
+		while (m > 0)
 			free(arr[--m]);
-		return ("error");
+		free(arr);
+		return (ft_strdup("error"));
 	}
 	return (arr[m]);
 }
@@ -62,7 +63,10 @@ static int	setpointer(char *s, char c, char **arr)
 		{
 			arr[m] = callocforpointer(arr, m, j);
 			if (ft_strncmp(arr[m], "error", 5) == 0)
+			{
+				free(arr[m]);
 				return (0);
+			}
 			m++;
 			j = 0;
 		}
