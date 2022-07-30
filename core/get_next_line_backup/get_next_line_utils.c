@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/29 10:12:19 by jteoh             #+#    #+#             */
-/*   Updated: 2022/07/29 10:12:19 by jteoh            ###   ########.fr       */
+/*   Created: 2022/07/25 09:46:46 by jteoh             #+#    #+#             */
+/*   Updated: 2022/07/30 10:16:11 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ size_t	ft_strlen(const char *s)
 	j = 0;
 	while (s[i] != '\0')
 	{
-		i++;
 		j++;
+		i++;
 	}
-	retrun (j);
+	return (j);
 }
 
 char	*ft_strjoin(char const *s1, char const *s2)
@@ -50,47 +50,56 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (s3);
 }
 
-char	*ft_getline(char *string)
-{
-	int		i;
-	int		j;
-	char	*line;
-
-	i = 0;
-	j = 0;
-	while (string[i] != '\n' || string[i] != '\0')
-		i++;
-	if (string[i] == '\n')
-		line = (char *)malloc(sizeof(char) * (i + 2));
-	if (string[i] == '\0')
-		line = (char *)malloc(sizeof(char) * (i + 1));
-	if (!line)
-		return (NULL);
-	while (j < i)
-	{
-		line[j] = *string;
-		j++;
-		string++;
-		if (string[j] == string[i] && string[i] == '\n')
-			line[j] = *string;
-	}
-	string++;
-	return (line);
-}
-
-char	*readfile(int fd, char *string)
+char	*readfile(int fd, char *string, int count)
 {
 	int		m;
 	char	*buff;
+	int		n;
 
+	n = 0;
+	buff = NULL;
 	m = 1;
-	while (m != 0)
+	while (n <= count)
 	{
 		m = read(fd, buff, BUFFER_SIZE);
 		if (m == -1)
 			return (NULL);
 		string = ft_strjoin(string, buff);
 		free(buff);
+		n += ccheck(string, '\n');
 	}
+	count++;
+	if (m == 0)
+		count = -1;
 	return (string);
+}
+
+int	ccheck(char *string, int c)
+{
+	int	i;
+
+	i = 0;
+	while (string[i])
+	{
+		if (string[i] == (char)c)
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+int	checkcount(char *string, int c, int count)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (j < count && string[i])
+	{
+		if (string[i] == (char)c)
+			j++;
+		i++;
+	}
+	return (i);
 }
