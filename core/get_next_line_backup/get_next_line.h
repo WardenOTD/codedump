@@ -36,6 +36,6 @@ int			ccheck(char *string, int c, char **arr, int type);
 
 char		**arrset(char **arr);
 
-void		duplicatearr(char **tmp, char **arr);
+int			duplicatearr(char **tmp, char **arr);
 
 #endif

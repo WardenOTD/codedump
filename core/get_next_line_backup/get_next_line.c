@@ -45,7 +45,7 @@ char	*ft_getline(char **arr, char *line)
 	return (glhelper(arr, ++i, 0, line, 0));
 }
 
-void	duplicatearr(char **tmp, char **arr)
+int	duplicatearr(char **tmp, char **arr)
 {
 	int	i;
 
@@ -56,13 +56,14 @@ void	duplicatearr(char **tmp, char **arr)
 		if (!tmp[i])
 		{
 			while (i-- > 0)
-				ccheck("", "", tmp, 1);
-			return (NULL);
+				ccheck("", ' ', tmp, 1);
+			return (0);
 		}
 		tmp[i] = ft_strdup(arr[i]);
 		i++;
 	}
 	tmp[++i] = 0;
+	return (1);
 }
 
 char	**arrset(char **arr)
@@ -85,11 +86,12 @@ char	**arrset(char **arr)
 		tmp = (char **)malloc(sizeof(char *) * (j + 2));
 		if (!tmp)
 		{
-			ccheck("", "", arr, 1);
+			ccheck("", ' ', arr, 1);
 			return (NULL);
 		}
-		duplicatearr(tmp, arr);
-		ccheck("", "", arr, 1);
+		if (duplicatearr(tmp, arr) == 0)
+			return (NULL);
+		ccheck("", ' ', arr, 1);
 	}
 	return (tmp);
 }
