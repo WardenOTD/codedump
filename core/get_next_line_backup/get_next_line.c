@@ -108,4 +108,5 @@ char	*get_next_line(int fd)
 	line = ft_getline(arr, line);
 	if (!line)
 		return (NULL);
+	return (line);
 }
