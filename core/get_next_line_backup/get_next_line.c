@@ -12,42 +12,100 @@
 
 #include "get_next_line.h"
 
-char	*ft_getline(char *string)
+char	*ft_getline(char **arr, char *line)
 {
 	int		i;
 	int		j;
-	char	*line;
 	int		m;
 
+	i = 0;
 	m = 0;
-	i = checkcount(string, '\n');
-	j = i;
-	while (string[j] != '\n' || string[j] != '\0')
-		j++;
-	if (string[i] != '\0')
-		line = (char *)malloc(sizeof(char) * (j + 2));
-	if (string[i] == '\0')
-		line = (char *)malloc(sizeof(char) * (j + 1));
-	if (!line)
-		return (NULL);
-	while (i < j)
+	j = 0;
+	while (arr[i] != 0)
+		i++;
+	if (i--)
 	{
-		line[m++] = string[i++];
-		if (string[j] == string[i] && string[j] == '\n')
-			line[m] = string[j];
+		while (ccheck(arr[--i], '\n', arr, 0) == 0)
+			continue ;
+		while (arr[i][j] != '\n')
+			j++;
+		j++;
+		while (arr[i][j] != '\0' || arr[i][j] != '\n')
+		{
+			m++;
+			j++;
+			if (arr[i][j + 1] == '\0')
+			{
+				i++;
+				j = 0;
+			}
+		}
+		line = (char *)malloc(sizeof(char) * (m + 2));
 	}
-	line[++m] = '\0';
-	return (line);
+	return (glhelper(arr, ++i, 0, line, 0));
+}
+
+void	duplicatearr(char **tmp, char **arr)
+{
+	int	i;
+
+	i = 0;
+	while (arr[i])
+	{
+		tmp[i] = (char *)malloc(sizeof(char) * (ft_strlen(arr[i]) + 1));
+		if (!tmp[i])
+		{
+			while (i-- > 0)
+				ccheck("", "", tmp, 1);
+			return (NULL);
+		}
+		tmp[i] = ft_strdup(arr[i]);
+		i++;
+	}
+	tmp[++i] = 0;
+}
+
+char	**arrset(char **arr)
+{
+	char	**tmp;
+	int		i;
+	int		j;
+
+	i = 0;
+	j = 0;
+	if (!arr)
+	{
+		tmp = (char **)malloc(sizeof(char *) * 2);
+		tmp[1] = 0;
+	}
+	else
+	{
+		while (arr[j])
+			j++;
+		tmp = (char **)malloc(sizeof(char *) * (j + 2));
+		if (!tmp)
+		{
+			ccheck("", "", arr, 1);
+			return (NULL);
+		}
+		duplicatearr(tmp, arr);
+		ccheck("", "", arr, 1);
+	}
+	return (tmp);
 }
 
 char	*get_next_line(int fd)
 {
 	char		*line;
-	static char	*string;
+	static char	**arr;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	if (!string)
-		string = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
-	string = readfile(fd, string);
+
+	arr = readfile(fd, arr);
+	if (!arr)
+		return (NULL);
+	line = ft_getline(arr, line);
+	if (!line)
+		return (NULL);
 }

@@ -22,16 +22,20 @@
 
 char		*get_next_line(int fd);
 
-char		*readfile(int fd, char *string);
+char		**readfile(int fd, char **arr);
 
 size_t		ft_strlen(const char *s);
 
-char		*ft_strjoin(char const *s1, char const *s2);
+char		*ft_strdup(const char *s1);
 
-char		*ft_getline(char *string);
+char		*ft_getline(char **arr, char *line);
 
-int			ccheck(char *string, int c);
+char		*glhelper(char **arr, int i, int j, char *line, int m);
 
-int			checkcount(char *string, int c);
+int			ccheck(char *string, int c, char **arr, int type);
+
+char		**arrset(char **arr);
+
+void		duplicatearr(char **tmp, char **arr);
 
 #endif
