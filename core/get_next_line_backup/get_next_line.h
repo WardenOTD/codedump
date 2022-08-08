@@ -22,20 +22,22 @@
 
 char		*get_next_line(int fd);
 
-char		**readfile(int fd, char **arr);
+int			setarr(char **arr, int fd);
 
-size_t		ft_strlen(const char *s);
+int			thelinepartofgnl(char **arr, char *line);
 
-char		*ft_strdup(const char *s1);
+int			linep1(int i, int m, int n, char **arr, char *line);
 
-char		*ft_getline(char **arr, char *line);
+int			linep2(int i, int m, int n, char **arr, char *line);
 
-char		*glhelper(char **arr, int i, int j, char *line, int m);
+int			scuffedrealloc(char **arr, int i);
 
-int			ccheck(char *string, int c, char **arr, int type);
+int			ft_strlen(const char *s);
 
-char		**arrset(char **arr);
+char		*ft_strdup(char *dest, const char *s1);
 
-int			duplicatearr(char **tmp, char **arr);
+int			check(char *string, int c);
+
+int			freeall(char **arr);
 
 #endif

@@ -12,88 +12,106 @@
 
 #include "get_next_line.h"
 
-char	*ft_getline(char **arr, char *line)
+int	setarr(char **arr, int fd)
 {
-	int		i;
-	int		j;
+	char	*buff;
 	int		m;
+	int		i;
 
+	m = 1;
 	i = 0;
-	m = 0;
-	j = 0;
-	while (arr[i] != 0)
-		i++;
-	if (i--)
+	while (check(arr[i], '\n'))
 	{
-		while (ccheck(arr[--i], '\n', arr, 0) == 0)
-			continue ;
-		while (arr[i][j] != '\n')
-			j++;
-		j++;
-		while (arr[i][j] != '\0' || arr[i][j] != '\n')
-		{
-			m++;
-			j++;
-			if (arr[i][j + 1] == '\0')
-			{
-				i++;
-				j = 0;
-			}
-		}
-		line = (char *)malloc(sizeof(char) * (m + 2));
-	}
-	return (glhelper(arr, ++i, 0, line, 0));
-}
-
-int	duplicatearr(char **tmp, char **arr)
-{
-	int	i;
-
-	i = 0;
-	while (arr[i])
-	{
-		tmp[i] = (char *)malloc(sizeof(char) * (ft_strlen(arr[i]) + 1));
-		if (!tmp[i])
-		{
-			while (i-- > 0)
-				ccheck("", ' ', tmp, 1);
+		if (i != 0)
+			i++;
+		buff = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
+		if (!buff)
 			return (0);
-		}
-		tmp[i] = ft_strdup(arr[i]);
-		i++;
+		m = read(fd, buff, BUFFER_SIZE);
+		if (m == -1)
+			return (0);
+		if (!scuffedrealloc(arr, i))
+			return (0);
+		arr[i] = ft_strdup(arr[i], buff);
+		if (!arr[i])
+			return (freeall(arr));
+		free(buff);
 	}
-	tmp[++i] = 0;
 	return (1);
 }
 
-char	**arrset(char **arr)
+int	thelinepartofgnl(char **arr, char *line)
 {
-	char	**tmp;
-	int		i;
-	int		j;
+	int	i;
+	int	j;
+	int	m;
+	int	n;
 
-	i = 0;
-	j = 0;
-	if (!arr)
+	m = 0;
+	n = 0;
+	i = ft_strlen(arr[0]);
+	if (!linep1(i, m, n, arr, line))
+		return (0);
+	if (!linep2(i, m, n, arr, line))
+		return (0);
+	return (1);
+}
+
+int	linep1(int i, int m, int n, char **arr, char *line)
+{
+	int	j;
+
+	if (!check(arr[--i], '\n'))
 	{
-		tmp = (char **)malloc(sizeof(char *) * 2);
-		tmp[1] = 0;
+		while (check(arr[--i], '\n'))
+			continue ;
+		j = ft_strlen(arr[i]);
+		while (arr[i][j--] != '\n')
+			m++;
+		i++;
+		j++;
+		while (arr[i][n++] != '\n')
+			m++;
+		line = (char *)malloc(sizeof(char) * (m + 2));
+		if (!line)
+			return (0);
+		while (arr[i][++j])
+			*line++ = arr[i][j];
+		i++;
+		while (*arr[i] != '\n')
+			*line++ = *arr[i]++;
+		*line++ = *arr[i];
+		*line = 0;
+		return (1);
 	}
-	else
+}
+
+int	linep2(int i, int m, int n, char **arr, char *line)
+{
+	int	j;
+
+	if (check(arr[--i], '\n'))
 	{
-		while (arr[j])
-			j++;
-		tmp = (char **)malloc(sizeof(char *) * (j + 2));
-		if (!tmp)
-		{
-			ccheck("", ' ', arr, 1);
-			return (NULL);
-		}
-		if (duplicatearr(tmp, arr) == 0)
-			return (NULL);
-		ccheck("", ' ', arr, 1);
+		while (check(arr[--i], '\n'))
+			continue ;
+		j = ft_strlen(arr[i]);
+		while (arr[i][j--] != '\n')
+			m++;
+		i++;
+		j++;
+		while (arr[i][n++] != 0)
+			m++;
+		line = (char *)malloc(sizeof(char) * (m + 1));
+		if (!line)
+			return (0);
+		while (arr[i][++j])
+			*line++ = arr[i][j];
+		i++;
+		while (*arr[i] != 0)
+			*line++ = *arr[i]++;
+		*line = 0;
+		return (1);
 	}
-	return (tmp);
 }
 
 char	*get_next_line(int fd)
@@ -101,14 +119,18 @@ char	*get_next_line(int fd)
 	char		*line;
 	static char	**arr;
 
+	if (!arr)
+	{
+		arr = (char **)malloc(sizeof(char *) * 1);
+		if (!arr)
+			return (NULL);
+		arr[0] = NULL;
+	}
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-
-	arr = readfile(fd, arr);
-	if (!arr)
+	if (!setarr(arr, fd))
 		return (NULL);
-	line = ft_getline(arr, line);
-	if (!line)
+	if (!thelinepartofgnl(arr, line))
 		return (NULL);
 	return (line);
 }

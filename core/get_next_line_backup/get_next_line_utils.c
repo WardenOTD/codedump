@@ -12,7 +12,7 @@
 
 #include "get_next_line.h"
 
-size_t	ft_strlen(const char *s)
+int	ft_strlen(const char *s)
 {
 	int	i;
 	int	j;
@@ -27,99 +27,69 @@ size_t	ft_strlen(const char *s)
 	return (j);
 }
 
-char	*ft_strdup(const char *s1)
+char	*ft_strdup(char *dest, const char *s1)
 {
-	char	*s1c;
 	int		i;
 
-	s1c = (char *)malloc(ft_strlen((char *)s1) + 1);
-	if (!s1c)
+	dest = (char *)malloc(sizeof(char) * (ft_strlen(s1) + 1));
+	if (!dest)
 		return (0);
 	i = 0;
 	while ((char)s1[i] != '\0')
 	{
-		s1c[i] = (char)s1[i];
+		dest[i] = (char)s1[i];
 		i++;
 	}
-	s1c[i] = '\0';
-	return (s1c);
+	dest[i] = '\0';
+	return (dest);
 }
 
-char	**readfile(int fd, char **arr)
+int	check(char *string, int c)
 {
-	int		m;
-	char	*buff;
-	int		i;
+	int	i;
 
-	i = 0;
-	m = 1;
-	while (ccheck(arr[i++], '\n', arr, 0) == 0)
+	i = -1;
+	while (string[++i])
 	{
-		buff = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
-		m = read(fd, buff, BUFFER_SIZE);
-		if (m == -1)
-			return (NULL);
-		arr = arrset(arr);
-		if (!arr)
-			return (NULL);
-		arr[i] = ft_strdup(buff);
-		free(buff);
+		if (string[i] == (char)c)
+			return (0);
 	}
-	return (arr);
+	return (1);
 }
 
-int	ccheck(char *string, int c, char **arr, int type)
+int	freeall(char **arr)
 {
 	int	i;
 
 	i = 0;
-	if (type == 0)
-	{
-		while (string[i])
-		{
-			if (string[i] == (char)c)
-				return (1);
-			i++;
-		}
-	}
-	if (type == 1)
-	{
-		while (arr[i])
-			free(arr[i++]);
-		free(arr);
-	}
+	while (arr[i] != NULL)
+		free(arr[i++]);
+	free(arr);
 	return (0);
 }
 
-char	*glhelper(char **arr, int i, int j, char *line, int m)
+int	scuffedrealloc(char **arr, int i)
 {
-	if (ccheck(arr[--i], '\n', arr, 0) == 1)
+	char	**tmp;
+	int		j;
+
+	j = 0;
+	tmp = (char **)malloc(sizeof(char *) * (i + 2));
+	if (!tmp)
+		return (0);
+	tmp[i + 2] = NULL;
+	while (arr[j])
 	{
-		while (ccheck(arr[--i], '\n', arr, 0) == 0)
-			continue ;
-		while (arr[i][j] != '\n')
-			j++;
-		while (arr[i][++j] != '\n' || arr[i][j] != '\0')
-		{
-			line[m++] = arr[i][j];
-			if (arr[i][j + 1] == '\0')
-			{
-				i++;
-				j = 0;
-			}
-		}
-		line[m++] = arr[i][j];
-		line[m] = '\0';
+		tmp[j] = ft_strdup(tmp[j], arr[j]);
+		j++;
 	}
-	else if (ccheck(arr[--i], '\n', arr, 0) == 0)
-	{
-		while (ccheck(arr[--i], '\n', arr, 0) == 0)
-			continue ;
-		while (arr[i][j] != '\n')
-			j++;
-		while (arr[i][++j] != '\0')
-			line [m++] = arr[i][j];
-		line[m] = '\0';
-	}
-	return (line);
+	freeall(arr);
+	arr = (char **)malloc(sizeof(char *) * (i + 2));
+	if (!arr)
+		return (0);
+	arr[i + 2] = NULL;
+	while (j-- != 0)
+		arr[j] = ft_strdup(arr[j], tmp[j]);
+	freeall(tmp);
+	return (1);
 }
