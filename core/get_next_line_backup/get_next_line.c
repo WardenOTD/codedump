@@ -50,6 +50,7 @@ int	thelinepartofgnl(char **arr, char *line)
 	m = 0;
 	n = 0;
 	i = ft_strlen(arr[0]);
+	i--;
 	if (!linep1(i, m, n, arr, line))
 		return (0);
 	if (!linep2(i, m, n, arr, line))
@@ -61,10 +62,10 @@ int	linep1(int i, int m, int n, char **arr, char *line)
 {
 	int	j;
 
-	if (!check(arr[--i], '\n'))
+	if (!check(arr[i--], '\n'))
 	{
-		while (check(arr[--i], '\n'))
-			continue ;
+		while (i > 0 && check(arr[i], '\n'))
+			i--;
 		j = ft_strlen(arr[i]);
 		while (arr[i][j--] != '\n')
 			m++;
@@ -82,18 +83,18 @@ int	linep1(int i, int m, int n, char **arr, char *line)
 			*line++ = *arr[i]++;
 		*line++ = *arr[i];
 		*line = 0;
-		return (1);
 	}
+	return (1);
 }
 
 int	linep2(int i, int m, int n, char **arr, char *line)
 {
 	int	j;
 
-	if (check(arr[--i], '\n'))
+	if (check(arr[i], '\n'))
 	{
-		while (check(arr[--i], '\n'))
-			continue ;
+		while (i > 0 && check(arr[i], '\n'))
+			i--;
 		j = ft_strlen(arr[i]);
 		while (arr[i][j--] != '\n')
 			m++;
@@ -110,8 +111,8 @@ int	linep2(int i, int m, int n, char **arr, char *line)
 		while (*arr[i] != 0)
 			*line++ = *arr[i]++;
 		*line = 0;
-		return (1);
 	}
+	return (1);
 }
 
 char	*get_next_line(int fd)
