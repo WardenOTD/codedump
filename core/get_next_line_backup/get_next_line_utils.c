@@ -6,7 +6,7 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 09:46:46 by jteoh             #+#    #+#             */
-/*   Updated: 2022/08/18 16:00:44 by jteoh            ###   ########.fr       */
+/*   Updated: 2022/08/22 10:43:46 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,40 @@ int	check(char *string, int c)
 	{
 		if (string[i] == (char)c)
 			return (1);
+	}
+	return (0);
+}
+
+char	*ft_strdup(const char *s1)
+{
+	char	*s1c;
+	int		i;
+
+	s1c = (char *)malloc(ft_strlen((char *)s1) + 1);
+	if (!s1c)
+		return (0);
+	i = 0;
+	while ((char)s1[i] != '\0')
+	{
+		s1c[i] = (char)s1[i];
+		i++;
+	}
+	s1c[i] = '\0';
+	return (s1c);
+}
+
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
+{
+	size_t	i;
+
+	i = 0;
+	while (i != n)
+	{
+		if ((unsigned char)s1[i] != (unsigned char)s2[i])
+			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+		if ((unsigned char)s1[i] == '\0' || (unsigned char)s2[i] == '\0')
+			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+		i++;
 	}
 	return (0);
 }
