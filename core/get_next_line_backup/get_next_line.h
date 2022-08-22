@@ -6,7 +6,7 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 09:46:40 by jteoh             #+#    #+#             */
-/*   Updated: 2022/08/04 10:46:29 by jteoh            ###   ########.fr       */
+/*   Updated: 2022/08/18 17:24:43 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,27 +17,21 @@
 # include <unistd.h>
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 10
+#  define BUFFER_SIZE 100
 # endif
 
 char		*get_next_line(int fd);
 
-int			setarr(char **arr, int fd);
+int			readfd(int fd, char **string);
 
-int			thelinepartofgnl(char **arr, char *line);
+char		*readstring(char *string);
 
-int			linep1(int i, int m, int n, char **arr, char *line);
-
-int			linep2(int i, int m, int n, char **arr, char *line);
-
-int			scuffedrealloc(char **arr, int i);
+char		*readeof(char *string);
 
 int			ft_strlen(const char *s);
 
-char		*ft_strdup(char *dest, const char *s1);
+char		*ft_strjoin(char *s1, char *s2);
 
 int			check(char *string, int c);
-
-int			freeall(char **arr);
 
 #endif
