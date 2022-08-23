@@ -6,7 +6,7 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 09:46:18 by jteoh             #+#    #+#             */
-/*   Updated: 2022/08/22 11:37:53 by jteoh            ###   ########.fr       */
+/*   Updated: 2022/08/23 13:39:25 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,19 +25,37 @@ char	*readfd(int fd, char *string)
 			return (NULL);
 		rv = read(fd, buff, BUFFER_SIZE);
 		if (rv == -1)
-			return (NULL);
-		buff[rv] = 0;
-		string = ft_strjoin(string, buff);
-		if (!string)
-			return (NULL);
-		if (check(buff, '\n'))
 		{
 			free(buff);
-			return (string);
+			free(string);
+			return (NULL);
 		}
+		buff = reallocbuff(buff, rv);
+		string = ft_strjoin(string, buff);
+		if (check(buff, '\n'))
+			rv = 0;
 		free(buff);
 	}
 	return (string);
+}
+
+char	*reallocbuff(char *buff, int rv)
+{
+	int		i;
+	char	*tmp;
+
+	i = 0;
+	tmp = (char *)malloc(sizeof(char) * (rv + 1));
+	if (!tmp)
+		return (NULL);
+	while (i < rv)
+	{
+		tmp[i] = buff[i];
+		i++;
+	}
+	tmp[i] = 0;
+	free(buff);
+	return (tmp);
 }
 
 char	*readstring(char *string)
@@ -54,6 +72,8 @@ char	*readstring(char *string)
 		tmp = (char *)malloc(sizeof(char) * (i + 2));
 	if (string[i] == '\0')
 		tmp = (char *)malloc(sizeof(char) * (i + 1));
+	if (!tmp)
+		return (NULL);
 	i = 0;
 	while (string[i] != '\n' && string[i] != '\0')
 		tmp[j++] = string[i++];
@@ -80,7 +100,7 @@ char	*trim(char *string)
 	}
 	tmp = (char *)malloc(sizeof(char) * (j - i + 1));
 	if (!tmp)
-		return (0);
+		return (NULL);
 	if (string[i] == '\n')
 		++i;
 	j = 0;
@@ -101,6 +121,8 @@ char	*get_next_line(int fd)
 	if (!string)
 	{
 		string = malloc(sizeof(char) * 1);
+		if (!string)
+			return (NULL);
 		string[0] = 0;
 	}
 	string = readfd(fd, string);
@@ -110,7 +132,5 @@ char	*get_next_line(int fd)
 	if (!line)
 		return (NULL);
 	string = trim(string);
-	if (!string)
-		return (NULL);
 	return (line);
 }
