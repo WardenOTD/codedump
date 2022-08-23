@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 09:46:18 by jteoh             #+#    #+#             */
-/*   Updated: 2022/08/23 13:39:25 by jteoh            ###   ########.fr       */
+/*   Updated: 2022/08/23 17:28:25 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,23 +114,23 @@ char	*trim(char *string)
 char	*get_next_line(int fd)
 {
 	char		*line;
-	static char	*string;
+	static char	*string[1024];
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	if (!string)
+	if (!string[fd])
 	{
-		string = malloc(sizeof(char) * 1);
-		if (!string)
+		string[fd] = malloc(sizeof(char) * 1);
+		if (!string[fd])
 			return (NULL);
-		string[0] = 0;
+		string[fd][0] = 0;
 	}
-	string = readfd(fd, string);
-	if (!string)
+	string[fd] = readfd(fd, string[fd]);
+	if (!string[fd])
 		return (NULL);
-	line = readstring(string);
+	line = readstring(string[fd]);
 	if (!line)
 		return (NULL);
-	string = trim(string);
+	string[fd] = trim(string[fd]);
 	return (line);
 }
