@@ -6,7 +6,7 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 09:46:40 by jteoh             #+#    #+#             */
-/*   Updated: 2022/08/23 16:24:10 by jteoh            ###   ########.fr       */
+/*   Updated: 2022/08/23 13:02:18 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,7 @@ char		*ft_strjoin(char *s1, char *s2);
 int			check(char *string, int c);
 
 char		*ft_strdup(const char *s1);
+
+int			ft_strncmp(const char *s1, const char *s2, size_t n);
 
 #endif
