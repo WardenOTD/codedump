@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 09:46:40 by jteoh             #+#    #+#             */
-/*   Updated: 2022/08/23 13:02:18 by jteoh            ###   ########.fr       */
+/*   Updated: 2022/08/25 09:45:28 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#ifndef GET_NEXT_LINE_BONUS_H
+# define GET_NEXT_LINE_BONUS_H
 
 # include <stdlib.h>
 # include <unistd.h>
@@ -37,7 +37,5 @@ char		*ft_strjoin(char *s1, char *s2);
 int			check(char *string, int c);
 
 char		*ft_strdup(const char *s1);
-
-int			ft_strncmp(const char *s1, const char *s2, size_t n);
 
 #endif
