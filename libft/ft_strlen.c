@@ -1,23 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/09 16:41:33 by jteoh             #+#    #+#             */
-/*   Updated: 2022/08/26 15:21:37 by jteoh            ###   ########.fr       */
+/*   Created: 2022/07/04 11:54:01 by jteoh             #+#    #+#             */
+/*   Updated: 2022/07/22 12:49:22 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include "libft.h"
 
-# include "./libft/libft.h"
-# include <stdlib.h>
-# include <unistd.h>
-# include <stdarg.h>
+size_t	ft_strlen(const char *s)
+{
+	int	i;
+	int	j;
 
-int				ft_printf(const char *str, ...);
-
-#endif
+	i = 0;
+	j = 0;
+	while (s[i] != '\0')
+	{
+		j++;
+		i++;
+	}
+	return (j);
+}

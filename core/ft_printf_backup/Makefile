@@ -6,13 +6,13 @@
 #    By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/09 16:35:10 by jteoh             #+#    #+#              #
-#    Updated: 2022/08/09 16:35:10 by jteoh            ###   ########.fr        #
+#    Updated: 2022/08/26 15:19:55 by jteoh            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-FUNC		= \
+SRC		= ft_printf.c \
 
-OBJS		= $(FUNC:.c=.0)
+OBJS		= $(SRC:.c=.0)
 
 CC			= gcc
 RM			= rm -f
@@ -24,6 +24,7 @@ all:	${NAME}
 
 $(NAME): $(OBJS)
 	make all -C libft/
+	make bonus -C libft/
 	cp libft/libft.a $(NAME)
 	ar rcs $(NAME) $(OBJS)
 

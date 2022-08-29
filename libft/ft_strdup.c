@@ -1,23 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/09 16:41:33 by jteoh             #+#    #+#             */
-/*   Updated: 2022/08/26 15:21:37 by jteoh            ###   ########.fr       */
+/*   Created: 2022/07/07 13:15:29 by jteoh             #+#    #+#             */
+/*   Updated: 2022/07/19 15:05:02 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include "libft.h"
 
-# include "./libft/libft.h"
-# include <stdlib.h>
-# include <unistd.h>
-# include <stdarg.h>
+char	*ft_strdup(const char *s1)
+{
+	char	*s1c;
+	int		i;
 
-int				ft_printf(const char *str, ...);
-
-#endif
+	s1c = (char *)malloc(ft_strlen((char *)s1) + 1);
+	if (!s1c)
+		return (0);
+	i = 0;
+	while ((char)s1[i] != '\0')
+	{
+		s1c[i] = (char)s1[i];
+		i++;
+	}
+	s1c[i] = '\0';
+	return (s1c);
+}
