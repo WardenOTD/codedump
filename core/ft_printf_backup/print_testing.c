@@ -1,0 +1,68 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <limits.h>
+
+char	*buffered_0(char *str)
+{
+	int		i = 0;
+	char	*tmp;
+	int	j;
+	while (str[i] == '0')
+		i++;
+	j = i;
+	while (str[j])
+		j++;
+	tmp = (char *)malloc(sizeof(char) * (j-i+1));
+	tmp[j-i] = 0;
+	j = 0;
+	while (str[i])
+		tmp[j++] = str[i++];
+	free(str);
+	printf("\n%s\n", tmp);
+	return (tmp);
+}
+
+int	main()
+{
+	char	*hex = "0123456789abcdef";
+	int	i = 100;
+	unsigned long	c = (unsigned long)&i;
+	unsigned long	cringe = c;
+	unsigned long	tmp;
+	int	q = 0;
+	char	*address;
+	printf("\nc: %ld\ncringe: %ld\n\n", c, cringe);
+	while (cringe > 0)
+	{
+		cringe /= 10;
+		q++;
+	}
+	address = (char *)malloc(sizeof(char) * (q + 1));
+	if (!address)
+		return (0);
+	address[q--] = 0;
+	cringe = c;
+	while (q > 0)
+	{
+		tmp = cringe % 16;
+		cringe /= 16;
+		address[q] = hex[tmp];
+		printf("%d  ---  %c\n", q, address[q]);
+		q--;
+	}
+	tmp = cringe % 16;
+	address[q] = hex[tmp];
+	address = buffered_0(address);
+
+	printf("\n");
+	printf("lx &i: 0x%0lx\n", (unsigned long)&i);
+	printf("p: %p\n", &i);
+	printf("lx c: 0x%0lx\n", c);
+	printf("address: 0x%s\n\n\n", address);
+	printf("===============================================================\n\n");
+	int	yes = printf("%9.5i\n", 42);
+	printf("previous print returned: %d\n\n\n", yes);
+	printf("%u\n\n", -15);
+	printf("%u\n\n", UINT_MAX);
+	system("leaks a.out");
+}
