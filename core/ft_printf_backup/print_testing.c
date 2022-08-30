@@ -62,6 +62,13 @@ int	main()
 	printf("===============================================================\n\n");
 	int	yes = printf("%9.5i\n", 42);
 	printf("previous print returned: %d\n\n\n", yes);
+	int	integer = -100;
+	unsigned int	unint = 200;
+	unsigned int	result = (unsigned int)(integer - unint);
+	long	lol = 10;
+	int		lolol = 10;
+	printf("long = %li ,, int = %i\n\n", lol, lolol);
+	printf("%u\n\n", result);
 	printf("%u\n\n", -15);
 	printf("%u\n\n", UINT_MAX);
 	system("leaks a.out");
