@@ -6,13 +6,13 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 10:29:50 by jteoh             #+#    #+#             */
-/*   Updated: 2022/08/30 10:38:24 by jteoh            ###   ########.fr       */
+/*   Updated: 2022/08/30 16:46:36 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	print_char(const char *str, int i, va_list list, t_list *count)
+int	print_char(int i, va_list list, t_list *count)
 {
 	char	c;
 
@@ -22,7 +22,7 @@ int	print_char(const char *str, int i, va_list list, t_list *count)
 	return (++i);
 }
 
-int	print_str(const char *str, int i, va_list list, t_list *count)
+int	print_str(int i, va_list list, t_list *count)
 {
 	char	*strr;
 	int		length;

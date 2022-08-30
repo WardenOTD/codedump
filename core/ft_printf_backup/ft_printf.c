@@ -6,7 +6,7 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 16:48:25 by jteoh             #+#    #+#             */
-/*   Updated: 2022/08/30 10:51:05 by jteoh            ###   ########.fr       */
+/*   Updated: 2022/08/30 17:22:32 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	minimum_width(const char *str, int i, va_list list, t_list *count)
 	}
 	while (str[i] >= '0' && str[i] <= '9')
 	{
-		width = str[i] - 48;
+		width = ft_atoi(&str[i]);
 		i++;
 	}
 	if (str[i] == '.')
@@ -65,18 +65,18 @@ int	minimum_width(const char *str, int i, va_list list, t_list *count)
 int	rolecall(const char *str, int i, va_list list, t_list *count)
 {
 	if (str[i] == 'c')
-		return (print_char(str, i, list, count));
+		return (print_char(i, list, count));
 	if (str[i] == 's')
-		return (print_str(str, i, list, count));
+		return (print_str(i, list, count));
 	if (str[i] == 'p')
-		return (print_ptr(str, i, list, count));
+		return (print_ptr(i, list, count));
 	if (str[i] == 'd' || str[i] == 'i')
-		return (print_deci_int(str, i, list, count));
+		return (print_deci_int(i, list, count));
 	if (str[i] == 'u')
-		return (0);
+		return (print_unsigned(i, list, count));
 	if (str[i] == 'x')
-		return (print_hex_lower(str, i, list, count));
+		return (print_hex_lower(i, list, count));
 	if (str[i] == 'X')
-		return (print_hex_upper(str, i, list, count));
+		return (print_hex_upper(i, list, count));
 	return (0);
 }

@@ -70,6 +70,8 @@ int	main()
 	printf("long = %li ,, int = %i\n\n", lol, lolol);
 	printf("%u\n\n", result);
 	printf("%u\n\n", -15);
+	lolol = -15;
+	printf("%lu\n\n", lol);
 	printf("%u\n\n", UINT_MAX);
 	system("leaks a.out");
 }
