@@ -6,7 +6,7 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 16:41:33 by jteoh             #+#    #+#             */
-/*   Updated: 2022/08/30 17:16:18 by jteoh            ###   ########.fr       */
+/*   Updated: 2022/09/01 11:15:24 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,27 +22,29 @@ int				ft_printf(const char *str, ...);
 
 int				minimum_width(const char *str, int i, va_list list, t_list *count);
 
-int				rolecall(const char *str, int i, va_list list, t_list *count);
+int				rolecall(const char *str, int i, va_list list, t_list *count, char *output);
 
-int				print_char(int i, va_list list, t_list *count);
+char			get_char(va_list list);
 
-int				print_str(int i, va_list list, t_list *count);
+char			*get_str(va_list list);
 
-int				print_ptr(int i, va_list list, t_list *count);
+char			*get_ptr(va_list list);
 
 char			*clear_buffered_0(char *str);
 
-int				address_hex(va_list list, t_list *count);
+char			*address_hex(va_list list);
 
-int				print_hex_lower(int i, va_list list, t_list *count);
+char			*add0x(char *address);
 
-int				print_hex_upper(int i, va_list list, t_list *count);
+char			*get_hex_lower(va_list list);
+
+char			*get_hex_upper(va_list list);
 
 void			hex_helper(char **hexed, unsigned long j, unsigned long q, int l, char *hex);
 
-int				print_deci_int(int i, va_list list, t_list *count);
+char			*get_deci_int(va_list list);
 
-int				print_unsigned(int i, va_list list, t_list *count);
+char			*get_unsigned(va_list list);
 
 void			unsigned_helper(char **arr, unsigned int uni, unsigned int tmp, int l);
 

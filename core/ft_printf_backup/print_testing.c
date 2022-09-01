@@ -73,5 +73,21 @@ int	main()
 	lolol = -15;
 	printf("%lu\n\n", lol);
 	printf("%u\n\n", UINT_MAX);
+	printf("\n\n\n\n");
+
+	printf("#lx &i: %0#lx\n", (unsigned long)&i);
+	printf("0xlx &i: 0x%0lx\n", (unsigned long)&i);
+	printf("%#5x\n", 100);
+	printf("%5x\n", 100);
+	printf("%#5X\n", 100);
+	printf("%5X\n", 100);
+	printf("% 5d\n", 100);
+	printf("% 5d\n", -100);
+	printf("%05d\n", 100);
+	printf("%+5d\n", 100);
+	printf("%-5d\n", 100);
+	printf("%.5d\n", 100);
+
+	printf("\n\n\n\n");
 	system("leaks a.out");
 }

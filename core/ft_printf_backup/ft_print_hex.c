@@ -6,13 +6,13 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 10:33:21 by jteoh             #+#    #+#             */
-/*   Updated: 2022/08/30 16:49:13 by jteoh            ###   ########.fr       */
+/*   Updated: 2022/09/01 11:06:53 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	print_hex_lower(int i, va_list list, t_list *count)
+char	*get_hex_lower(va_list list)
 {
 	char		*hex;
 	unsigned long	j;
@@ -33,15 +33,10 @@ int	print_hex_lower(int i, va_list list, t_list *count)
 	if (!hexed)
 		return (0);
 	hex_helper(&hexed, j, q, l, hex);
-	l = ft_strlen(hexed);
-	j = 0;
-	while (j++ < l)
-		ft_lstadd_back(&count, ft_lstnew("+1"));
-	ft_putstr_fd(hexed, 1);
-	return (++i);
+	return (hexed);
 }
 
-int	print_hex_upper(int i, va_list list, t_list *count)
+char	*get_hex_upper(va_list list)
 {
 	char		*hex;
 	unsigned long	j;
@@ -62,12 +57,7 @@ int	print_hex_upper(int i, va_list list, t_list *count)
 	if (!hexed)
 		return (0);
 	hex_helper(&hexed, j, q, l, hex);
-	l = ft_strlen(hexed);
-	j = 0;
-	while (j++ < l)
-		ft_lstadd_back(&count, ft_lstnew("+1"));
-	ft_putstr_fd(hexed, 1);
-	return (++i);
+	return (hexed);
 }
 
 void	hex_helper(char **hexed, unsigned long j, unsigned long q, int l, char *hex)

@@ -6,7 +6,7 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 16:48:25 by jteoh             #+#    #+#             */
-/*   Updated: 2022/08/30 17:22:32 by jteoh            ###   ########.fr       */
+/*   Updated: 2022/09/01 11:48:55 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	ft_printf(const char *str, ...)
 	i = 0;
 	while (str[i])
 	{
-		if (str[i] == '%' && str[i] != '%')
+		if (str[i] == '%')
 		{
 			//calls function...?
 			//returns i??
@@ -38,8 +38,9 @@ int	ft_printf(const char *str, ...)
 
 int	minimum_width(const char *str, int i, va_list list, t_list *count)
 {
-	int	zero;
-	int	width;
+	int		zero;
+	int		width;
+	char	*output;
 
 	zero = 0;
 	width = 0;
@@ -50,33 +51,70 @@ int	minimum_width(const char *str, int i, va_list list, t_list *count)
 	}
 	while (str[i] >= '0' && str[i] <= '9')
 	{
-		width = ft_atoi(&str[i]);
-		i++;
+		width = str[i++] - 48;
+		width *= 10;
 	}
+	width /= 10;
+	output = (char *)malloc(sizeof(char) * (width + 1));
+	if (!output)
+		return (0);
+	output[width] = 0;
+	if (zero == 1)
+		fillzero(&output);
 	if (str[i] == '.')
-	{
-		//does something with another function ????
-	}
+		i = precision(i, str, &output);
 	if ( 0)
 		return (0);
 	return (i);
 }
 
-int	rolecall(const char *str, int i, va_list list, t_list *count)
+void	fillzero(char **output)
+{
+	int	i;
+
+	i = 0;
+	while (*output[i])
+		*output[i++] = 48;
+}
+
+int	precision(int i, const char *str, char **output)
+{
+	int	width;
+	int	l;
+
+	width = 0;
+	l = 0;
+	i++;
+	while (str[i] >= '0' && str[i] <= '9')
+	{
+		width = str[i++] - 48;
+		width *= 10;
+	}
+	width /= 10;
+	while (*output[l])
+		l++;
+	while (width-- > 0)
+		*output[l--] = 0;
+	return (i);
+}
+
+int	rolecall(const char *str, int i, va_list list, t_list *count, char *output)
 {
 	if (str[i] == 'c')
-		return (print_char(i, list, count));
+		return (get_char(list));
 	if (str[i] == 's')
-		return (print_str(i, list, count));
+		return (get_str(list));
 	if (str[i] == 'p')
-		return (print_ptr(i, list, count));
+		return (get_ptr(list));
 	if (str[i] == 'd' || str[i] == 'i')
-		return (print_deci_int(i, list, count));
+		return (get_deci_int(list));
 	if (str[i] == 'u')
-		return (print_unsigned(i, list, count));
+		return (get_unsigned(list));
 	if (str[i] == 'x')
-		return (print_hex_lower(i, list, count));
+		return (get_hex_lower(list));
 	if (str[i] == 'X')
-		return (print_hex_upper(i, list, count));
+		return (get_hex_upper(list));
+	if (str[i] == '%')
+
 	return (0);
 }
