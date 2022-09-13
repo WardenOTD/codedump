@@ -87,6 +87,10 @@ int	main()
 	printf("%+5d\n", 100);
 	printf("%-5d\n", 100);
 	printf("%.5d\n", 100);
+	printf("bro %.10s man\n", "holy shittaa");
+	printf("%-2d\n", 100);
+	printf("%+5d\n", 100);
+	printf("%#x\n", 100);
 
 	printf("\n\n\n\n");
 	system("leaks a.out");

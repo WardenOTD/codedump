@@ -6,7 +6,7 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/03 13:10:28 by jteoh             #+#    #+#             */
-/*   Updated: 2022/09/03 14:37:36 by jteoh            ###   ########.fr       */
+/*   Updated: 2022/09/13 11:39:47 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	flag_set(const char *str, int i, t_flags *flag, va_list list)
 {
 	char	*format;
 
-	format = get_format(str, i);
+	format = get_format(str, i, flag);
 	if (!format)
 		return (0);
 	if (run_tru(format, ' '))
@@ -61,7 +61,7 @@ int	run_tru0(char *format, char c)
 	return (0);
 }
 
-char	*get_format(const char *str, int i)
+char	*get_format(const char *str, int i, t_flags *flag)
 {
 	char	*format;
 	int		l;

@@ -6,7 +6,7 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 16:41:33 by jteoh             #+#    #+#             */
-/*   Updated: 2022/09/03 14:50:47 by jteoh            ###   ########.fr       */
+/*   Updated: 2022/09/13 11:40:01 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,17 @@ typedef struct s_flags
 	int			printed;
 	char		*output;
 }				t_flags;
+
+typedef struct s_specifier
+{
+	int			c;
+	int			s;
+	int			p;
+	int			di;
+	int			u;
+	int			x;
+	int			upperx;
+}				t_specifier;
 
 int				ft_printf(const char *str, ...);
 

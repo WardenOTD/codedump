@@ -6,7 +6,7 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 16:48:25 by jteoh             #+#    #+#             */
-/*   Updated: 2022/09/03 14:50:57 by jteoh            ###   ########.fr       */
+/*   Updated: 2022/09/13 11:41:53 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,15 @@ void	default_flag(t_flags *flag)
 	flag->pos = 0;
 	flag->hash = 0;
 	flag->printed = 0;
+}
+
+void	default_specifier(t_specifier *spc)
+{
+	spc->c = 0;
+	spc->s = 0;
+	spc->p = 0;
+	spc->di = 0;
+	spc->u = 0;
+	spc->x = 0;
+	spc->upperx = 0;
 }
