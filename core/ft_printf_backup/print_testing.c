@@ -91,6 +91,7 @@ int	main()
 	printf("%-2d\n", 100);
 	printf("%+5d\n", 100);
 	printf("%#x\n", 100);
+	printf("%10.5s", "123456");
 
 	printf("\n\n\n\n");
 	system("leaks a.out");

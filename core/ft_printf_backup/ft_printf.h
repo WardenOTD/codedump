@@ -6,7 +6,7 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 16:41:33 by jteoh             #+#    #+#             */
-/*   Updated: 2022/09/13 11:40:01 by jteoh            ###   ########.fr       */
+/*   Updated: 2022/09/13 15:42:50 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,9 @@ typedef struct s_specifier
 }				t_specifier;
 
 int				ft_printf(const char *str, ...);
+
+void			default_flag(t_flags *flag);
+
+void			default_specifier(t_specifier *spc);
 
 #endif

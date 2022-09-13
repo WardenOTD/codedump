@@ -6,7 +6,7 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/03 13:10:28 by jteoh             #+#    #+#             */
-/*   Updated: 2022/09/13 11:39:47 by jteoh            ###   ########.fr       */
+/*   Updated: 2022/09/13 13:39:19 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,11 @@
 
 int	flag_set(const char *str, int i, t_flags *flag, va_list list)
 {
-	char	*format;
+	char		*format;
+	t_specifier	*spc;
 
 	format = get_format(str, i, flag);
+	specifier_set(format, spc);
 	if (!format)
 		return (0);
 	if (run_tru(format, ' '))
@@ -115,4 +117,25 @@ int	cmp(char c)
 			return (2);
 	}
 	return (0);
+}
+
+void	specifier_set(char *format, t_specifier *spc)
+{
+	while (*format)
+		format++;
+	format--;
+	if (*format == 'c')
+		spc->c = 1;
+	else if (*format == 's')
+		spc->s = 1;
+	else if (*format == 'p')
+		spc->p = 1;
+	else if (*format == 'd' || *format == 'i')
+		spc->di = 1;
+	else if (*format == 'u')
+		spc->u = 1;
+	else if (*format == 'x')
+		spc->x = 1;
+	else if (*format == 'X')
+		spc->upperx = 1;
 }

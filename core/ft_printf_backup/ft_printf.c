@@ -6,7 +6,7 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 16:48:25 by jteoh             #+#    #+#             */
-/*   Updated: 2022/09/13 11:41:53 by jteoh            ###   ########.fr       */
+/*   Updated: 2022/09/13 13:30:05 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,12 @@
 int	ft_printf(const char *str, ...)
 {
 	t_flags	*flag;
+	t_specifier	*spc;
 	va_list	list;
 	int		p;
 
 	default_flag(flag);
+	default_specifier(spc);
 	va_start(list, str);
 	while (*str)
 	{
