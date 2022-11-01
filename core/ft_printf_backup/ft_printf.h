@@ -6,7 +6,7 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 16:41:33 by jteoh             #+#    #+#             */
-/*   Updated: 2022/09/13 15:42:50 by jteoh            ###   ########.fr       */
+/*   Updated: 2022/11/01 11:35:05 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct s_flags
 	int			precision;
 	int			hash;
 	int			printed;
+	char		*extract;
 	char		*output;
 }				t_flags;
 
@@ -39,6 +40,7 @@ typedef struct s_specifier
 	int			u;
 	int			x;
 	int			upperx;
+	int			hash;
 }				t_specifier;
 
 int				ft_printf(const char *str, ...);

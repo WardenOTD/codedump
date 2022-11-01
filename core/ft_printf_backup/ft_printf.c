@@ -6,7 +6,7 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 16:48:25 by jteoh             #+#    #+#             */
-/*   Updated: 2022/09/13 13:30:05 by jteoh            ###   ########.fr       */
+/*   Updated: 2022/11/01 11:35:17 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,17 +26,13 @@ int	ft_printf(const char *str, ...)
 	{
 		if (*str == '%' && *(str + 1) != '%')
 		{
-			p = flag_set(++str, 0, flag, list);
-			if (p == 0)
-				return (0);
-			str += p;
-			// create array  with the format flags and specifiers to print;;
+			/*
+			do whatever
+			*/
+			continue ;
 		}
 		if (*str == '%' && *(str + 1) == '%')
-		{
-			ft_putchar_fd(*str, 1);
-			str += 2;
-		}
+			str++;
 		ft_putchar_fd(*str, 1);
 		flag->printed += 1;
 		str++;
@@ -65,4 +61,5 @@ void	default_specifier(t_specifier *spc)
 	spc->u = 0;
 	spc->x = 0;
 	spc->upperx = 0;
+	spc->hash = 0;
 }
