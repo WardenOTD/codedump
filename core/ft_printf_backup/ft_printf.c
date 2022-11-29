@@ -6,7 +6,7 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 16:48:25 by jteoh             #+#    #+#             */
-/*   Updated: 2022/11/01 11:35:17 by jteoh            ###   ########.fr       */
+/*   Updated: 2022/11/29 10:50:33 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 int	ft_printf(const char *str, ...)
 {
-	t_flags	*flag;
+	t_flags		*flag;
 	t_specifier	*spc;
-	va_list	list;
-	int		p;
+	va_list		list;
+	int			p;
 
 	default_flag(flag);
 	default_specifier(spc);
@@ -43,9 +43,6 @@ int	ft_printf(const char *str, ...)
 
 void	default_flag(t_flags *flag)
 {
-	flag->space = 0;
-	flag->zero = 0;
-	flag->precision = 0;
 	flag->neg = 0;
 	flag->pos = 0;
 	flag->hash = 0;

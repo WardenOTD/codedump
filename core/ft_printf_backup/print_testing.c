@@ -93,6 +93,23 @@ int	main()
 	printf("%#x\n", 100);
 	printf("%10.5s\n", "123456");
 	printf("%d,%010% 12\n", 100);
+	printf("%020f\n", 10.10);
+	printf("%020.3f\n", 10.10);
+	printf("%20d\n", 9);
+	printf("%.20d\n", 9);
+	printf("%020d\n", 9);
+	printf("%5s\n", "0123456");
+	printf("%.5s\n", "0123456");
+	printf("%1s\n", "0123456");
+	printf("%.1s\n", "0123456");
+	printf("%.06d\n", 1000);
+	printf("%06d\n", 1000);
+	printf("%.010f\n", 0.5);
+	printf("%010f\n", 0.5);
+	printf("%.2d\n", 1000);
+	printf("%02d\n", 1000);
+	printf("%-5d\n", -500);
+	printf("%+5d\n", -500);
 
 	printf("\n\n\n\n");
 	system("leaks a.out");

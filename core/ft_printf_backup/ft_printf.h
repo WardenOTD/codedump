@@ -6,7 +6,7 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 16:41:33 by jteoh             #+#    #+#             */
-/*   Updated: 2022/11/01 11:35:05 by jteoh            ###   ########.fr       */
+/*   Updated: 2022/11/29 10:50:19 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,7 @@
 typedef struct s_flags
 {
 	int			neg;
-	int			space;
 	int			pos;
-	int			zero;
-	int			precision;
 	int			hash;
 	int			printed;
 	char		*extract;
