@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <limits.h>
+#include "ft_printf.h"
 
 char	*buffered_0(char *str)
 {
@@ -34,7 +35,7 @@ int	main()
 	printf("\nc: %ld\ncringe: %ld\n\n", c, cringe);
 	while (cringe > 0)
 	{
-		cringe /= 10;
+		cringe /= 16;
 		q++;
 	}
 	address = (char *)malloc(sizeof(char) * (q + 1));
@@ -52,7 +53,11 @@ int	main()
 	}
 	tmp = cringe % 16;
 	address[q] = hex[tmp];
+	printf("address before buffer: %s\n", address);
+	printf("address before buffer: 0x%s\n", address);
 	address = buffered_0(address);
+	printf("address after buffer: %s\n", address);
+	printf("address after buffer: 0x%s\n", address);
 
 	printf("\n");
 	printf("lx &i: 0x%0lx\n", (unsigned long)&i);
@@ -111,6 +116,51 @@ int	main()
 	printf("%-5d\n", -500);
 	printf("%+5d\n", -500);
 
+
+	unsigned int	lll = 560;
+	unsigned long	ppp = (unsigned long)&lll;
+	printf("%#50lX\n", ppp);
+	printf("%-50p\n", &lll);
+	printf("%-+5d\n", lll);
+
+	unsigned int	un = 500;
+	printf("%-5u\n", un);
+	printf("%-6s\n", "suck");
+	printf("%-6c\n", 'f');
+	printf("%-c\n", 'f');
+
+	ft_printf("\n\n+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+\n\n");
+
+	printf("asdadasdasd\n");
+	ft_printf("asdadasdasd\n");
+
+	// printf("%c\n", 'f');
+	// ft_printf("%c\n", 'f');
+
+	printf("%s\n", "string");
+	ft_printf("%s\n", "string");
+
+	// printf("%p\n", &lll);
+	// ft_printf("%p\n", &lll);
+
+	// printf("%d\n", 6);
+	// ft_printf("%d\n", 6);
+
+	// printf("%i\n", 6);
+	// ft_printf("%i\n", 6);
+
+	// printf("%u\n", lll);
+	// ft_printf("%u\n", lll);
+
+	// printf("%x\n", 100);
+	// ft_printf("%x\n", 100);
+
+	// printf("%X\n", 100);
+	// ft_printf("%X\n", 100);
+
+	printf("%%\n");
+	ft_printf("%%\n");
+
 	printf("\n\n\n\n");
-	system("leaks a.out");
+	// system("leaks a.out");
 }

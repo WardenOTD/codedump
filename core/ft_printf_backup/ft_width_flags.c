@@ -6,7 +6,7 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 13:02:34 by jteoh             #+#    #+#             */
-/*   Updated: 2022/11/29 10:52:02 by jteoh            ###   ########.fr       */
+/*   Updated: 2022/12/01 16:27:18 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,9 @@ int	minimum(t_flags *flag)
 
 	i = 0;
 	min = 0;
-	while (flag->extract[i] != 0)
+	while (flag->extract[i])
 	{
-		if (flag->extract[i] >= '0' && flag->extract[i] <= '9')
+		if (ft_isdigit(flag->extract[i]))
 			min = min * 10 + (flag->extract[i] - '0');
 		i++;
 	}

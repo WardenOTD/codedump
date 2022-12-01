@@ -6,13 +6,14 @@
 #    By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/09 16:35:10 by jteoh             #+#    #+#              #
-#    Updated: 2022/08/26 15:19:55 by jteoh            ###   ########.fr        #
+#    Updated: 2022/12/01 15:55:49 by jteoh            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRC		= ft_printf.c \
+SRC		= ft_printf.c ft_create.c ft_create2.c ft_create3.c \
+			ft_width_flags.c ft_extract.c ft_findspc.c \
 
-OBJS		= $(SRC:.c=.0)
+OBJS		= $(SRC:.c=.o)
 
 CC			= gcc
 RM			= rm -f
