@@ -25,142 +25,68 @@ char	*buffered_0(char *str)
 
 int	main()
 {
-	char	*hex = "0123456789abcdef";
-	int	i = 100;
-	unsigned long	c = (unsigned long)&i;
-	unsigned long	cringe = c;
-	unsigned long	tmp;
-	int	q = 0;
-	char	*address;
-	printf("\nc: %ld\ncringe: %ld\n\n", c, cringe);
-	while (cringe > 0)
-	{
-		cringe /= 16;
-		q++;
-	}
-	address = (char *)malloc(sizeof(char) * (q + 1));
-	if (!address)
-		return (0);
-	address[q--] = 0;
-	cringe = c;
-	while (q > 0)
-	{
-		tmp = cringe % 16;
-		cringe /= 16;
-		address[q] = hex[tmp];
-		printf("%d  ---  %c\n", q, address[q]);
-		q--;
-	}
-	tmp = cringe % 16;
-	address[q] = hex[tmp];
-	printf("address before buffer: %s\n", address);
-	printf("address before buffer: 0x%s\n", address);
-	address = buffered_0(address);
-	printf("address after buffer: %s\n", address);
-	printf("address after buffer: 0x%s\n", address);
-
-	printf("\n");
-	printf("lx &i: 0x%0lx\n", (unsigned long)&i);
-	printf("p: %p\n", &i);
-	printf("lx c: 0x%0lx\n", c);
-	printf("address: 0x%s\n\n\n", address);
-	printf("===============================================================\n\n");
-	int	yes = printf("%9.5i\n", 42);
-	printf("previous print returned: %d\n\n\n", yes);
-	int	integer = -100;
-	unsigned int	unint = 200;
-	unsigned int	result = (unsigned int)(integer - unint);
-	long	lol = 10;
-	int		lolol = 10;
-	printf("long = %li ,, int = %i\n\n", lol, lolol);
-	printf("%u\n\n", result);
-	printf("%u\n\n", -15);
-	lolol = -15;
-	printf("%lu\n\n", lol);
-	printf("%u\n\n", UINT_MAX);
-	printf("\n\n\n\n");
-
-	printf("#lx &i: %0#lx\n", (unsigned long)&i);
-	printf("0xlx &i: 0x%0lx\n", (unsigned long)&i);
-	printf("%#5x\n", 100);
-	printf("%5x\n", 100);
-	printf("%#5X\n", 100);
-	printf("%5X\n", 100);
-	printf("% 5d\n", 100);
-	printf("% 5d\n", -100);
-	printf("%05d\n", 100);
-	printf("%+5d\n", 100);
-	printf("%-5d\n", 100);
-	printf("%.5d\n", 100);
-	printf("bro %.10s man\n", "holy shittaa");
-	printf("%-2d\n", 100);
-	printf("%+5d\n", 100);
-	printf("%#x\n", 100);
-	printf("%10.5s\n", "123456");
-	printf("%d,%010% 12\n", 100);
-	printf("%020f\n", 10.10);
-	printf("%020.3f\n", 10.10);
-	printf("%20d\n", 9);
-	printf("%.20d\n", 9);
-	printf("%020d\n", 9);
-	printf("%5s\n", "0123456");
-	printf("%.5s\n", "0123456");
-	printf("%1s\n", "0123456");
-	printf("%.1s\n", "0123456");
-	printf("%.06d\n", 1000);
-	printf("%06d\n", 1000);
-	printf("%.010f\n", 0.5);
-	printf("%010f\n", 0.5);
-	printf("%.2d\n", 1000);
-	printf("%02d\n", 1000);
-	printf("%-5d\n", -500);
-	printf("%+5d\n", -500);
-
-
-	unsigned int	lll = 560;
-	unsigned long	ppp = (unsigned long)&lll;
-	printf("%#50lX\n", ppp);
-	printf("%-50p\n", &lll);
-	printf("%-+5d\n", lll);
-
-	unsigned int	un = 500;
-	printf("%-5u\n", un);
-	printf("%-6s\n", "suck");
-	printf("%-6c\n", 'f');
-	printf("%-c\n", 'f');
-
 	ft_printf("\n\n+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+\n\n");
 
-	printf("asdadasdasd\n");
-	ft_printf("asdadasdasd\n");
+	// unsigned int	lll;
 
-	// printf("%c\n", 'f');
-	// ft_printf("%c\n", 'f');
+	// works
+	// printf("\nTest1\n");
+	// printf("system:_asdadasdasd\n");
+	// ft_printf("mine:_asdadasdasd\n");
 
-	printf("%s\n", "string");
-	ft_printf("%s\n", "string");
+	// works
+	// char	c = 'f';
+	// printf("\nTest2\n");
+	// printf("system:_%-5c\n", c);
+	// ft_printf("mine:_%-5c\n", c);
 
-	// printf("%p\n", &lll);
-	// ft_printf("%p\n", &lll);
+	// works
+	// printf("\nTest3\n");
+	// printf("system:_%-10s\n", "string");
+	// ft_printf("mine:_%-10s\n", "string");
 
-	// printf("%d\n", 6);
-	// ft_printf("%d\n", 6);
+	//	works
+	// printf("\ntest4\n");
+	// printf("system:_%-14p\n", &lll);
+	// ft_printf("mine:_%-14p\n", &lll);
 
-	// printf("%i\n", 6);
-	// ft_printf("%i\n", 6);
+	//	works
+	// printf("\ntest5\n");
+	// printf("system:_%+-5d\n", 6);
+	// ft_printf("mine:_%+-5d\n", 6);
 
-	// printf("%u\n", lll);
-	// ft_printf("%u\n", lll);
+	//	works
+	// printf("\ntest5.5\n");
+	// printf("system:_%+5d\n", 6);
+	// ft_printf("mine:_%+5d\n", 6);
 
-	// printf("%x\n", 100);
-	// ft_printf("%x\n", 100);
+	// 	works
+	// printf("\ntest6\n");
+	// printf("system:_%+-i\n", 6);
+	// ft_printf("mine:_%+-i\n", 6);
 
-	// printf("%X\n", 100);
-	// ft_printf("%X\n", 100);
+	//	works
+	// lll = 1234567;
+	// printf("\ntest7\n");
+	// printf("system:_%-10u\n", lll);
+	// ft_printf("mine:_%-10u\n", lll);
 
-	printf("%%\n");
-	ft_printf("%%\n");
+	//	works ---doesn't append 0x
+	printf("\ntest8\n");
+	printf("system:_%-#60x\n", 23458);
+	ft_printf("mine:_%-#60x\n", 23458);
 
-	printf("\n\n\n\n");
+	//	works ---doesn't append 0x
+	printf("\ntest9\n");
+	printf("system:_%-#60X\n", 439819);
+	ft_printf("mine:_%-#60X\n", 439819);
+
+	//	works? after percent printed no newline
+	// printf("\ntest9\n");
+	// printf("system:_%%\n");
+	// ft_printf("mine:_%%\n");
+
+
+	// printf("\n\n\n");
 	// system("leaks a.out");
 }

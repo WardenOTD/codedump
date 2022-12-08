@@ -20,6 +20,7 @@ RM			= rm -f
 CFLAGS		= -Wall -Wextra -Werror -I.
 
 NAME		= libftprintf.a
+LNAME		= lftprintf.a
 
 all:	${NAME}
 
@@ -31,10 +32,22 @@ $(NAME): $(OBJS)
 
 clean:
 	$(RM) $(OBJS)
+	$(RM) print_testing.o
 	make clean -C libft/
 
 fclean:	clean
 	$(RM) $(NAME)
+	$(RM) test
 	make fclean -C libft/
 
 re:	fclean $(NAME)
+
+test: $(NAME)
+	gcc	-c print_testing.c
+	gcc print_testing.o -L. $(NAME) -o test
+
+test_asan: $(NAME)
+	gcc	-c print_testing.c
+	gcc print_testing.o -L. $(NAME) -fsanitize=address -o test
+
+retest: fclean test

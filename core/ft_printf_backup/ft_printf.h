@@ -6,7 +6,7 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 16:41:33 by jteoh             #+#    #+#             */
-/*   Updated: 2022/12/01 16:34:02 by jteoh            ###   ########.fr       */
+/*   Updated: 2022/12/08 15:20:43 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "./libft/libft.h"
 # include <stdlib.h>
+# include <stdio.h>
 # include <unistd.h>
 # include <stdarg.h>
 
@@ -57,17 +58,31 @@ void			fillspace(t_flags *flag);
 
 void			cmp(t_flags *flag, char *cc);
 
-void			other(t_specifier *spc, t_flags *flag);
+int				other(t_specifier *spc, t_flags *flag);
+
+int				scuffed_realloc_plus(t_flags *flag);
+
+int				scuffed_realloc_plus_neg(t_flags *flag);
+
+int				scuffed_realloc_0x(t_flags *flag, t_specifier *spc);
+
+int				scuffed_realloc_0x_neg(t_flags *flag, t_specifier *spc);
 
 int				if_hex(t_flags *flag, t_specifier *spc, va_list list);
 
 char			*hex_convert(t_specifier *spc, unsigned long address);
 
-void			hexx(char **cadd, unsigned long address, int count);
+void			hexx(char *cadd, unsigned long address, int count);
 
-void			uhexx(char **cadd, unsigned long address, int count);
+void			uhexx(char *cadd, unsigned long address, int count);
 
 int				if_char(t_flags *flag, va_list list);
+
+int				if_int(t_specifier *spc, t_flags *flag, va_list list);
+
+unsigned int	digitcount(unsigned int n);
+
+char			*utoa(unsigned int n);
 
 void			neg(t_flags *flag);
 

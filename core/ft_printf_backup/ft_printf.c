@@ -6,7 +6,7 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 16:48:25 by jteoh             #+#    #+#             */
-/*   Updated: 2022/12/01 17:00:08 by jteoh            ###   ########.fr       */
+/*   Updated: 2022/12/06 15:44:54 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,14 @@ int	ft_printf(const char *str, ...)
 	t_specifier	spc;
 	va_list		list;
 
-	default_flag(&flag);
-	default_specifier(&spc);
 	va_start(list, str);
 	while (*str)
 	{
 		if (*str == '%' && *(str + 1) != '%')
 		{
+			// you should reset the flag every time there is the % sign
+			default_flag(&flag);
+			default_specifier(&spc);
 			if (!out(&spc, &flag, list, str))
 				return (0);
 			print(&flag);
@@ -43,9 +44,10 @@ void	print(t_flags *flag)
 {
 	flag->printed += ft_strlen(flag->output);
 	ft_putstr_fd(flag->output, 1);
-	free(flag->output);
-	if (flag->extract)
-		free(flag->extract);
+	// if (flag->output)
+	// 	free(flag->output);
+	// if (flag->extract)
+	// 	free(flag->extract);
 }
 
 void	default_flag(t_flags *flag)
@@ -55,6 +57,8 @@ void	default_flag(t_flags *flag)
 	flag->hash = 0;
 	flag->printed = 0;
 	flag->extract_size = 0;
+	flag->extract = NULL;
+	flag->output = NULL;
 }
 
 void	default_specifier(t_specifier *spc)
