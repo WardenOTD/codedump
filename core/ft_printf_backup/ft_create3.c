@@ -6,7 +6,7 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 15:49:35 by jteoh             #+#    #+#             */
-/*   Updated: 2022/12/08 12:05:28 by jteoh            ###   ########.fr       */
+/*   Updated: 2022/12/09 13:01:23 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 int	if_char(t_flags *flag, va_list list)
 {
 	char	c[2];
-	int		i;
 	int		p;
 
 	c[0] = (char)va_arg(list, int);
@@ -30,19 +29,24 @@ int	if_char(t_flags *flag, va_list list)
 	if (flag->neg)
 		flag->output[0] = c[0];
 	if (!flag->neg)
-	{
-		if (!flag->output)
-		{
-			free(flag->output);
-			flag->output = c;
-		}
-		if (flag->output)
-		{
-			i = ft_strlen(flag->output);
-			flag->output[--i] = c[0];
-		}
-	}
+		neg_char(flag, c);
 	return (1);
+}
+
+void	neg_char(t_flags *flag, char *c)
+{
+	int	i;
+
+	if (!flag->output)
+	{
+		free(flag->output);
+		flag->output = c;
+	}
+	if (flag->output)
+	{
+		i = ft_strlen(flag->output);
+		flag->output[--i] = c[0];
+	}
 }
 
 int	if_int(t_specifier *spc, t_flags *flag, va_list list)

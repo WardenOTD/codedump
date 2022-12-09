@@ -6,7 +6,7 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 13:02:34 by jteoh             #+#    #+#             */
-/*   Updated: 2022/12/01 16:27:18 by jteoh            ###   ########.fr       */
+/*   Updated: 2022/12/09 12:44:43 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	neg(t_flags *flag)
 		}
 		i++;
 	}
+	pos(flag);
 }
 
 void	pos(t_flags *flag)
@@ -38,6 +39,23 @@ void	pos(t_flags *flag)
 		if (flag->extract[i] == '+')
 		{
 			flag->pos = 1;
+			break ;
+		}
+		i++;
+	}
+	hash(flag);
+}
+
+void	hash(t_flags *flag)
+{
+	int	i;
+
+	i = 0;
+	while (flag->extract[i] != 0)
+	{
+		if (flag->extract[i] == '#')
+		{
+			flag->hash = 1;
 			break ;
 		}
 		i++;

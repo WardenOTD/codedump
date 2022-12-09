@@ -6,7 +6,7 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 10:54:37 by jteoh             #+#    #+#             */
-/*   Updated: 2022/12/08 12:08:42 by jteoh            ###   ########.fr       */
+/*   Updated: 2022/12/09 12:57:19 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ char	*hex_convert(t_specifier *spc, unsigned long address)
 void	hexx(char *cadd, unsigned long address, int count)
 {
 	const char		*hex;
-	int	tmp;
+	unsigned long	tmp;
 
 	hex = "0123456789abcdef";
 	count--;

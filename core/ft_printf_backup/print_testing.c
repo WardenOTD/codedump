@@ -27,66 +27,88 @@ int	main()
 {
 	ft_printf("\n\n+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+\n\n");
 
-	// unsigned int	lll;
+	unsigned int	lll;
+	int	p;
 
 	// works
-	// printf("\nTest1\n");
-	// printf("system:_asdadasdasd\n");
-	// ft_printf("mine:_asdadasdasd\n");
+	printf("\nTest1\n");
+	p = printf("system:_asdadasdasd\n");
+	printf("\n----system printed: %d----\n", p);
+	ft_printf("mine:_asdadasdasd\n");
 
 	// works
-	// char	c = 'f';
-	// printf("\nTest2\n");
-	// printf("system:_%-5c\n", c);
-	// ft_printf("mine:_%-5c\n", c);
+	char	c = 'f';
+	printf("\nTest2\n");
+	p=printf("system:_%-5c\n", c);
+	printf("\n----system printed: %d----\n", p);
+	ft_printf("mine:_%-5c\n", c);
 
 	// works
-	// printf("\nTest3\n");
-	// printf("system:_%-10s\n", "string");
-	// ft_printf("mine:_%-10s\n", "string");
+	printf("\nTest3\n");
+	p=printf("system:_%-10s\n", "string");
+	printf("\n----system printed: %d----\n", p);
+	ft_printf("mine:_%-10s\n", "string");
 
 	//	works
-	// printf("\ntest4\n");
-	// printf("system:_%-14p\n", &lll);
-	// ft_printf("mine:_%-14p\n", &lll);
+	printf("\ntest4\n");
+	p=printf("system:_%-14p\n", &lll);
+	printf("\n----system printed: %d----\n", p);
+	ft_printf("mine:_%-14p\n", &lll);
 
 	//	works
-	// printf("\ntest5\n");
-	// printf("system:_%+-5d\n", 6);
-	// ft_printf("mine:_%+-5d\n", 6);
+	printf("\ntest5\n");
+	p=printf("system:_%+-5d\n", 6);
+	printf("\n----system printed: %d----\n", p);
+	ft_printf("mine:_%+-5d\n", 6);
 
 	//	works
-	// printf("\ntest5.5\n");
-	// printf("system:_%+5d\n", 6);
-	// ft_printf("mine:_%+5d\n", 6);
+	printf("\ntest5.5\n");
+	p=printf("system:_%+5d\n", 6);
+	printf("\n----system printed: %d----\n", p);
+	ft_printf("mine:_%+5d\n", 6);
 
 	// 	works
-	// printf("\ntest6\n");
-	// printf("system:_%+-i\n", 6);
-	// ft_printf("mine:_%+-i\n", 6);
+	printf("\ntest6\n");
+	p=printf("system:_%+-i\n", 6);
+	printf("\n----system printed: %d----\n", p);
+	ft_printf("mine:_%+-i\n", 6);
 
 	//	works
-	// lll = 1234567;
-	// printf("\ntest7\n");
-	// printf("system:_%-10u\n", lll);
-	// ft_printf("mine:_%-10u\n", lll);
+	lll = 1234567;
+	printf("\ntest7\n");
+	p=printf("system:_%-10u\n", lll);
+	printf("\n----system printed: %d----\n", p);
+	ft_printf("mine:_%-10u\n", lll);
 
-	//	works ---doesn't append 0x
+	//	works
 	printf("\ntest8\n");
-	printf("system:_%-#60x\n", 23458);
+	p=printf("system:_%#60x\n", 23458);
+	printf("\n----system printed: %d----\n", p);
+	ft_printf("mine:_%#60x\n", 23458);
+
+	printf("\ntest8.5\n");
+	p=printf("system:_%-#60x\n", 23458);
+	printf("\n----system printed: %d----\n", p);
 	ft_printf("mine:_%-#60x\n", 23458);
 
-	//	works ---doesn't append 0x
+	//	works
 	printf("\ntest9\n");
-	printf("system:_%-#60X\n", 439819);
+	p=printf("system:_%#60X\n", 439819);
+	printf("\n----system printed: %d----\n", p);
+	ft_printf("mine:_%#60X\n", 439819);
+
+	printf("\ntest9.5\n");
+	p=printf("system:_%-#60X\n", 439819);
+	printf("\n----system printed: %d----\n", p);
 	ft_printf("mine:_%-#60X\n", 439819);
 
-	//	works? after percent printed no newline
-	// printf("\ntest9\n");
-	// printf("system:_%%\n");
-	// ft_printf("mine:_%%\n");
+	//	works
+	printf("\ntest9\n");
+	p = printf("system:_%%\n");
+	printf("\n----system printed: %d----\n", p);
+	ft_printf("mine:_%%\n");
 
 
-	// printf("\n\n\n");
+	printf("\n\n\n");
 	// system("leaks a.out");
 }

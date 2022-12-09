@@ -6,7 +6,7 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 15:33:48 by jteoh             #+#    #+#             */
-/*   Updated: 2022/12/08 13:19:36 by jteoh            ###   ########.fr       */
+/*   Updated: 2022/12/09 13:02:15 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	findspc(const char *str, t_specifier *spc)
 {
 	int	i;
 
-	i = 1; // start with 1 because the 1st char is %
+	i = 1;
 	while (str[i] != 0)
 	{
 		if (str[i] == 'c')
@@ -40,7 +40,7 @@ int	findspc2(const char *str, t_specifier *spc)
 {
 	int	i;
 
-	i = 1; // start with 1 because the 1st char is %
+	i = 1;
 	while (str[i] != 0)
 	{
 		if (str[i] == 'p')
@@ -64,7 +64,7 @@ int	findspc3(const char *str, t_specifier *spc)
 {
 	int	i;
 
-	i = 1; // start with 1 because the 1st char is %
+	i = 1;
 	while (str[i] != 0)
 	{
 		if (str[i] == 'u')
