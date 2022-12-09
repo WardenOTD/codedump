@@ -6,7 +6,7 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 16:41:33 by jteoh             #+#    #+#             */
-/*   Updated: 2022/12/09 13:17:44 by jteoh            ###   ########.fr       */
+/*   Updated: 2022/12/09 13:58:50 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,10 +102,12 @@ void			hard_set(t_specifier *spc, t_flags *flag);
 
 int				findspc(const char *str, t_specifier *spc);
 
-int				findspc2(const char *str, t_specifier *spc);
+int				findspc1(int str, int i, t_specifier *spc);
 
-int				findspc3(const char *str, t_specifier *spc);
+int				findspc2(int str, int i, t_specifier *spc);
 
-int				findspc4(const char *str, t_specifier *spc);
+int				findspc3(int str, int i, t_specifier *spc);
+
+int				findspc4(int str, int i, t_specifier *spc);
 
 #endif

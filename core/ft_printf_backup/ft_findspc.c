@@ -6,7 +6,7 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 15:33:48 by jteoh             #+#    #+#             */
-/*   Updated: 2022/12/09 13:02:15 by jteoh            ###   ########.fr       */
+/*   Updated: 2022/12/09 13:59:23 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,94 +16,52 @@ int	findspc(const char *str, t_specifier *spc)
 {
 	int	i;
 
-	i = 1;
-	while (str[i] != 0)
-	{
-		if (str[i] == 'c')
-		{
-			spc->c = 1;
-			break ;
-		}
-		else if (str[i] == 's')
-		{
-			spc->s = 1;
-			break ;
-		}
+	i = 0;
+	while (!ft_isalpha(str[i]) && str[i])
 		i++;
-	}
-	if (str[i] == 0)
-		return (findspc2(str, spc));
+	return (findspc1(str[i], i, spc));
+}
+
+int	findspc1(int str, int i, t_specifier *spc)
+{
+	if (str == 'c')
+		spc->c = 1;
+	else if (str == 's')
+		spc->s = 1;
+	else
+		return (findspc2(str, i, spc));
 	return (++i);
 }
 
-int	findspc2(const char *str, t_specifier *spc)
+int	findspc2(int str, int i, t_specifier *spc)
 {
-	int	i;
-
-	i = 1;
-	while (str[i] != 0)
-	{
-		if (str[i] == 'p')
-		{
-			spc->p = 1;
-			break ;
-		}
-		else if (str[i] == 'd' || str[i] == 'i')
-		{
-			spc->di = 1;
-			break ;
-		}
-		i++;
-	}
-	if (str[i] == 0)
-		return (findspc3(str, spc));
+	if (str == 'p')
+		spc->p = 1;
+	else if (str == 'd' || str == 'i')
+		spc->di = 1;
+	else
+		return (findspc3(str, i, spc));
 	return (++i);
 }
 
-int	findspc3(const char *str, t_specifier *spc)
+int	findspc3(int str, int i, t_specifier *spc)
 {
-	int	i;
-
-	i = 1;
-	while (str[i] != 0)
-	{
-		if (str[i] == 'u')
-		{
-			spc->u = 1;
-			break ;
-		}
-		else if (str[i] == 'x')
-		{
-			spc->x = 1;
-			break ;
-		}
-		i++;
-	}
-	if (str[i] == 0)
-		return (findspc4(str, spc));
+	if (str == 'u')
+		spc->u = 1;
+	else if (str == 'x')
+		spc->x = 1;
+	else
+		return (findspc4(str, i, spc));
 	return (++i);
 }
 
-int	findspc4(const char *str, t_specifier *spc)
+int	findspc4(int str, int i, t_specifier *spc)
 {
-	int	i;
-
-	i = 1;
-	while (str[i] != 0)
-	{
-		if (str[i] == 'X')
-		{
-			spc->upperx = 1;
-			break ;
-		}
-		else if (str[i] == '%')
-		{
-			spc->hash = 1;
-			break ;
-		}
-		i++;
-	}
-	if (str[i] == 0)
+	if (str == 'X')
+		spc->upperx = 1;
+	else if (str == '%')
+		spc->hash = 1;
+	else
 		return (0);
 	return (++i);
 }
