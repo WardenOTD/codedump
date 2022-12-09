@@ -6,7 +6,7 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 16:48:25 by jteoh             #+#    #+#             */
-/*   Updated: 2022/12/09 13:59:50 by jteoh            ###   ########.fr       */
+/*   Updated: 2022/12/09 14:47:52 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,19 @@ int	ft_printf(const char *str, ...)
 			str += flag.extract_size;
 			continue ;
 		}
+		percent(&str);
 		ft_putchar_fd(*str, 1);
 		flag.printed += 1;
 		str++;
 	}
 	va_end(list);
 	return (flag.printed);
+}
+
+void	percent(const char **str)
+{
+	if (**str == '%' && **(str + 1) == '%')
+		*str++;
 }
 
 void	print(t_flags *flag)

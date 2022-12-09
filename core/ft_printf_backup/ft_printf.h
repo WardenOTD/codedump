@@ -6,7 +6,7 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 16:41:33 by jteoh             #+#    #+#             */
-/*   Updated: 2022/12/09 13:58:50 by jteoh            ###   ########.fr       */
+/*   Updated: 2022/12/09 14:48:12 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ typedef struct s_specifier
 }				t_specifier;
 
 int				ft_printf(const char *str, ...);
+
+void			percent(const char **str);
 
 void			print(t_flags *flag);
 
