@@ -109,6 +109,9 @@ int	main()
 	// ft_printf("mine:_%%\n");
 
 	ft_printf("wait for it... %#Xp", 42);
+	ft_printf("\n");
+	int	p = ft_printf("%c", 'a');
+	ft_printf("\n%d\n", p);
 
 	printf("\n\n\n");
 	// system("leaks a.out");
