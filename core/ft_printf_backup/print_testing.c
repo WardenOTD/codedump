@@ -112,6 +112,12 @@ int	main()
 	ft_printf("\n");
 	int	p = ft_printf("%c", 'a');
 	ft_printf("\n%d\n", p);
+	int	l = ft_printf("l%cl%cl%cl%cl%c", 'a', 'i', 'u', 'e', 'o');
+	ft_printf("\n%d\n", l);
+	int	k = ft_printf("l%cl%cl%cl%cl%c", '\0', '\0', '\0', 'e', '\0');
+	ft_printf("\n%d\n", k);
+	int	j = printf("l%cl%cl%cl%cl%c", '\0', '\0', '\0', 'e', '\0');
+	printf("\n%d\n", j);
 
 	printf("\n\n\n");
 	// system("leaks a.out");

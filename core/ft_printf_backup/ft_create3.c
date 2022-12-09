@@ -6,7 +6,7 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 15:49:35 by jteoh             #+#    #+#             */
-/*   Updated: 2022/12/09 13:01:23 by jteoh            ###   ########.fr       */
+/*   Updated: 2022/12/09 15:06:05 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ int	if_char(t_flags *flag, va_list list)
 	int		p;
 
 	c[0] = (char)va_arg(list, int);
+	if (c[0] == 0)
+		return (0);
 	c[1] = 0;
 	p = ft_strlen(flag->output);
 	free(flag->output);
