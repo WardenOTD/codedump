@@ -6,7 +6,7 @@
 #    By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/09 16:35:10 by jteoh             #+#    #+#              #
-#    Updated: 2022/12/13 15:32:48 by jteoh            ###   ########.fr        #
+#    Updated: 2022/12/13 15:39:23 by jteoh            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,22 +32,10 @@ $(NAME): $(OBJS)
 
 clean:
 	$(RM) $(OBJS)
-	$(RM) print_testing.o
 	make clean -C libft/
 
 fclean:	clean
 	$(RM) $(NAME)
-	$(RM) test
 	make fclean -C libft/
 
 re:	fclean $(NAME)
-
-test: $(NAME)
-	gcc	-c print_testing.c
-	gcc print_testing.o -L. $(NAME) -o test
-
-test_asan: $(NAME)
-	gcc	-c print_testing.c
-	gcc print_testing.o -L. $(NAME) -fsanitize=address -o test
-
-retest: fclean test
