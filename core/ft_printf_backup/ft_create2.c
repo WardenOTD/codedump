@@ -6,7 +6,7 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 10:54:37 by jteoh             #+#    #+#             */
-/*   Updated: 2022/12/13 11:50:35 by jteoh            ###   ########.fr       */
+/*   Updated: 2022/12/13 12:15:53 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int	if_hex(t_flags *flag, t_specifier *spc, va_list list)
 	if (spc->p)
 		append_0x(address2);
 	write_to_fd(address2, flag, 1);
+	free(address2);
 	return (1);
 }
 
