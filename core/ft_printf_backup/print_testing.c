@@ -92,9 +92,9 @@ int	main()
 	// printf("\n----system printed: %d----\n", p);
 	// ft_printf("mine:_%%\n");
 
-	printf(" %p ", -1);
+	printf(" %x ", LONG_MIN);
 	printf("\n\n\n");
-	ft_printf(" %p ", -1);
+	ft_printf(" %x ", LONG_MIN);
 	ft_printf("\n\n\n");
 
 	printf("\n\n\n");

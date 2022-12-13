@@ -5,78 +5,78 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/01 15:49:35 by jteoh             #+#    #+#             */
-/*   Updated: 2022/12/13 12:17:38 by jteoh            ###   ########.fr       */
+/*   Created: 2022/12/01 10:54:37 by jteoh             #+#    #+#             */
+/*   Updated: 2022/12/13 15:26:36 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	if_char(t_flags *flag, va_list list)
+int	if_hex(t_flags *flag, t_specifier *spc, va_list list)
 {
-	char	c;
+	char			*address2;
+	unsigned int	address;
 
-	c = va_arg(list, int);
-	ft_putchar_fd(c, 1);
-	flag->printed += 1;
+	address = va_arg(list, unsigned int);
+	address2 = hex_convert(spc, address);
+	if (!address2)
+		return (0);
+	write_to_fd(address2, flag, 1);
+	free(address2);
 	return (1);
 }
 
-int	if_int(t_specifier *spc, t_flags *flag, va_list list)
+char	*hex_convert(t_specifier *spc, unsigned int address)
 {
-	int				di;
-	unsigned int	u;
-	char			*c;
+	int				count;
+	unsigned int	fake_address;
+	char			*cadd;
 
-	if (spc->di == 1)
+	count = 1;
+	fake_address = address;
+	while (fake_address >= 16)
 	{
-		di = va_arg(list, int);
-		c = ft_itoa(di);
-	}
-	if (spc->u == 1)
-	{
-		u = va_arg(list, unsigned int);
-		c = utoa(u);
-	}
-	write_to_fd(c, flag, 1);
-	free(c);
-	return (1);
-}
-
-unsigned int	digitcount(unsigned int n)
-{
-	int	count;
-
-	count = 0;
-	if (n == 0)
-		return (count + 1);
-	while (n != 0)
-	{
-		n /= 10;
+		fake_address /= 16;
 		count++;
 	}
-	return (count);
+	cadd = (char *)ft_calloc((count + 1), sizeof(char));
+	if (!cadd)
+		return (0);
+	if (spc->x == 1)
+		hexx(cadd, address, count);
+	if (spc->upperx == 1)
+		uhexx(cadd, address, count);
+	return (cadd);
 }
 
-char	*utoa(unsigned int n)
+void	hexx(char *cadd, unsigned int address, int count)
 {
-	unsigned int	count;
-	char			*arr;
-	unsigned int	temp;
+	const char		*hex;
+	unsigned int	tmp;
 
-	count = digitcount(n);
-	arr = (char *)malloc(count * sizeof(char) + 1);
-	if (!arr)
-		return (0);
-	arr[count--] = '\0';
-	while (count > 0)
+	hex = "0123456789abcdef";
+	count--;
+	while (count != -1)
 	{
-		temp = n % 10;
-		n /= 10;
-		arr[count] = temp + '0';
+		tmp = address % 16;
+		address /= 16;
+		cadd[count] = hex[tmp];
 		count--;
 	}
-	temp = n % 10;
-	arr[count] = temp + '0';
-	return (arr);
+}
+
+void	uhexx(char *cadd, unsigned int address, int count)
+{
+	const char		*uhex;
+	unsigned int	tmp;
+
+	uhex = "0123456789ABCDEF";
+	count--;
+	while (count != -1)
+	{
+		tmp = address % 16;
+		address /= 16;
+		cadd[count] = uhex[tmp];
+		count--;
+	}
 }

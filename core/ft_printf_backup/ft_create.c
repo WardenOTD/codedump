@@ -6,7 +6,7 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 11:13:21 by jteoh             #+#    #+#             */
-/*   Updated: 2022/12/13 13:12:22 by jteoh            ###   ########.fr       */
+/*   Updated: 2022/12/13 15:30:34 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,14 @@ int	out(t_specifier *spc, t_flags *flag, va_list list, const char *str)
 
 	if (!findspc(str, spc))
 		return (0);
-	if (spc->x == 1 || spc->upperx == 1 || spc->p == 1)
-		return (if_hex(flag, spc, list));
 	if (spc->c == 1)
 		return (if_char(flag, list));
 	if (spc->di == 1 || spc->u == 1)
 		return (if_int(spc, flag, list));
+	if (spc->p == 1)
+		return (if_pointer(flag, list));
+	if (spc->x == 1 || spc->upperx == 1)
+		return (if_hex(flag, spc, list));
 	cc = create_c(spc, list);
 	if (!cc)
 		return (0);
@@ -61,16 +63,4 @@ void	write_to_fd(char *str, t_flags *flag, int fd)
 {
 	flag->printed += ft_strlen(str);
 	ft_putstr_fd(str, fd);
-}
-
-void	address_check(long long *address)
-{
-	if (*address >= (long long)LONG_MAX)
-		*address = (long long)LONG_MAX;
-	if (*address <= (long long)LONG_MIN)
-		*address = (long long)LONG_MIN;
-	if (*address >= (long long)ULONG_MAX)
-		*address = (long long)ULONG_MAX;
-	if (*address >= 9223372036854775807LL - 1)
-		*address = 9223372036854775807LL;
 }
