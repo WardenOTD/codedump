@@ -92,10 +92,11 @@ int	main()
 	// printf("\n----system printed: %d----\n", p);
 	// ft_printf("mine:_%%\n");
 
-	printf(" NULL %s NULL ", NULL);
+	printf(" %p ", -1);
 	printf("\n\n\n");
-	ft_printf(" NULL %s NULL ", NULL);
+	ft_printf(" %p ", -1);
+	ft_printf("\n\n\n");
 
 	printf("\n\n\n");
-	system("leaks a.out");
+	// system("leaks a.out");
 }

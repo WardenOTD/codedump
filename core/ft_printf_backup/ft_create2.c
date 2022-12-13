@@ -6,7 +6,7 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 10:54:37 by jteoh             #+#    #+#             */
-/*   Updated: 2022/12/13 12:15:53 by jteoh            ###   ########.fr       */
+/*   Updated: 2022/12/13 12:53:37 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ char	*hex_convert(t_specifier *spc, unsigned long address)
 		fake_address /= 16;
 		count++;
 	}
-	cadd = (char *) ft_calloc ((count + 1 + (spc->p * 2)), sizeof(char));
+	count += (spc->p * 2);
+	cadd = (char *) ft_calloc ((count + 1), sizeof(char));
 	if (!cadd)
 		return (0);
 	if (spc->x == 1 || spc->p == 1)
