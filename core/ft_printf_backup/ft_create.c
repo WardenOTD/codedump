@@ -6,7 +6,7 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 11:13:21 by jteoh             #+#    #+#             */
-/*   Updated: 2022/12/13 12:43:40 by jteoh            ###   ########.fr       */
+/*   Updated: 2022/12/13 13:09:28 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,16 @@ void	write_to_fd(char *str, t_flags *flag, int fd)
 {
 	flag->printed += ft_strlen(str);
 	ft_putstr_fd(str, fd);
+}
+
+void	address_check(long long *address)
+{
+	if (*address >= LONG_MAX)
+		*address = LONG_MAX;
+	if (*address <= LONG_MIN)
+		*address = LONG_MIN;
+	if (*address >= ULONG_MAX)
+		*address = ULONG_MAX;
+	if (*address >= 9223372036854775807LL - 1)
+		*address = 9223372036854775807LL;
 }

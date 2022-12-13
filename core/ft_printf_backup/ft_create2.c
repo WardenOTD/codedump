@@ -6,7 +6,7 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 10:54:37 by jteoh             #+#    #+#             */
-/*   Updated: 2022/12/13 12:53:37 by jteoh            ###   ########.fr       */
+/*   Updated: 2022/12/13 13:10:50 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,10 @@
 int	if_hex(t_flags *flag, t_specifier *spc, va_list list)
 {
 	char			*address2;
-	unsigned long	address;
+	long long		address;
 
-	address = va_arg(list, unsigned long);
+	address = va_arg(list, long long);
+	address_check(&address);
 	address2 = hex_convert(spc, address);
 	if (!address2)
 		return (0);
@@ -28,10 +29,10 @@ int	if_hex(t_flags *flag, t_specifier *spc, va_list list)
 	return (1);
 }
 
-char	*hex_convert(t_specifier *spc, unsigned long address)
+char	*hex_convert(t_specifier *spc, long long address)
 {
 	int				count;
-	unsigned long	fake_address;
+	long long		fake_address;
 	char			*cadd;
 
 	count = 1;
@@ -52,10 +53,10 @@ char	*hex_convert(t_specifier *spc, unsigned long address)
 	return (cadd);
 }
 
-void	hexx(char *cadd, unsigned long address, int count)
+void	hexx(char *cadd, long long address, int count)
 {
 	const char		*hex;
-	unsigned long	tmp;
+	long long		tmp;
 
 	hex = "0123456789abcdef";
 	count--;
@@ -68,10 +69,10 @@ void	hexx(char *cadd, unsigned long address, int count)
 	}
 }
 
-void	uhexx(char *cadd, unsigned long address, int count)
+void	uhexx(char *cadd, long long address, int count)
 {
 	const char		*uhex;
-	unsigned long	tmp;
+	long long		tmp;
 
 	uhex = "0123456789ABCDEF";
 	count--;
