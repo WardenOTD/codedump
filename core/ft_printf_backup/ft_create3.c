@@ -6,7 +6,7 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 15:49:35 by jteoh             #+#    #+#             */
-/*   Updated: 2022/12/09 15:06:05 by jteoh            ###   ########.fr       */
+/*   Updated: 2022/12/13 12:10:40 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,41 +14,12 @@
 
 int	if_char(t_flags *flag, va_list list)
 {
-	char	c[2];
-	int		p;
+	char	c;
 
-	c[0] = (char)va_arg(list, int);
-	if (c[0] == 0)
-		return (0);
-	c[1] = 0;
-	p = ft_strlen(flag->output);
-	free(flag->output);
-	flag->output = malloc(sizeof(char) * (p + 1 + (p == 0)));
-	if (!flag->output)
-		return (0);
-	flag->output[p + (p == 0)] = 0;
-	fillspace(flag);
-	if (flag->neg)
-		flag->output[0] = c[0];
-	if (!flag->neg)
-		neg_char(flag, c);
+	c = va_arg(list, int);
+	ft_putchar_fd(c, 1);
+	flag->printed += 1;
 	return (1);
-}
-
-void	neg_char(t_flags *flag, char *c)
-{
-	int	i;
-
-	if (!flag->output)
-	{
-		free(flag->output);
-		flag->output = c;
-	}
-	if (flag->output)
-	{
-		i = ft_strlen(flag->output);
-		flag->output[--i] = c[0];
-	}
 }
 
 int	if_int(t_specifier *spc, t_flags *flag, va_list list)
@@ -67,9 +38,7 @@ int	if_int(t_specifier *spc, t_flags *flag, va_list list)
 		u = va_arg(list, unsigned int);
 		c = utoa(u);
 	}
-	cmp(flag, c);
-	if (!other(spc, flag))
-		return (0);
+	write_to_fd(c, flag, 1);
 	return (1);
 }
 

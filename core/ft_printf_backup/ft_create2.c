@@ -6,7 +6,7 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 10:54:37 by jteoh             #+#    #+#             */
-/*   Updated: 2022/12/09 12:57:19 by jteoh            ###   ########.fr       */
+/*   Updated: 2022/12/13 11:50:35 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,9 @@ int	if_hex(t_flags *flag, t_specifier *spc, va_list list)
 	address2 = hex_convert(spc, address);
 	if (!address2)
 		return (0);
-	cmp(flag, address2);
-	free(address2);
-	if (!other(spc, flag))
-		return (0);
+	if (spc->p)
+		append_0x(address2);
+	write_to_fd(address2, flag, 1);
 	return (1);
 }
 
@@ -41,7 +40,7 @@ char	*hex_convert(t_specifier *spc, unsigned long address)
 		fake_address /= 16;
 		count++;
 	}
-	cadd = (char *) ft_calloc ((count + 1), sizeof(char));
+	cadd = (char *) ft_calloc ((count + 1 + (spc->p * 2)), sizeof(char));
 	if (!cadd)
 		return (0);
 	if (spc->x == 1 || spc->p == 1)
@@ -81,4 +80,10 @@ void	uhexx(char *cadd, unsigned long address, int count)
 		cadd[count] = uhex[tmp];
 		count--;
 	}
+}
+
+void	append_0x(char *str)
+{
+	str[0] = '0';
+	str[1] = 'x';
 }

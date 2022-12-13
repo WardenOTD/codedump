@@ -6,12 +6,11 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 16:48:25 by jteoh             #+#    #+#             */
-/*   Updated: 2022/12/09 14:54:49 by jteoh            ###   ########.fr       */
+/*   Updated: 2022/12/13 12:11:18 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdio.h>
 
 int	ft_printf(const char *str, ...)
 {
@@ -25,12 +24,9 @@ int	ft_printf(const char *str, ...)
 	{
 		if (*str == '%' && *(str + 1) != '%')
 		{
-			default_flag(&flag);
 			default_specifier(&spc);
-			if (!out(&spc, &flag, list, str))
-				return (0);
-			print(&flag);
-			str += flag.extract_size;
+			out(&spc, &flag, list, str);
+			str += 2;
 			continue ;
 		}
 		str += percent(str);
@@ -47,26 +43,6 @@ int	percent(const char *str)
 	if (*str == '%' && *(str + 1) == '%')
 		return (1);
 	return (0);
-}
-
-void	print(t_flags *flag)
-{
-	flag->printed += ft_strlen(flag->output);
-	ft_putstr_fd(flag->output, 1);
-	if (flag->output)
-		free(flag->output);
-	if (flag->extract)
-		free(flag->extract);
-}
-
-void	default_flag(t_flags *flag)
-{
-	flag->neg = 0;
-	flag->pos = 0;
-	flag->hash = 0;
-	flag->extract_size = 0;
-	flag->extract = NULL;
-	flag->output = NULL;
 }
 
 void	default_specifier(t_specifier *spc)
