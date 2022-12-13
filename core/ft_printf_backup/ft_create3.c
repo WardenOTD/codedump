@@ -6,7 +6,7 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 15:49:35 by jteoh             #+#    #+#             */
-/*   Updated: 2022/12/13 12:10:40 by jteoh            ###   ########.fr       */
+/*   Updated: 2022/12/13 12:17:38 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ int	if_int(t_specifier *spc, t_flags *flag, va_list list)
 		c = utoa(u);
 	}
 	write_to_fd(c, flag, 1);
+	free(c);
 	return (1);
 }
 
