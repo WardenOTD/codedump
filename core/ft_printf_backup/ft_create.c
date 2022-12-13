@@ -6,7 +6,7 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 11:13:21 by jteoh             #+#    #+#             */
-/*   Updated: 2022/12/13 12:26:25 by jteoh            ###   ########.fr       */
+/*   Updated: 2022/12/13 12:26:59 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ char	*create_c(t_specifier *spc, va_list list)
 	if (spc->s == 1)
 	{
 		cc = va_arg(list, char *);
-		if (*cc = 0)
+		if (*cc == 0)
 		{
 			free(cc);
 			cc = ft_strdup("(null)");

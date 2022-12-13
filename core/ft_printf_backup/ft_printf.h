@@ -6,7 +6,7 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 16:41:33 by jteoh             #+#    #+#             */
-/*   Updated: 2022/12/13 12:09:01 by jteoh            ###   ########.fr       */
+/*   Updated: 2022/12/13 12:27:26 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdarg.h>
-#include <stdio.h>
+# include <stdio.h>
 
 typedef struct s_flags
 {
@@ -47,7 +47,7 @@ void			default_flag(t_flags *flag);
 void			default_specifier(t_specifier *spc);
 
 int				out(t_specifier *spc, t_flags *flag,
-						va_list list, const char *str);
+					va_list list, const char *str);
 
 char			*create_c(t_specifier *spc, va_list list);
 
