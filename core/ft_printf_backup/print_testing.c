@@ -97,5 +97,5 @@ int	main()
 	ft_printf(" NULL %s NULL ", NULL);
 
 	printf("\n\n\n");
-	// system("leaks a.out");
+	system("leaks a.out");
 }

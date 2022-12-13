@@ -6,7 +6,7 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 16:41:33 by jteoh             #+#    #+#             */
-/*   Updated: 2022/12/13 12:27:26 by jteoh            ###   ########.fr       */
+/*   Updated: 2022/12/13 12:43:28 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ int				out(t_specifier *spc, t_flags *flag,
 					va_list list, const char *str);
 
 char			*create_c(t_specifier *spc, va_list list);
+
+void			free_check(char *cc);
 
 void			write_to_fd(char *str, t_flags *flag, int fd);
 
