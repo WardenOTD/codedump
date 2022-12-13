@@ -6,7 +6,7 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 10:54:37 by jteoh             #+#    #+#             */
-/*   Updated: 2022/12/13 13:13:34 by jteoh            ###   ########.fr       */
+/*   Updated: 2022/12/13 13:16:23 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,10 @@ int	if_hex(t_flags *flag, t_specifier *spc, va_list list)
 	char			*address2;
 	long long		address;
 
-	address = va_arg(list, long long);
+	if (!spc->p)
+		address = va_arg(list, long long);
+	if (spc->p)
+		address = (long long)va_arg(list, unsigned long);
 	if (!spc->p)
 		address_check(&address);
 	address2 = hex_convert(spc, address);
