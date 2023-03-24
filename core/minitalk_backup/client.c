@@ -6,7 +6,7 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 13:51:14 by jteoh             #+#    #+#             */
-/*   Updated: 2023/03/24 16:55:40 by jteoh            ###   ########.fr       */
+/*   Updated: 2023/03/24 17:23:57 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	binary(int pid, char *str)
 			else
 				kill(pid, SIGUSR1);
 			num <<= 1;
-			usleep(1750);
+			usleep(1500);
 		}
 		str++;
 	}
