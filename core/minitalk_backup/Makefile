@@ -33,7 +33,9 @@ clean:
 
 fclean:	clean
 	${RM} ${CLIENT} ${SERVER}
+	${RM} $(NAME)
 	make fclean -C libft/
 
 re:	fclean
 	${RM} $(NAME)
+	make
