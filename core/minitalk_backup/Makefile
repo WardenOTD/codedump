@@ -6,20 +6,19 @@ CC			= gcc
 RM			= rm -f
 CFLAGS		= -Wall -Wextra -Werror -I.
 
-NAME		= minitalk.a
+LIBFT		= libft.a
 
-all:	${NAME} ${SERVER} ${CLIENT}
+all:	${SERVER} ${CLIENT}
 
-$(NAME):
+${SERVER}: ${LIBFT} ${SERVER}.c
+	${CC} ${CFLAGS} ${SERVER}.c ${LIBFT} -o ${SERVER}
+
+${CLIENT}: ${LIBFT} ${CLIENT}.c
+	${CC} ${CFLAGS} ${CLIENT}.c ${LIBFT} -o ${CLIENT}
+
+${LIBFT}:
 	make all -C libft/
-	make bonus -C libft/
-	cp libft/libft.a $(NAME)
-
-${SERVER}:
-	${CC} ${CFLAGS} ${SERVER}.c ${NAME} -o ${SERVER}
-
-${CLIENT}:
-	${CC} ${CFLAGS} ${CLIENT}.c ${NAME} -o ${CLIENT}
+	mv libft/libft.a .
 
 cclient:
 	${RM} ${CLIENT}
@@ -27,14 +26,16 @@ cclient:
 cserver:
 	${RM} ${SERVER}
 
+clibfta:
+	${RM} ${LIBFT}
+
 clean:
 	make clean -C libft/
 
-fclean:	clean
-	${RM} ${CLIENT} ${SERVER}
+fclean:	cclient cserver clibfta
 	${RM} $(NAME)
 	make fclean -C libft/
 
-re:	fclean
-	${RM} $(NAME)
-	make
+re:	fclean all
+
+.PHONY: all
