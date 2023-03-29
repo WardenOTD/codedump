@@ -6,7 +6,7 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 13:51:17 by jteoh             #+#    #+#             */
-/*   Updated: 2023/03/24 17:14:26 by jteoh            ###   ########.fr       */
+/*   Updated: 2023/03/29 12:25:48 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,28 +17,23 @@
 
 void	sig(int sig, siginfo_t *info, void *bruh)
 {
-	static int	bit = 0;
-	static int	count = 0;
+	static int	bit;
+	static int	count;
 
 	(void)bruh;
-	if (sig == SIGUSR1)
-		bit |= 0;
-	if (sig == SIGUSR2)
-		bit |= 1;
-	if (++count < 8)
-		bit <<= 1;
-	if ((bit & 255) == 255 && count == 8)
-	{
-		kill(info->si_pid, SIGUSR1);
-		count = 0;
-		bit = 0;
-	}
+	bit |= (sig == SIGUSR2);
+	++count;
 	if (count == 8)
 	{
-		write(1, &bit, 1);
+		if (bit == 255)
+			kill(info->si_pid, SIGUSR1);
+		else
+			write(1, &bit, 1);
 		count = 0;
 		bit = 0;
 	}
+	else
+		bit <<= 1;
 }
 
 int	main(void)
@@ -55,6 +50,7 @@ int	main(void)
 	ft_putchar_fd('\n', 1);
 	while (1)
 	{
+		pause();
 	}
 	return (0);
 }

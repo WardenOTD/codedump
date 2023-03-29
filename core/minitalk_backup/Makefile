@@ -14,7 +14,6 @@ $(NAME):
 	make all -C libft/
 	make bonus -C libft/
 	cp libft/libft.a $(NAME)
-	ar rcs $(NAME) ${CLIENT}.c ${SERVER}.c
 
 ${SERVER}:
 	${CC} ${CFLAGS} ${SERVER}.c ${NAME} -o ${SERVER}
