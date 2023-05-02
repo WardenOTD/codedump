@@ -6,7 +6,7 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 13:29:08 by jteoh             #+#    #+#             */
-/*   Updated: 2023/04/28 19:26:14 by jteoh            ###   ########.fr       */
+/*   Updated: 2023/05/02 11:51:49 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,15 +183,22 @@ int fill(int x, int y, char **tmp, t_data *data)
 	left = fill(x - 1, y, tmp, data);
 	down = fill(x, y + 1, tmp, data);
 	right = fill(x + 1, y, tmp, data);
+	printf("up: %d, left: %d, down: %d, right: %d\n", up, left, down, right);
 	return (up + left + down + right);
 }
 
 int flood(t_data *data)
 {
 	char	**tmp;
+	int		i;
 
 	tmp = dupe(data);
-	if (fill(data->sprite_x, data->sprite_y, tmp, data) == 4 && data->ccount == 0 && data->exit == 0)
+	locatep(data);
+	printf("map sprite: %c\n", data->map[data->sprite_y][data->sprite_x]);
+	printf("tmp sprite: %c\n", tmp[data->sprite_y][data->sprite_x]);
+	i = fill(data->sprite_x, data->sprite_y, tmp, data);
+	printf("? %d\n", i);
+	if (i == 4 && data->ccount == 0 && data->exit == 0)
 		return (1);
 	return (0);
 }
@@ -215,6 +222,6 @@ int	main(int argc, char **argv)
 	return (0);
 }
 
-//gcc -Wall -Wextra -Werror so_long.c get_next_line.c get_next_line_utils.c -o so_long
-//-lmlx -framework OpenGL -framework AppKit -fsanitize=address -g3
+//gcc -Wall -Wextra -Werror -fsanitize=address -g3 so_long.c get_next_line.c get_next_line_utils.c -o so_long && rm -rf *.dSYM
+//-lmlx -framework OpenGL -framework AppKit
 //./so_long ./maps/map1.ber
