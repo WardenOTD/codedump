@@ -6,7 +6,7 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 13:29:08 by jteoh             #+#    #+#             */
-/*   Updated: 2023/05/02 12:24:17 by jteoh            ###   ########.fr       */
+/*   Updated: 2023/05/02 12:25:22 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -198,7 +198,7 @@ int flood(t_data *data)
 	printf("tmp sprite: %c\n", tmp[data->sprite_y][data->sprite_x]);
 	i = fill(data->sprite_x, data->sprite_y, tmp, data);
 	printf("? %d\n", i);
-	if (i == 10 && data->ccount == 0 && data->exit == 0)
+	if (i == 16 && data->ccount == 0 && data->exit == 0)
 		return (1);
 	return (0);
 }
