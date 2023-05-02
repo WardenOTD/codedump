@@ -6,27 +6,46 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 13:29:08 by jteoh             #+#    #+#             */
-/*   Updated: 2023/05/02 12:26:18 by jteoh            ###   ########.fr       */
+/*   Updated: 2023/05/02 17:49:37 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-typedef struct	s_data {
-	void	*mlx_ptr;
-	void	*win_ptr;
-	void	*wall_ptr;
-	void	*floor_ptr;
-	void	*sprite_ptr;
-	void	*col_ptr;
-	void	*exit_ptr;
-	int		sprite_x;
-	int		sprite_y;
-	char	**map;
-	int		mapsize;
-	int		ccount;
-	int		exit;
-}				t_data;
+int	validity_helper(t_data *data, int i)
+{
+	int	j;
+
+	j = 0;
+	while (data->map[i][j] != '\n')
+	{
+		if (data->map[i][j] == 0)
+			return (0);
+		j++;
+	}
+	return (--j);
+}
+
+int	validity(t_data *data)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = validity_helper(data, i);
+	if (j == 0)
+		return (0);
+	while (data->map[i] != NULL)
+	{
+		if (data->map[i][0] == '0' || data->map[i][j] == '0')
+			return (0);
+		i++;
+	}
+	j = validity_helper(data, --i);
+	if (j == 0)
+		return (0);
+	return (1);
+}
 
 int	parse(t_data *data, char *argv)
 {
@@ -44,6 +63,8 @@ int	parse(t_data *data, char *argv)
 	}
 	data->map[i] = NULL;
 	if (close(fd) < 0)
+		return (0);
+	if (validity(data) == 0)
 		return (0);
 	return (1);
 }
@@ -81,7 +102,7 @@ int	ccount(t_data *data)
 		while (data->map[i][j] != 0)
 		{
 			if (data->map[i][j] == 'C')
-				data->ccount += 1;
+				data->ccount++;
 			j++;
 		}
 		i++;
@@ -121,7 +142,6 @@ void	locatep(t_data *data)
 	int	j;
 
 	i = 0;
-	data->exit = 1;
 	while (data->map[i] != NULL)
 	{
 		j = 0;
@@ -131,6 +151,8 @@ void	locatep(t_data *data)
 			{
 				data->sprite_x = j;
 				data->sprite_y = i;
+				data->sprite_x60 = j * 60;
+				data->sprite_y60 = i * 60;
 				return ;
 			}
 			j++;
@@ -158,7 +180,7 @@ char	**dupe(t_data *data)
 	return (tmp);
 }
 
-int fill(int x, int y, char **tmp, t_data *data)
+int	fill(int x, int y, char **tmp, t_data *data)
 {
 	int	up;
 	int	left;
@@ -183,45 +205,71 @@ int fill(int x, int y, char **tmp, t_data *data)
 	left = fill(x - 1, y, tmp, data);
 	down = fill(x, y + 1, tmp, data);
 	right = fill(x + 1, y, tmp, data);
-	printf("up: %d, left: %d, down: %d, right: %d\n", up, left, down, right);
-	return (up + left + down + right);
+	return (1);
 }
 
-int flood(t_data *data)
+int	flood(t_data *data)
 {
 	char	**tmp;
-	int		i;
 
 	tmp = dupe(data);
 	locatep(data);
-	printf("map sprite: %c\n", data->map[data->sprite_y][data->sprite_x]);
-	printf("tmp sprite: %c\n", tmp[data->sprite_y][data->sprite_x]);
-	i = fill(data->sprite_x, data->sprite_y, tmp, data);
-	printf("? %d\n", i);
-	if (i == 4 && data->ccount == 0 && data->exit == 0)
+	fill(data->sprite_x, data->sprite_y, tmp, data);
+	free(tmp);
+	if (data->ccount == 0 && data->exit == 0)
 		return (1);
 	return (0);
+}
+
+void	broke(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (data->map[i] != NULL)
+		free(data->map[i++]);
+	free(data->map);
+	printf("failed w/ free\n");
+	exit(1);
+}
+
+void	init(t_data *data)
+{
+	data->sprite_x = 0;
+	data->sprite_y = 0;
+	data->sprite_x60 = 0;
+	data->sprite_y60 = 0;
+	data->mapsize = 0;
+	data->map_width = 0;
+	data->map_height = 0;
+	data->ccount = 0;
+	data->exit = 1;
 }
 
 int	main(int argc, char **argv)
 {
 	t_data	data;
 
+	init(&data);
 	if (argc != 2)
 		return (0);
 	if (mapsize(&data, argv[1]) == 0)
 		return (printf("map parse failed\n"));
 	if (parse(&data, argv[1]) == 0)
-		return (printf("parse failed\n"));
+		broke(&data);
 	if (ccount(&data) == 0 || pecount(&data) == 0)
 		return (printf("Count failed\n"));
 	if (flood(&data) == 0)
-		return (printf("FLODFUCK\n"));
-	for (int i = 0; data.map[i] != 0; i++)
-		printf("%s", data.map[i]);
+		return (printf("FLODFUCK: invalid map\n"));
+	if (mlx(&data) == 0)
+		return (0);
 	return (0);
 }
 
-//gcc -Wall -Wextra -Werror -fsanitize=address -g3 so_long.c get_next_line.c get_next_line_utils.c -o so_long && rm -rf *.dSYM
-//-lmlx -framework OpenGL -framework AppKit
-//./so_long ./maps/map1.ber
+/*
+gcc -Wall -Wextra -Werror -lmlx -framework OpenGL -framework AppKit -fsanitize=address -g3 so_long.c mlx_stuff.c mlx_movement_admin.c put_to_term.c get_next_line.c get_next_line_utils.c -o so_long && rm -rf *.dSYM
+
+./so_long ./maps/map1.ber
+./so_long ./maps/map2.ber
+
+*/

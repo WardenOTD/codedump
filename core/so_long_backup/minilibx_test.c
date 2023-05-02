@@ -26,6 +26,16 @@ int	move(int	keycode, t_data *data)
 	int			img_height;
 	static int	count = 1;
 
+	printf("%d\n", keycode);
+	if (keycode == 53)
+	{
+		mlx_destroy_image(data->mlx_ptr, data->wall_ptr);
+		mlx_destroy_image(data->mlx_ptr, data->floor_ptr);
+		mlx_destroy_image(data->mlx_ptr, data->sprite_ptr);
+		mlx_destroy_window(data->mlx_ptr, data->win_ptr);
+		free(data->mlx_ptr);
+		exit(0);
+	}
 	if (keycode == 13)
 	{
 		mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->sprite_ptr, data->sprite_x, data->sprite_y - 60);
