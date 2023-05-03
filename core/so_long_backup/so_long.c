@@ -6,7 +6,7 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 13:29:08 by jteoh             #+#    #+#             */
-/*   Updated: 2023/05/02 17:49:37 by jteoh            ###   ########.fr       */
+/*   Updated: 2023/05/03 10:30:30 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -200,6 +200,7 @@ int	fill(int x, int y, char **tmp, t_data *data)
 	{
 		data->exit--;
 		tmp[y][x] = '1';
+		return (1);
 	}
 	up = fill(x, y - 1, tmp, data);
 	left = fill(x - 1, y, tmp, data);

@@ -6,7 +6,7 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 16:45:46 by jteoh             #+#    #+#             */
-/*   Updated: 2023/05/02 17:49:46 by jteoh            ###   ########.fr       */
+/*   Updated: 2023/05/03 10:34:17 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int	movement_admin(int keycode, t_data *data)
 	if (keycode == 2)
 		d(data);
 	collection(data);
+	printf("collectible count: %d\n", data->ccount);
 	movement++;
 	ft_putnbr_fd(movement, 1);
 	ft_putchar_fd('\n', 1);

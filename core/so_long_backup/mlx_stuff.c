@@ -6,7 +6,7 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 13:15:04 by jteoh             #+#    #+#             */
-/*   Updated: 2023/05/02 17:46:35 by jteoh            ###   ########.fr       */
+/*   Updated: 2023/05/03 10:35:53 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ void	collection(t_data *data)
 	if (data->map[data->sprite_y60 / 60][data->sprite_x60 / 60] == 'C')
 	{
 		data->ccount--;
+		data->map[data->sprite_y60 / 60][data->sprite_x60 / 60] = '0';
 		if (data->ccount == 0)
 		{
 			data->sprite_ptr = mlx_xpm_file_to_image(data->mlx_ptr, "./textures/sprite_pu.xpm", &img_width, &img_height);
