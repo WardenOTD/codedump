@@ -6,7 +6,7 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 16:18:22 by jteoh             #+#    #+#             */
-/*   Updated: 2023/05/03 17:14:29 by jteoh            ###   ########.fr       */
+/*   Updated: 2023/05/03 19:19:32 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ int	mapsize(t_data *data, char *argv)
 		tmp = get_next_line(fd);
 		data->mapsize++;
 	}
+	if (data->mapsize <= 1)
+		return (0);
 	free(tmp);
 	if (close(fd) < 0)
 		return (0);

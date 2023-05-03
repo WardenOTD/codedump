@@ -6,7 +6,7 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 16:16:01 by jteoh             #+#    #+#             */
-/*   Updated: 2023/05/03 17:04:31 by jteoh            ###   ########.fr       */
+/*   Updated: 2023/05/03 19:18:36 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	validity_helper(t_data *data, int i)
 	j = 0;
 	while (data->map[i][j] != '\n')
 	{
-		if (data->map[i][j] == 0)
+		if (data->map[i][j] != '1')
 			return (0);
 		j++;
 	}
@@ -63,7 +63,7 @@ int	validity(t_data *data)
 		tmp = ft_strlen(data->map[i]) - 2;
 		if (j != tmp)
 			return (0);
-		if (data->map[i][0] != '1' && data->map[i][j] != '1')
+		if (data->map[i][0] != '1' || data->map[i][j] != '1')
 			return (0);
 		i++;
 	}
