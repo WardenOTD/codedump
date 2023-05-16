@@ -6,7 +6,7 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 15:21:49 by jteoh             #+#    #+#             */
-/*   Updated: 2023/05/05 15:36:39 by jteoh            ###   ########.fr       */
+/*   Updated: 2023/05/16 15:52:44 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ void	ra(t_stack *stack)
 	int	tmp;
 	int	i;
 
-	if (stack->a[0] == 0)
+	if (stack->a_size == 0)
 		return ;
 	i = 0;
 	tmp = stack->a[i];
-	while (stack->a[i + 1] != 0)
+	while (i < stack->a_size - 1)
 	{
 		stack->a[i] = stack->a[i + 1];
 		i++;
@@ -35,11 +35,11 @@ void	rb(t_stack *stack)
 	int	tmp;
 	int	i;
 
-	if (stack->b[0] == 0)
+	if (stack->b_size == 0)
 		return ;
 	i = 0;
 	tmp = stack->b[i];
-	while (stack->b[i + 1] != 0)
+	while (i < stack->b_size - 1)
 	{
 		stack->b[i] = stack->b[i + 1];
 		i++;

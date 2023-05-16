@@ -6,7 +6,7 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 12:12:38 by jteoh             #+#    #+#             */
-/*   Updated: 2023/05/05 15:14:22 by jteoh            ###   ########.fr       */
+/*   Updated: 2023/05/16 15:44:52 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	sa(t_stack *stack)
 {
 	int	tmp;
 
-	if (stack->a[0] == 0 || stack->a[1] == 0)
+	if (stack->a_size == 0)
 		return ;
 	tmp = stack->a[1];
 	stack->a[1] = stack->a[0];
@@ -28,7 +28,7 @@ void	sb(t_stack *stack)
 {
 	int	tmp;
 
-	if (stack->b[0] == 0 || stack->b[1] == 0)
+	if (stack->b_size == 0)
 		return ;
 	tmp = stack->b[1];
 	stack->b[1] = stack->b[0];
