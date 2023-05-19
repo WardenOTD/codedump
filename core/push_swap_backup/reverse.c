@@ -6,7 +6,7 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 15:21:50 by jteoh             #+#    #+#             */
-/*   Updated: 2023/05/16 15:50:51 by jteoh            ###   ########.fr       */
+/*   Updated: 2023/05/19 12:17:59 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,43 +14,64 @@
 
 void	rra(t_stack *stack)
 {
-	int	tmp;
 	int	i;
 
-	if (stack->a_size == 0)
-		return ;
-	i = stack->a_size - 1;
-	tmp = stack->a[i];
-	while (i > 0)
+	if (stack->a_size > 0)
 	{
-		stack->a[i] = stack->a[i - 1];
-		i--;
+		i = stack->a_size - 2;
+		while (i >= 0)
+		{
+			swap(&stack->a[i], &stack->a[i + 1]);
+			i--;
+		}
+		ft_putstr_fd("rra\n", 1);
 	}
-	stack->a[i] = tmp;
-	printf("rra\n");
+	return ;
 }
 
 void	rrb(t_stack *stack)
 {
-	int	tmp;
 	int	i;
 
-	if (stack->b_size == 0)
-		return ;
-	i = stack->b_size - 1;
-	tmp = stack->b[i];
-	while (i > 0)
+	if (stack->b_size > 0)
 	{
-		stack->b[i] = stack->b[i - 1];
-		i--;
+		i = stack->b_size - 2;
+		while (i >= 0)
+		{
+			swap(&stack->b[i], &stack->b[i + 1]);
+			i--;
+		}
+		ft_putstr_fd("rrb\n", 1);
 	}
-	stack->b[i] = tmp;
-	printf("rrb\n");
+	return ;
 }
 
 void	rrr(t_stack *stack)
 {
-	rra(stack);
-	rrb(stack);
-	printf("rrr\n");
+	int	c;
+	int	i;
+
+	c = 0;
+	if (stack->a_size > 0)
+	{
+		i = stack->a_size - 2;
+		while (i >= 0)
+		{
+			swap(&stack->a[i], &stack->a[i + 1]);
+			i--;
+		}
+		c++;
+	}
+	if (stack->b_size > 0)
+	{
+		i = stack->b_size - 2;
+		while (i >= 0)
+		{
+			swap(&stack->b[i], &stack->b[i + 1]);
+			i--;
+		}
+		c++;
+	}
+	if (c > 0)
+		ft_putstr_fd("rrr\n", 1);
 }

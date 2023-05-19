@@ -6,7 +6,7 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 11:34:27 by jteoh             #+#    #+#             */
-/*   Updated: 2023/05/16 15:57:54 by jteoh            ###   ########.fr       */
+/*   Updated: 2023/05/19 12:50:01 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,15 @@ void	innit_1(char *tmp, t_stack *stack)
 	while (tmp[count] != 0)
 	{
 		if (tmp[count] == ' ')
-			space++;
+		{
+			if (tmp[count] == ' ' && count == 0)
+			{
+				count++;
+				continue ;
+			}
+			else if (tmp[count - 1] != ' ')
+				space++;
+		}
 		count++;
 	}
 	stack->size = space + 1;
@@ -210,14 +218,18 @@ int	main(int argc, char **argv)
 		}
 		return (0);
 	}
+	if (argc == 1)
+		exit (0);
 	printf("Invalid arguements\n");
 	return (0);
 }
 
+/*
+	so far all is working fine,
+	instructions seem to work,
+	have yet to implement free on all the exit points.
+	sorting algorithm is due now,
+	large problem, algorithms are hard.
+*/
 
-//current way of solving push_swap is invalid, complete overhaul is due.
-//original idea of converting every number into a list without 0 seems almost impossible.
-//new approach, sort the list as is with the numbers given, foregoing all my end checking using 0s.
-//ft_atoi return value is a problem, needing to find a way to return a proper error not invloving numbers.
-//or recreating a new atoi script using long to detect and handle int overflow so the error value isnt sent into the stack
-//blending in with the sea of other integers.
+// gcc -Wall -Wextra -Werror -fsanitize=address -g3 *.c ./libft/*.c -o push_swap && rm -rf *.dSYM

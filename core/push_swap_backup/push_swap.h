@@ -6,7 +6,7 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 11:55:04 by jteoh             #+#    #+#             */
-/*   Updated: 2023/05/16 15:55:44 by jteoh            ###   ########.fr       */
+/*   Updated: 2023/05/19 12:01:38 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ typedef struct s_stack {
 	int	b_size;
 	int	size;
 }				t_stack;
+
+void	swap(int *a, int *b);
 
 void	sa(t_stack *stack);
 
