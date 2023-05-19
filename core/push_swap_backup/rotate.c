@@ -6,7 +6,7 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 15:21:49 by jteoh             #+#    #+#             */
-/*   Updated: 2023/05/19 12:08:55 by jteoh            ###   ########.fr       */
+/*   Updated: 2023/05/19 13:57:32 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,22 +46,8 @@ void	rb(t_stack *stack)
 	return ;
 }
 
-void	rr(t_stack *stack)
+int	rr_help(t_stack *stack, int i, int c)
 {
-	int	c;
-	int	i;
-
-	c = 0;
-	if (stack->a_size > 0)
-	{
-		i = 0;
-		while (i < (stack->a_size - 1))
-		{
-			swap(&stack->a[i], &stack->a[i + 1]);
-			i++;
-		}
-		c++;
-	}
 	if (stack->b_size > 0)
 	{
 		i = 0;
@@ -72,6 +58,27 @@ void	rr(t_stack *stack)
 		}
 		c++;
 	}
+	return (c);
+}
+
+void	rr(t_stack *stack)
+{
+	int	c;
+	int	i;
+
+	c = 0;
+	i = 0;
+	if (stack->a_size > 0)
+	{
+		i = 0;
+		while (i < (stack->a_size - 1))
+		{
+			swap(&stack->a[i], &stack->a[i + 1]);
+			i++;
+		}
+		c++;
+	}
+	c += rr_help(stack, i, c);
 	if (c > 0)
 		ft_putstr_fd("rr\n", 1);
 }

@@ -6,7 +6,7 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 11:34:27 by jteoh             #+#    #+#             */
-/*   Updated: 2023/05/19 12:50:01 by jteoh            ###   ########.fr       */
+/*   Updated: 2023/05/19 13:51:46 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,12 +84,12 @@ int	modify_atoi(const char *str)
 		if (out >= 214748364 && *str > '7' && sign == 1)
 		{
 			ft_putstr_fd("overflow\n", 2);
-			exit (2);
+			exit (1);
 		}
 		if (out >= 214748364 && *str > '8' && sign == -1)
 		{
 			ft_putstr_fd("negative overflow\n", 2);
-			exit (2);
+			exit (1);
 		}
 		out = out * 10 + (*str - '0');
 		str++;
@@ -111,7 +111,7 @@ void detect_dupe(t_stack *stack)
 			if (stack->a[i] == stack->a[j])
 			{
 				ft_putstr_fd("duplicate number\n", 2);
-				exit (2);
+				exit (1);
 			}
 			j++;
 		}
@@ -179,7 +179,7 @@ int	main(int argc, char **argv)
 		if (create_stack_1(argv[1], &stack) == 0)
 		{
 			ft_putstr_fd("split / malloc error\n", 2); //need free
-			exit (2);
+			exit (1);
 		}
 		pb(&stack);
 		pa(&stack);
@@ -202,7 +202,7 @@ int	main(int argc, char **argv)
 		if (create_stack_2(argv, &stack) == 0)
 		{
 			ft_putstr_fd("invalid argument\n", 2); //need free
-			exit (2);
+			exit (1);
 		}
 		pb(&stack);
 		pa(&stack);
