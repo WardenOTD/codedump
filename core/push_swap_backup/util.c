@@ -6,7 +6,7 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 13:36:14 by jteoh             #+#    #+#             */
-/*   Updated: 2023/05/19 15:25:57 by jteoh            ###   ########.fr       */
+/*   Updated: 2023/05/19 17:26:30 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,33 +26,61 @@ int	check_sort(int *st, int size)
 	return (1);
 }
 
-void	sort2(t_stack *stack)
+void	sort2(int *a)
 {
-	if (!check_sort(stack->a, 2))
-		sa(stack);
+	if (!check_sort(a, 2))
+		sa(a, 2);
 }
 
-void	sort3(t_stack *stack)
+void	sort3(int *a)
 {
-	while (!check_sort(stack->a, 3))
+	while (!check_sort(a, 3))
 	{
-		if (stack->a[0] > stack->a[2] && stack->a[2] > stack->a[1])
-			ra(stack);
-		else if (stack->a[0] > stack->a[2] && stack->a[1] > stack->a[0])
-			rra(stack);
-		else if (stack->a[2] > stack->a[0] && stack->a[0] > stack->a[1])
-			sa(stack);
-		else if (stack->a[0] > stack->a[1] && stack->a[1] > stack->a[2])
+		if (a[0] > a[2] && a[2] > a[1])
+			ra(a, 3);
+		else if (a[0] > a[2] && a[1] > a[0])
+			rra(a, 3);
+		else if (a[2] > a[0] && a[0] > a[1])
+			sa(a, 3);
+		else if (a[0] > a[1] && a[1] > a[2])
 		{
-			sa(stack);
-			rra(stack);
+			sa(a, 3);
+			rra(a, 3);
 		}
-		else if (stack->a[2] > stack->a[0] && stack->a[1] > stack->a[2])
+		else if (a[2] > a[0] && a[1] > a[2])
 		{
-			rra(stack);
-			sa(stack);
+			rra(a, 3);
+			sa(a, 3);
 		}
 	}
+}
+
+void	sort4(t_stack *stack)
+{
+	int	median;
+	int	*tmp;
+	int	i;
+
+	i = 0;
+	median = (stack->a_size / 2);
+	tmp = bubble_sort_a(stack->a, stack->a_size);
+	while (i < 4)
+	{
+		if (tmp[median] > stack->a[0])
+			pb(stack->a, stack->b, stack);
+		else
+			ra(stack->a, stack->a_size);
+		i++;
+	}
+	sort2(stack->a);
+	sort2(stack->b);
+	sb(stack->b, stack->b_size);
+	pa(stack->a, stack->b, stack);
+	pa(stack->a, stack->b, stack);
+	if(!check_sort(stack->a, stack->a_size))
+		sort5(stack);
+	free(tmp);
+	return ;
 }
 
 void	sort5(t_stack *stack)
@@ -60,27 +88,38 @@ void	sort5(t_stack *stack)
 	int	median;
 	int	*tmp;
 	int	i;
-	int	j;
 
+	i = 0;
 	median = stack->a_size / 2;
-	tmp = bubble_sort_a(stack);
-	while (i < stack->a_size)
+	tmp = bubble_sort_a(stack->a, stack->a_size);
+	while (i++ < 5)
 	{
-		if (tmp[median] < stack->a[i])
-			pb(stack);
+		if (tmp[median] > stack->a[0])
+			pb(stack->a, stack->b, stack);
+		else
+			ra(stack->a, stack->a_size);
 	}
+	sort2(stack->b);
+	sort3(stack->a);
+	sb(stack->b, stack->b_size);
+	pa(stack->a, stack->b, stack);
+	pa(stack->a, stack->b, stack);
+	if(!check_sort(stack->a, stack->a_size))
+		sort5(stack);
+	free(tmp);
+	return ;
 }
 
-int	*bubble_sort_a(t_stack *stack)
+int	*bubble_sort_a(int *arr, int size)
 {
 	int	*tmp;
 	int	i;
 
-	tmp = stack_dupe(stack->a, stack->a_size);
-	while(!check_sort(tmp, stack->a_size))
+	tmp = stack_dupe(arr, size);
+	while(!check_sort(tmp, size))
 	{
 		i = 0;
-		while (i < (stack->a_size - 1))
+		while (i < (size - 1))
 		{
 			if (tmp[i] > tmp[i + 1])
 				swap(&tmp[i], &tmp[i + 1]);

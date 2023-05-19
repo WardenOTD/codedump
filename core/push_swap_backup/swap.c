@@ -6,7 +6,7 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 12:12:38 by jteoh             #+#    #+#             */
-/*   Updated: 2023/05/19 12:34:24 by jteoh            ###   ########.fr       */
+/*   Updated: 2023/05/19 16:05:48 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,39 +21,39 @@ void	swap(int *a, int *b)
 	*b = tmp;
 }
 
-void	sa(t_stack *stack)
+void	sa(int *a, int size)
 {
-	if (stack->a_size > 0)
+	if (size > 0)
 	{
-		swap(&stack->a[0], &stack->a[1]);
+		swap(&a[0], &a[1]);
 		ft_putstr_fd("sa\n", 1);
 	}
 	return ;
 }
 
-void	sb(t_stack *stack)
+void	sb(int *b, int size)
 {
-	if (stack->b_size > 0)
+	if (size > 0)
 	{
-		swap(&stack->b[0], &stack->b[1]);
+		swap(&b[0], &b[1]);
 		ft_putstr_fd("sb\n", 1);
 	}
 	return ;
 }
 
-void	ss(t_stack *stack)
+void	ss(int *a, int *b, int a_size, int b_size)
 {
 	int	i;
 
 	i = 0;
-	if (stack->a_size > 0)
+	if (a_size > 0)
 	{
-		swap(&stack->a[0], &stack->a[1]);
+		swap(&a[0], &a[1]);
 		i++;
 	}
-	if (stack->b_size > 0)
+	if (b_size > 0)
 	{
-		swap(&stack->b[0], &stack->b[1]);
+		swap(&b[0], &b[1]);
 		i++;
 	}
 	if (i > 0)

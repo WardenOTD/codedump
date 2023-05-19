@@ -6,7 +6,7 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 11:34:27 by jteoh             #+#    #+#             */
-/*   Updated: 2023/05/19 13:51:46 by jteoh            ###   ########.fr       */
+/*   Updated: 2023/05/19 16:44:26 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,6 +168,18 @@ int	create_stack_2(char **argv, t_stack *stack)
 	return (1);
 }
 
+void	sort(t_stack *stack)
+{
+	if (stack->a_size == 2)
+		sort2(stack->a);
+	else if (stack->a_size == 3)
+		sort3(stack->a);
+	else if(stack->a_size == 4)
+		sort4(stack);
+	else if (stack->a_size == 5)
+		sort5(stack);
+}
+
 int	main(int argc, char **argv)
 {
 	t_stack	stack;
@@ -181,13 +193,7 @@ int	main(int argc, char **argv)
 			ft_putstr_fd("split / malloc error\n", 2); //need free
 			exit (1);
 		}
-		pb(&stack);
-		pa(&stack);
-		pb(&stack);
-		pb(&stack);
-		ss(&stack);
-		rr(&stack);
-		rrr(&stack);
+		sort(&stack);
 		for (int i = 0; i < stack.size; i++)
 		{
 			printf("%d  ", stack.a[i]);
@@ -204,13 +210,7 @@ int	main(int argc, char **argv)
 			ft_putstr_fd("invalid argument\n", 2); //need free
 			exit (1);
 		}
-		pb(&stack);
-		pa(&stack);
-		pb(&stack);
-		pb(&stack);
-		ss(&stack);
-		rr(&stack);
-		rrr(&stack);
+		sort(&stack);
 		for (int i = 0; i < stack.size; i++)
 		{
 			printf("%d  ", stack.a[i]);
