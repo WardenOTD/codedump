@@ -6,7 +6,7 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 13:36:14 by jteoh             #+#    #+#             */
-/*   Updated: 2023/05/19 13:47:27 by jteoh            ###   ########.fr       */
+/*   Updated: 2023/05/19 15:25:57 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,3 +54,54 @@ void	sort3(t_stack *stack)
 		}
 	}
 }
+
+void	sort5(t_stack *stack)
+{
+	int	median;
+	int	*tmp;
+	int	i;
+	int	j;
+
+	median = stack->a_size / 2;
+	tmp = bubble_sort_a(stack);
+	while (i < stack->a_size)
+	{
+		if (tmp[median] < stack->a[i])
+			pb(stack);
+	}
+}
+
+int	*bubble_sort_a(t_stack *stack)
+{
+	int	*tmp;
+	int	i;
+
+	tmp = stack_dupe(stack->a, stack->a_size);
+	while(!check_sort(tmp, stack->a_size))
+	{
+		i = 0;
+		while (i < (stack->a_size - 1))
+		{
+			if (tmp[i] > tmp[i + 1])
+				swap(&tmp[i], &tmp[i + 1]);
+			i++;
+		}
+	}
+	return (tmp);
+}
+
+int	*stack_dupe(int *arr, int size)
+{
+	int	*dup;
+
+	dup = (int *)malloc(sizeof(int) * size);
+	size--;
+	while (size >= 0)
+	{
+		dup[size] = arr[size];
+		size--;
+	}
+	return (dup);
+}
+
+//	I don't know what the fuck is happening here I'm going insane
