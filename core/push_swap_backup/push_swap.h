@@ -6,7 +6,7 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 11:55:04 by jteoh             #+#    #+#             */
-/*   Updated: 2023/05/19 16:44:01 by jteoh            ###   ########.fr       */
+/*   Updated: 2023/05/22 13:05:41 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,5 +63,7 @@ void	sort3(int *a);
 void	sort4(t_stack *stack);
 
 void	sort5(t_stack *stack);
+
+void	detect_alph(const char *str);
 
 #endif

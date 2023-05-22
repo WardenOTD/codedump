@@ -6,7 +6,7 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 11:34:27 by jteoh             #+#    #+#             */
-/*   Updated: 2023/05/19 16:44:26 by jteoh            ###   ########.fr       */
+/*   Updated: 2023/05/22 13:05:28 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ int	modify_atoi(const char *str)
 			sign = -sign;
 		str++;
 	}
+	detect_alph(str);
 	while (*str >= '0' && *str <= '9')
 	{
 		if (out >= 214748364 && *str > '7' && sign == 1)
@@ -97,7 +98,23 @@ int	modify_atoi(const char *str)
 	return ((int)(out * sign));
 }
 
-void detect_dupe(t_stack *stack)
+void	detect_alph(const char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] != 0)
+	{
+		if (ft_isalpha(str[i]) == 1 || ft_isdigit(str[i] == 0))
+		{
+			ft_putstr_fd("invalid number\n", 2);
+			exit (1);
+		}
+		i++;
+	}
+}
+
+void	detect_dupe(t_stack *stack)
 {
 	int	i;
 	int	j;
