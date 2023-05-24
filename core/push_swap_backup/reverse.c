@@ -6,7 +6,7 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 15:21:50 by jteoh             #+#    #+#             */
-/*   Updated: 2023/05/19 16:10:54 by jteoh            ###   ########.fr       */
+/*   Updated: 2023/05/24 18:18:32 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,21 +46,6 @@ void	rrb(int *b, int size)
 	return ;
 }
 
-int	rrr_help(int *b, int b_size, int i, int c)
-{
-	if (b_size > 0)
-	{
-		i = b_size - 2;
-		while (i >= 0)
-		{
-			swap(&b[i], &b[i + 1]);
-			i--;
-		}
-		c++;
-	}
-	return (c);
-}
-
 void	rrr(int *a, int *b, int a_size, int b_size)
 {
 	int	c;
@@ -81,4 +66,19 @@ void	rrr(int *a, int *b, int a_size, int b_size)
 	c += rrr_help(b, b_size, i, c);
 	if (c > 0)
 		ft_putstr_fd("rrr\n", 1);
+}
+
+int	rrr_help(int *b, int b_size, int i, int c)
+{
+	if (b_size > 0)
+	{
+		i = b_size - 2;
+		while (i >= 0)
+		{
+			swap(&b[i], &b[i + 1]);
+			i--;
+		}
+		c++;
+	}
+	return (c);
 }
