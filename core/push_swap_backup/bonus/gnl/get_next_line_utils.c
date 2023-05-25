@@ -6,13 +6,13 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 09:46:46 by jteoh             #+#    #+#             */
-/*   Updated: 2022/08/23 16:24:17 by jteoh            ###   ########.fr       */
+/*   Updated: 2023/05/25 14:43:22 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int	ft_strlen(const char *s)
+int	gnl_strlen(const char *s)
 {
 	int	i;
 	int	j;
@@ -27,7 +27,7 @@ int	ft_strlen(const char *s)
 	return (j);
 }
 
-char	*ft_strjoin(char *s1, char *s2)
+char	*gnl_strjoin(char *s1, char *s2)
 {
 	int		i;
 	int		j;
@@ -41,7 +41,7 @@ char	*ft_strjoin(char *s1, char *s2)
 		return (NULL);
 	}
 	result = (char *)malloc(sizeof(char)
-			* (ft_strlen(s1) + ft_strlen(s2) + 1));
+			* (gnl_strlen(s1) + gnl_strlen(s2) + 1));
 	if (!result)
 		return (NULL);
 	while (s1[i] != 0)
@@ -69,12 +69,12 @@ int	check(char *string, int c)
 	return (0);
 }
 
-char	*ft_strdup(const char *s1)
+char	*gnl_strdup(const char *s1)
 {
 	char	*s1c;
 	int		i;
 
-	s1c = (char *)malloc(ft_strlen((char *)s1) + 1);
+	s1c = (char *)malloc(gnl_strlen((char *)s1) + 1);
 	if (!s1c)
 		return (0);
 	i = 0;

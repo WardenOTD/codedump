@@ -6,7 +6,7 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 16:26:41 by jteoh             #+#    #+#             */
-/*   Updated: 2023/05/25 11:19:59 by jteoh            ###   ########.fr       */
+/*   Updated: 2023/05/25 14:39:04 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,11 @@
 
 void	sort(t_stack *stack)
 {
+	if (check_sort(stack->a, stack->a_size))
+	{
+		full_free(stack);
+		exit (0);
+	}
 	if (stack->a_size == 2)
 	{
 		sort2(stack->a);

@@ -6,7 +6,7 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 18:03:57 by jteoh             #+#    #+#             */
-/*   Updated: 2023/05/25 11:27:16 by jteoh            ###   ########.fr       */
+/*   Updated: 2023/05/25 15:51:45 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,10 @@ void	sort4(t_stack *stack)
 	sb(stack->b, stack->b_size);
 	pa(stack->a, stack->b, stack);
 	pa(stack->a, stack->b, stack);
+	free(tmp);
 	if (!check_sort(stack->a, stack->a_size))
 		sort4(stack);
-	free(tmp);
-	return ;
+	exit (0);
 }
 
 void	sort5(t_stack *stack)
@@ -93,10 +93,10 @@ void	sort5(t_stack *stack)
 	sb(stack->b, stack->b_size);
 	pa(stack->a, stack->b, stack);
 	pa(stack->a, stack->b, stack);
+	free(tmp);
 	if (!check_sort(stack->a, stack->a_size))
 		sort5(stack);
-	free(tmp);
-	return ;
+	exit (0);
 }
 
 void	innit_1_help(t_stack *stack, int space)

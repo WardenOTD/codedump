@@ -6,7 +6,7 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 09:46:18 by jteoh             #+#    #+#             */
-/*   Updated: 2022/08/23 13:39:25 by jteoh            ###   ########.fr       */
+/*   Updated: 2023/05/25 14:43:46 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	*readfd(int fd, char *string)
 			return (NULL);
 		}
 		buff = reallocbuff(buff, rv);
-		string = ft_strjoin(string, buff);
+		string = gnl_strjoin(string, buff);
 		if (check(buff, '\n'))
 			rv = 0;
 		free(buff);
@@ -89,7 +89,7 @@ char	*trim(char *string)
 	int		i;
 	int		j;
 
-	j = ft_strlen(string);
+	j = gnl_strlen(string);
 	i = 0;
 	while (string[i] != '\n' && string[i] != '\0')
 		i++;

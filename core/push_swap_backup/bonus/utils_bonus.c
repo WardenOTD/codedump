@@ -1,35 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   checker.c                                          :+:      :+:    :+:   */
+/*   utils_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/25 11:59:22 by jteoh             #+#    #+#             */
-/*   Updated: 2023/05/25 12:15:27 by jteoh            ###   ########.fr       */
+/*   Created: 2023/05/19 13:36:14 by jteoh             #+#    #+#             */
+/*   Updated: 2023/05/25 14:31:17 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	main(int argc, char **argv)
+int	check_sort(int *st, int size)
 {
-	t_bonus bonus;
+	int	i;
 
-	if (argc == 2)
+	i = 0;
+	while (i < (size - 1))
 	{
-		innit_1(argv[1], &bonus);
-		if (create_stack_1(argv[1], &bonus) == 0)
-			dead(&bonus);
-		return (0);
+		if (st[i] > st[i + 1])
+			return (0);
+		i++;
 	}
-	else if (argc > 2)
+	return (1);
+}
+
+void	bbzero(int *s, int size)
+{
+	int	i;
+
+	i = 0;
+	while (i < size)
 	{
-		stack.size = argc - 1;
-		innit_2(&bonus);
-		if (create_stack_2(argv, &bonus) == 0)
-			dead(&bonus);
-		return (0);
+		s[i] = 0;
+		i++;
 	}
-	return (0);
+}
+
+void	dead(t_stack *stack)
+{
+	ft_putstr_fd("Error\n", 2);
+	full_free(stack);
+	exit (1);
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   bonus_ps.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 11:34:27 by jteoh             #+#    #+#             */
-/*   Updated: 2023/05/25 15:22:02 by jteoh            ###   ########.fr       */
+/*   Updated: 2023/05/25 14:22:07 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,30 +79,4 @@ int	create_stack_2(char **argv, t_stack *stack)
 	}
 	detect_dupe(stack);
 	return (1);
-}
-
-int	main(int argc, char **argv)
-{
-	t_stack	stack;
-
-	if (argc > 1 && argv[1] == NULL)
-		exit (0);
-	if (argc == 2)
-	{
-		innit_1(argv[1], &stack);
-		if (create_stack_1(argv[1], &stack) == 0)
-			dead(&stack);
-		sort(&stack);
-		return (0);
-	}
-	else if (argc > 2)
-	{
-		stack.size = argc - 1;
-		innit_2(&stack);
-		if (create_stack_2(argv, &stack) == 0)
-			dead(&stack);
-		sort(&stack);
-		return (0);
-	}
-	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 09:46:40 by jteoh             #+#    #+#             */
-/*   Updated: 2022/08/23 16:24:10 by jteoh            ###   ########.fr       */
+/*   Updated: 2023/05/25 14:44:06 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,12 @@ char		*readstring(char *string);
 
 char		*trim(char *string);
 
-int			ft_strlen(const char *s);
+int			gnl_strlen(const char *s);
 
-char		*ft_strjoin(char *s1, char *s2);
+char		*gnl_strjoin(char *s1, char *s2);
 
 int			check(char *string, int c);
 
-char		*ft_strdup(const char *s1);
+char		*gnl_strdup(const char *s1);
 
 #endif
