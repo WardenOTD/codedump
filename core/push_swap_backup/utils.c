@@ -6,7 +6,7 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 13:36:14 by jteoh             #+#    #+#             */
-/*   Updated: 2023/05/24 18:47:59 by jteoh            ###   ########.fr       */
+/*   Updated: 2023/05/25 11:18:56 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,4 +73,11 @@ void	bbzero(int *s, int size)
 		s[i] = 0;
 		i++;
 	}
+}
+
+void	dead(t_stack *stack)
+{
+	ft_putstr_fd("Error\n", 2);
+	full_free(stack);
+	exit (1);
 }

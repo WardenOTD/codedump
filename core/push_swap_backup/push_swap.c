@@ -6,7 +6,7 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 11:34:27 by jteoh             #+#    #+#             */
-/*   Updated: 2023/05/24 18:46:06 by jteoh            ###   ########.fr       */
+/*   Updated: 2023/05/25 11:25:14 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,7 @@ void	innit_1(char *tmp, t_stack *stack)
 		}
 		count++;
 	}
-	stack->size = space + 1;
-	stack->a = (int *)malloc(sizeof(int) * stack->size);
-	stack->b = (int *)malloc(sizeof(int) * stack->size);
-	stack->a_size = stack->size;
-	stack->b_size = 0;
-	bbzero(stack->a, stack->size);
-	bbzero(stack->b, stack->size);
+	innit_1_help(stack, space);
 }
 
 void	innit_2(t_stack *stack)
@@ -91,18 +85,11 @@ int	main(int argc, char **argv)
 {
 	t_stack	stack;
 
-	stack.size = 0;
-	if (argc == 1)
-		exit (0);
 	if (argc == 2)
 	{
 		innit_1(argv[1], &stack);
 		if (create_stack_1(argv[1], &stack) == 0)
-		{
-			ft_putstr_fd("split / malloc error\n", 2);
-			full_free(&stack);
-			exit (1);
-		}
+			dead(&stack);
 		sort(&stack);
 		return (0);
 	}
@@ -111,14 +98,9 @@ int	main(int argc, char **argv)
 		stack.size = argc - 1;
 		innit_2(&stack);
 		if (create_stack_2(argv, &stack) == 0)
-		{
-			ft_putstr_fd("invalid argument\n", 2);
-			full_free(&stack);
-			exit (1);
-		}
+			dead(&stack);
 		sort(&stack);
 		return (0);
 	}
-	printf("Invalid arguements\n");
 	return (0);
 }

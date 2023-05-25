@@ -6,7 +6,7 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 18:08:08 by jteoh             #+#    #+#             */
-/*   Updated: 2023/05/24 18:10:53 by jteoh            ###   ########.fr       */
+/*   Updated: 2023/05/25 11:19:30 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,11 @@ int	modify_atoi(const char *str, t_stack *stack)
 
 	sign = 1;
 	out = 0;
-	while (*str == '\t' || *str == '\f' || *str == '\r'
-		|| *str == '\v' || *str == ' ' || *str == '\n')
-		str++;
+	only_negative(str, stack);
 	if (*str == '-' || *str == '+')
 	{
 		if (*str == '-')
-			sign = -sign;
+			sign *= -1;
 		str++;
 	}
 	detect_alph(str, stack);
@@ -34,22 +32,19 @@ int	modify_atoi(const char *str, t_stack *stack)
 
 int	modify_atoi_half(const char *str, t_stack *stack, long out, int sign)
 {
-	while (*str >= '0' && *str <= '9')
+	int	i;
+
+	i = 0;
+	while (str[i] != 0)
 	{
-		if (out >= 214748364 && *str > '7' && sign == 1)
-		{
-			ft_putstr_fd("overflow\n", 2);
-			full_free(stack);
-			exit (1);
-		}
-		if (out >= 214748364 && *str > '8' && sign == -1)
-		{
-			ft_putstr_fd("negative overflow\n", 2);
-			full_free(stack);
-			exit (1);
-		}
-		out = out * 10 + (*str - '0');
-		str++;
+		detect_alph(str, stack);
+		is_negative(str[i], stack);
+		if (out >= 214748364 && str[i] > '7' && sign == 1)
+			dead(stack);
+		if (out >= 214748364 && str[i] > '8' && sign == -1)
+			dead(stack);
+		out = out * 10 + (str[i] - '0');
+		i++;
 	}
 	return ((int)(out * sign));
 }

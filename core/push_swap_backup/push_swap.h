@@ -6,7 +6,7 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 11:55:04 by jteoh             #+#    #+#             */
-/*   Updated: 2023/05/24 18:46:37 by jteoh            ###   ########.fr       */
+/*   Updated: 2023/05/25 12:09:27 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define PUSH_SWAP_H
 
 # include "./libft/libft.h"
+# include "./gnl/get_next_line.h"
 # include <stdio.h>
 # include <unistd.h>
 # include <stdlib.h>
@@ -25,6 +26,14 @@ typedef struct s_stack {
 	int	b_size;
 	int	size;
 }				t_stack;
+
+typedef struct s_bonus {
+	int	*a;
+	int	*b;
+	int	a_size;
+	int	b_size;
+	int	size;
+}				t_bonus;
 
 //-----PUSH_SWAP.C-----
 int			main(int argc, char **argv);
@@ -57,6 +66,10 @@ int			modify_atoi_half(const char *str, t_stack *stack,
 //-----DETECTION.C-----
 void		detect_alph(const char *str, t_stack *stack);
 
+void		only_negative(const char *str, t_stack *stack);
+
+void		is_negative(int c, t_stack *stack);
+
 void		detect_dupe(t_stack *stack);
 
 int			detect_space(char *argv);
@@ -70,6 +83,8 @@ void		sort4(t_stack *stack);
 
 void		sort5(t_stack *stack);
 
+void		innit_1_help(t_stack *stack, int space);
+
 //-----UTILS.C-----
 int			check_sort(int *st, int size);
 
@@ -78,6 +93,8 @@ int			*bubble_sort_a(int *arr, int size);
 int			*stack_dupe(int *arr, int size);
 
 void		bbzero(int *s, int size);
+
+void		dead(t_stack *stack);
 
 //-----SWAP.C-----
 void		swap(int *a, int *b);
