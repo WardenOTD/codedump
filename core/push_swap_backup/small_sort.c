@@ -6,7 +6,7 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 18:03:57 by jteoh             #+#    #+#             */
-/*   Updated: 2023/05/25 15:51:45 by jteoh            ###   ########.fr       */
+/*   Updated: 2023/05/26 16:10:04 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,59 +43,38 @@ void	sort3(int *a)
 
 void	sort4(t_stack *stack)
 {
-	int	median;
-	int	*tmp;
-	int	i;
-
-	i = 0;
-	median = (stack->a_size / 2);
-	tmp = bubble_sort_a(stack->a, stack->a_size);
-	if (!tmp)
-		full_free(stack);
-	while (i++ < 4)
-	{
-		if (tmp[median] > stack->a[0])
-			pb(stack->a, stack->b, stack);
-		else
-			ra(stack->a, stack->a_size);
-	}
-	sort2(stack->a);
-	sort2(stack->b);
-	sb(stack->b, stack->b_size);
-	pa(stack->a, stack->b, stack);
-	pa(stack->a, stack->b, stack);
-	free(tmp);
-	if (!check_sort(stack->a, stack->a_size))
-		sort4(stack);
-	exit (0);
+	while (stack->a_size > 3)
+		pb(stack->a, stack->b, stack);
+	sort3(stack->a);
+	while (stack->b_size > 0)
+		rotate_and_push(stack);
+	return ;
 }
 
 void	sort5(t_stack *stack)
 {
-	int	median;
 	int	*tmp;
 	int	i;
 
 	i = 0;
-	median = stack->a_size / 2;
 	tmp = bubble_sort_a(stack->a, stack->a_size);
 	if (!tmp)
 		full_free(stack);
 	while (i++ < 5)
 	{
-		if (tmp[median] > stack->a[0])
+		if (tmp[2] > stack->a[0])
 			pb(stack->a, stack->b, stack);
 		else
 			ra(stack->a, stack->a_size);
 	}
-	sort2(stack->b);
 	sort3(stack->a);
-	sb(stack->b, stack->b_size);
+	if (check_sort(stack->b, stack->b_size))
+		sb(stack->b, stack->b_size);
 	pa(stack->a, stack->b, stack);
 	pa(stack->a, stack->b, stack);
-	free(tmp);
 	if (!check_sort(stack->a, stack->a_size))
 		sort5(stack);
+	full_free_tmp(stack, tmp);
 	exit (0);
 }
 

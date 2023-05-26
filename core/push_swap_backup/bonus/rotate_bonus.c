@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rotate.c                                           :+:      :+:    :+:   */
+/*   rotate_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 15:21:49 by jteoh             #+#    #+#             */
-/*   Updated: 2023/05/24 18:18:20 by jteoh            ###   ########.fr       */
+/*   Updated: 2023/05/26 16:03:05 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void	ra(int *a, int size)
 			swap(&a[i], &a[i + 1]);
 			i++;
 		}
-		ft_putstr_fd("ra\n", 1);
 	}
 	return ;
 }
@@ -41,7 +40,6 @@ void	rb(int *b, int size)
 			swap(&b[i], &b[i + 1]);
 			i++;
 		}
-		ft_putstr_fd("rb\n", 1);
 	}
 	return ;
 }
@@ -65,7 +63,7 @@ void	rr(int *a, int *b, int a_size, int b_size)
 	}
 	c += rr_help(b, b_size, i, c);
 	if (c > 0)
-		ft_putstr_fd("rr\n", 1);
+		return ;
 }
 
 int	rr_help(int *b, int b_size, int i, int c)

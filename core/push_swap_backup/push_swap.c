@@ -6,7 +6,7 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 11:34:27 by jteoh             #+#    #+#             */
-/*   Updated: 2023/05/25 15:22:02 by jteoh            ###   ########.fr       */
+/*   Updated: 2023/05/26 16:10:00 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ int	create_stack_1(char *argv, t_stack *stack)
 		stack->a[i] = modify_atoi(tmp[i], stack);
 		i++;
 	}
+	free2d(tmp);
 	detect_dupe(stack);
 	return (1);
 }
@@ -93,7 +94,7 @@ int	main(int argc, char **argv)
 		if (create_stack_1(argv[1], &stack) == 0)
 			dead(&stack);
 		sort(&stack);
-		return (0);
+		exit (0);
 	}
 	else if (argc > 2)
 	{
@@ -102,7 +103,7 @@ int	main(int argc, char **argv)
 		if (create_stack_2(argv, &stack) == 0)
 			dead(&stack);
 		sort(&stack);
-		return (0);
+		exit (0);
 	}
 	return (0);
 }

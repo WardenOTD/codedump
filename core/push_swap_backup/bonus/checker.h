@@ -6,7 +6,7 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 14:18:36 by jteoh             #+#    #+#             */
-/*   Updated: 2023/05/25 14:50:29 by jteoh            ###   ########.fr       */
+/*   Updated: 2023/05/26 15:30:37 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ int			check_sort(int *st, int size);
 void		bbzero(int *s, int size);
 
 void		dead(t_stack *stack);
+
+void		free2d(char **arr);
 
 //-----SWAP_BONUS.C-----
 void		swap(int *a, int *b);

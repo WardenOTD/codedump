@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   reverse.c                                          :+:      :+:    :+:   */
+/*   reverse_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 15:21:50 by jteoh             #+#    #+#             */
-/*   Updated: 2023/05/24 18:18:32 by jteoh            ###   ########.fr       */
+/*   Updated: 2023/05/26 16:03:18 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void	rra(int *a, int size)
 			swap(&a[i], &a[i + 1]);
 			i--;
 		}
-		ft_putstr_fd("rra\n", 1);
 	}
 	return ;
 }
@@ -41,7 +40,6 @@ void	rrb(int *b, int size)
 			swap(&b[i], &b[i + 1]);
 			i--;
 		}
-		ft_putstr_fd("rrb\n", 1);
 	}
 	return ;
 }
@@ -65,7 +63,7 @@ void	rrr(int *a, int *b, int a_size, int b_size)
 	}
 	c += rrr_help(b, b_size, i, c);
 	if (c > 0)
-		ft_putstr_fd("rrr\n", 1);
+		return ;
 }
 
 int	rrr_help(int *b, int b_size, int i, int c)

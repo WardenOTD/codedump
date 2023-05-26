@@ -6,7 +6,7 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 13:36:14 by jteoh             #+#    #+#             */
-/*   Updated: 2023/05/25 14:31:17 by jteoh            ###   ########.fr       */
+/*   Updated: 2023/05/26 16:10:22 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,17 @@ void	dead(t_stack *stack)
 	ft_putstr_fd("Error\n", 2);
 	full_free(stack);
 	exit (1);
+}
+
+void	free2d(char **arr)
+{
+	int	i;
+
+	i = 0;
+	while (arr[i] != 0)
+	{
+		free(arr[i]);
+		i++;
+	}
+	free(arr);
 }

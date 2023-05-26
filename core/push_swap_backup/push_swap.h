@@ -6,7 +6,7 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 11:55:04 by jteoh             #+#    #+#             */
-/*   Updated: 2023/05/25 14:18:58 by jteoh            ###   ########.fr       */
+/*   Updated: 2023/05/26 15:28:23 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,13 @@ int			*stack_dupe(int *arr, int size);
 void		bbzero(int *s, int size);
 
 void		dead(t_stack *stack);
+
+//-----UTILS2.C-----
+void		free2d(char **arr);
+
+void		rotate_and_push(t_stack *stack);
+
+int			find_index_max( int *arr, int size);
 
 //-----SWAP.C-----
 void		swap(int *a, int *b);

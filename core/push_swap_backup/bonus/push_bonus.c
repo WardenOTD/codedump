@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push.c                                             :+:      :+:    :+:   */
+/*   push_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 15:21:48 by jteoh             #+#    #+#             */
-/*   Updated: 2023/05/19 16:36:46 by jteoh            ###   ########.fr       */
+/*   Updated: 2023/05/26 15:52:20 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ void	pa(int *a, int *b, t_stack *stack)
 		b[stack->b_size - 1] = 0;
 		stack->a_size++;
 		stack->b_size--;
-		ft_putstr_fd("pa\n", 1);
 	}
 	return ;
 }
@@ -61,7 +60,6 @@ void	pb(int *a, int *b, t_stack *stack)
 		a[stack->a_size - 1] = 0;
 		stack->b_size++;
 		stack->a_size--;
-		ft_putstr_fd("pb\n", 1);
 	}
 	return ;
 }

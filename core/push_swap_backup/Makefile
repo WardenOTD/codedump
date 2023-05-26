@@ -1,5 +1,5 @@
 SRC			= push_swap.c detection.c modify_atoi.c utils.c \
-				sort.c small_sort.c \
+				sort.c small_sort.c utils2.c \
 				swap.c push.c rotate.c reverse.c \
 
 BNS			= bonus/*.c \
@@ -18,14 +18,14 @@ NAME		= push_swap
 all:	${NAME}
 
 ${NAME}: ${LIBFT} ${SRC}
-	${CC} ${CFLAGS} ${FSANITIZE} ${SRC} ${LIBFT} -o ${NAME} && ${DSYM}
+	${CC} ${CFLAGS} ${SRC} ${LIBFT} -o ${NAME} && ${DSYM}
 
 ${LIBFT}:
 	make all -C libft/
 	mv libft/libft.a .
 
 bonus: ${BNS}
-	${CC} ${CFLAGS} ${FSANITIZE} ${BNS} ${GNL} ${LIBFT} -o ${BONUS} && ${DSYM}
+	${CC} ${CFLAGS} ${BNS} ${GNL} ${LIBFT} -o ${BONUS} && ${DSYM}
 
 clean:
 	${RM} *.o
