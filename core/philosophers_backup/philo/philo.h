@@ -6,7 +6,7 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 10:44:42 by jteoh             #+#    #+#             */
-/*   Updated: 2023/06/19 11:38:18 by jteoh            ###   ########.fr       */
+/*   Updated: 2023/06/20 17:41:57 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,34 @@
 typedef struct s_data{
 	pthread_t		*philo;
 	pthread_mutex_t	*fork;
+	int				id;
+	int				idmax;
+	int				fid;
+	int				fidmax;
+	unsigned long	tod_start;
+	unsigned long	tod_end;
 	int				num_of_philo;
 	int				num_of_eat;
+	int				cur_eat_count;
 	unsigned long	time_die;
 	unsigned long	time_eat;
 	unsigned long	time_sleep;
+	int				death;
 }				t_data;
 
-//_____UTIL.C_____
-int	ft_isdigit(int c);
+typedef struct s_fock{
+	int				l_id;
+	int				r_id;
+	unsigned long	time_last_eat;
+}				t_fock;
 
-int	ft_atoi(const char *str);
+//_____UTIL.C_____
+int		ft_isdigit(int c);
+
+int		ft_atoi(const char *str);
+
+void	time_start(t_data *data);
+
+void	time_end(t_data *data);
 
 #endif

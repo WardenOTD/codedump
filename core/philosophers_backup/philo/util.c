@@ -6,7 +6,7 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 11:01:36 by jteoh             #+#    #+#             */
-/*   Updated: 2023/06/19 11:07:27 by jteoh            ###   ########.fr       */
+/*   Updated: 2023/06/20 11:30:05 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,20 @@ int	ft_atoi(const char *str)
 	if (ft_isdigit(*str) == 0)
 		return (-1);
 	return ((int)out);
+}
+
+void	time_start(t_data *data)
+{
+	struct timeval	start;
+
+	gettimeofday(&start, 0);
+	data->tod_start = ((start.tv_sec * 1000) + (start.tv_usec / 1000));
+}
+
+void	time_end(t_data *data)
+{
+	struct timeval	end;
+
+	gettimeofday(&end, 0);
+	data->tod_end = ((end.tv_sec * 1000) + (end.tv_usec / 1000)) - data->tod_start;
 }
