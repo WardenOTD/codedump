@@ -1,0 +1,168 @@
+0 2 is thinking
+0 2 has taken a fork
+0 2 has taken a fork
+time_last_eat = 0, time_die = 410
+0 2 is eating
+0 4 is thinking
+0 4 has taken a fork
+0 4 has taken a fork
+time_last_eat = 0, time_die = 410
+0 4 is eating
+0 1 is thinking
+0 3 is thinking
+205 2 is sleeping
+205 4 is sleeping
+205 3 has taken a fork
+205 3 has taken a fork
+time_last_eat = 0, time_die = 410
+205 3 is eating
+205 1 has taken a fork
+205 1 has taken a fork
+time_last_eat = 0, time_die = 410
+205 1 is eating
+408 2 is thinking
+408 4 is thinking
+408 3 is sleeping
+408 1 is sleeping
+408 4 has taken a fork
+408 4 has taken a fork
+time_last_eat = 0, time_die = 410
+408 4 is eating
+408 2 has taken a fork
+408 2 has taken a fork
+time_last_eat = 0, time_die = 410
+408 2 is eating
+613 3 is thinking
+613 1 is thinking
+613 4 is sleeping
+613 2 is sleeping
+613 1 has taken a fork
+613 1 has taken a fork
+time_last_eat = 0, time_die = 410
+613 1 is eating
+613 3 has taken a fork
+613 3 has taken a fork
+time_last_eat = 0, time_die = 410
+613 3 is eating
+813 4 is thinking
+813 2 is thinking
+813 2 has taken a fork
+813 3 is sleeping
+813 4 has taken a fork
+813 2 has taken a fork
+813 1 is sleeping
+813 4 has taken a fork
+time_last_eat = 0, time_die = 410
+813 2 is eating
+time_last_eat = 0, time_die = 410
+813 4 is eating
+1015 3 is thinking
+1015 1 is thinking
+1015 2 is sleeping
+1015 4 is sleeping
+1015 3 has taken a fork
+1015 3 has taken a fork
+time_last_eat = 0, time_die = 410
+1015 3 is eating
+1015 1 has taken a fork
+1015 1 has taken a fork
+time_last_eat = 0, time_die = 410
+1015 1 is eating
+1219 2 is thinking
+1219 4 is thinking
+1219 1 is sleeping
+1219 2 has taken a fork
+1219 2 has taken a fork
+1219 3 is sleeping
+1219 4 has taken a fork
+1219 4 has taken a fork
+time_last_eat = 0, time_die = 410
+1219 4 is eating
+time_last_eat = 0, time_die = 410
+1219 2 is eating
+1419 1 is thinking
+1419 3 is thinking
+1419 4 is sleeping
+1419 1 has taken a fork
+1419 1 has taken a fork
+1419 3 has taken a fork
+1419 3 has taken a fork
+time_last_eat = 0, time_die = 410
+1419 3 is eating
+1419 2 is sleeping
+time_last_eat = 0, time_die = 410
+1419 1 is eating
+1620 4 is thinking
+1620 2 is thinking
+1620 3 is sleeping
+1620 1 is sleeping
+1620 4 has taken a fork
+1620 4 has taken a fork
+1620 2 has taken a fork
+1620 2 has taken a fork
+time_last_eat = 0, time_die = 410
+1620 2 is eating
+time_last_eat = 0, time_die = 410
+1620 4 is eating
+1820 3 is thinking
+1820 1 is thinking
+1820 2 is sleeping
+1820 4 is sleeping
+1820 3 has taken a fork
+1820 3 has taken a fork
+time_last_eat = 0, time_die = 410
+1820 3 is eating
+1820 1 has taken a fork
+1820 1 has taken a fork
+time_last_eat = 0, time_die = 410
+1820 1 is eating
+2025 2 is thinking
+2025 4 is thinking
+2025 3 is sleeping
+2025 4 has taken a fork
+2025 4 has taken a fork
+time_last_eat = 0, time_die = 410
+2025 4 is eating
+2025 1 is sleeping
+2025 2 has taken a fork
+2025 2 has taken a fork
+time_last_eat = 0, time_die = 410
+2025 2 is eating
+2231 3 is thinking
+2231 4 is sleeping
+2231 1 is thinking
+2231 1 has taken a fork
+2231 1 has taken a fork
+time_last_eat = 0, time_die = 410
+2231 1 is eating
+2231 2 is sleeping
+2231 3 has taken a fork
+2231 3 has taken a fork
+time_last_eat = 0, time_die = 410
+2231 3 is eating
+2434 2 is thinking
+2434 4 is thinking
+2434 1 is sleeping
+2434 3 is sleeping
+2434 2 has taken a fork
+2434 2 has taken a fork
+time_last_eat = 0, time_die = 410
+2434 2 is eating
+2434 4 has taken a fork
+2434 4 has taken a fork
+time_last_eat = 0, time_die = 410
+2434 4 is eating
+2636 2 is sleeping
+2636 4 is sleeping
+2637 1 is thinking
+2637 1 has taken a fork
+2637 1 has taken a fork
+time_last_eat = 0, time_die = 410
+2637 1 is eating
+2637 3 is thinking
+2637 3 has taken a fork
+2637 3 has taken a fork
+time_last_eat = 0, time_die = 410
+2637 3 is eating
+2841 3 is sleeping
+2841 1 is sleeping

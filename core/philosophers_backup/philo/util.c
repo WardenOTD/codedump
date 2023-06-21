@@ -6,7 +6,7 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 11:01:36 by jteoh             #+#    #+#             */
-/*   Updated: 2023/06/20 11:30:05 by jteoh            ###   ########.fr       */
+/*   Updated: 2023/06/21 10:59:05 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	ft_atoi(const char *str)
 		out = out * 10 + (*str - '0');
 		str++;
 	}
-	if (ft_isdigit(*str) == 0)
+	if (ft_isdigit(*str) == 0 && *str != 0)
 		return (-1);
 	return ((int)out);
 }

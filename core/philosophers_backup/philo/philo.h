@@ -6,7 +6,7 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 10:44:42 by jteoh             #+#    #+#             */
-/*   Updated: 2023/06/20 17:41:57 by jteoh            ###   ########.fr       */
+/*   Updated: 2023/06/21 12:08:34 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,17 +30,18 @@ typedef struct s_data{
 	unsigned long	tod_end;
 	int				num_of_philo;
 	int				num_of_eat;
-	int				cur_eat_count;
+	int				need_eat;
+	int				*cur_eat_count;
 	unsigned long	time_die;
 	unsigned long	time_eat;
 	unsigned long	time_sleep;
+	unsigned long	*time_last_eat;
 	int				death;
 }				t_data;
 
 typedef struct s_fock{
 	int				l_id;
 	int				r_id;
-	unsigned long	time_last_eat;
 }				t_fock;
 
 //_____UTIL.C_____
