@@ -6,14 +6,14 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 10:44:46 by jteoh             #+#    #+#             */
-/*   Updated: 2023/06/21 15:38:40 by jteoh            ###   ########.fr       */
+/*   Updated: 2023/06/21 18:51:21 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
 // need to work on death.....!!
-//  gcc -Wall -Wextra -Werror -fsanitize=thread -g3 *.c -o philo
+//  gcc -Wall -Wextra -Werror -fsanitize=thread -g3 *.c -o philo && rm -rf *.dSYM
 //
 
 int	eat(t_data *data, int id, t_fock *fock)
@@ -124,7 +124,7 @@ void	thread_func(void *stuff)
 	id = data->id;
 
 	if (id % 2 == 0)
-		usleep(500);
+		usleep((data->time_die * 1000) / 2);
 	if (id == 0)
 		fock.l_id = data->fidmax;
 	else

@@ -6,7 +6,7 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 10:44:42 by jteoh             #+#    #+#             */
-/*   Updated: 2023/06/21 12:08:34 by jteoh            ###   ########.fr       */
+/*   Updated: 2023/06/21 18:20:39 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ typedef struct s_fock{
 	int				l_id;
 	int				r_id;
 }				t_fock;
+
+int	eat_check(t_data *data);
 
 //_____UTIL.C_____
 int		ft_isdigit(int c);
