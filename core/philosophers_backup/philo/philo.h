@@ -6,7 +6,7 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 10:44:42 by jteoh             #+#    #+#             */
-/*   Updated: 2023/06/21 18:20:39 by jteoh            ###   ########.fr       */
+/*   Updated: 2023/06/22 10:29:49 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,15 +44,39 @@ typedef struct s_fock{
 	int				r_id;
 }				t_fock;
 
-int	eat_check(t_data *data);
+//TEMP_____PHILO_CHUA.C_____
+int			create_fork(t_data *data);
+
+int			last_n_cur_eat(t_data *data);
+
+int			create_thread(t_data *data);
+
+int			get_argue(t_data *data, char **av);
+
+void		init_all(t_data *data);
+
+int			the_free(t_data *data, int i);
+
+int			eat_check(t_data *data);
+
+int			main(int argc, char **argv);
+
+//_____THREAD_STUFF.C_____
+int			eat(t_data *data, int id, t_fock *fock);
+
+int			sleeep(t_data *data, int id);
+
+int			fouck(t_data *data, int id, t_fock *fock);
+
+void		thread_func(void *stuff);
 
 //_____UTIL.C_____
-int		ft_isdigit(int c);
+int			ft_isdigit(int c);
 
-int		ft_atoi(const char *str);
+int			ft_atoi(const char *str);
 
-void	time_start(t_data *data);
+void		time_start(t_data *data);
 
-void	time_end(t_data *data);
+void		time_end(t_data *data);
 
 #endif

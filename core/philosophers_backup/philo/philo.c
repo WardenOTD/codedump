@@ -6,15 +6,15 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 10:44:46 by jteoh             #+#    #+#             */
-/*   Updated: 2023/06/21 18:51:21 by jteoh            ###   ########.fr       */
+/*   Updated: 2023/06/22 10:24:40 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
+// obsolete file.. new main is philo_chua.c
 // need to work on death.....!!
 //  gcc -Wall -Wextra -Werror -fsanitize=thread -g3 *.c -o philo && rm -rf *.dSYM
-//
 
 int	eat(t_data *data, int id, t_fock *fock)
 {
