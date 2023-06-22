@@ -134,21 +134,29 @@ int	the_free(t_data *data, int i)
 
 int	eat_check(t_data *data)
 {
-	return (data->death);
-	// int	i;
-	// int	flag;
+	int	i;
+	int	flag;
 
-	// i = 0;
-	// flag = 0;
-	// while (i < data->num_of_philo)
-	// {
-	// 	if (data->cur_eat_count[i] == data->num_of_eat)
-	// 		flag++;
-	// 	i++;
-	// }
-	// if (flag == data->num_of_philo)
-	// 	return (1);
-	// return (0);
+	i = 0;
+	flag = 0;
+	while (i < data->num_of_philo)
+	{
+		if (data->cur_eat_count[i] == data->num_of_eat)
+			flag++;
+		i++;
+	}
+	if (flag == data->num_of_philo)
+		return (1);
+	return (0);
+}
+
+void	you_die(t_data *data, int i)
+{
+	if (!eat_check(data) || !data->need_eat)
+	{
+		time_end(data);
+		printf("%lu %d has died\n", data->tod_end, i + 1);
+	}
 }
 
 int	main(int argc, char **argv)
@@ -180,6 +188,22 @@ int	main(int argc, char **argv)
 		if (!create_thread(&data))
 			return (the_free(&data, 2));
 	}
+	time_end(&data);
+	while (data.death == 0)
+	{
+		while ((data.tod_end - data.time_last_eat[i]) < data.time_die)
+		{
+			if (i == data.idmax)
+			{
+				usleep(data.death * 1000);
+				i = -1;
+			}
+			i++;
+			time_end(&data);
+		}
+		data.death = 1;
+	}
+	you_die(&data, i);
 	while (j < data.num_of_philo)
 	{
 		pthread_join(data.philo[j], 0);

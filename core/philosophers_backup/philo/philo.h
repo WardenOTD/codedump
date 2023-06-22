@@ -6,7 +6,7 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 10:44:42 by jteoh             #+#    #+#             */
-/*   Updated: 2023/06/22 10:29:49 by jteoh            ###   ########.fr       */
+/*   Updated: 2023/06/22 15:18:05 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ void		init_all(t_data *data);
 int			the_free(t_data *data, int i);
 
 int			eat_check(t_data *data);
+
+void		you_die(t_data *data, int i);
 
 int			main(int argc, char **argv);
 
