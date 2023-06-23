@@ -6,7 +6,7 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 10:38:21 by jteoh             #+#    #+#             */
-/*   Updated: 2023/06/23 14:45:17 by jteoh            ###   ########.fr       */
+/*   Updated: 2023/06/23 16:31:13 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,17 +39,17 @@ int	create_fork(t_data *data)
 	data->fid = 0;
 	data->fork = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t)
 			* data->num_of_philo);
-	pthread_mutex_init(&data->lock, 0);
-	// pthread_mutex_init(&data->lock_eat, 0);
-	// pthread_mutex_init(&data->lock_main, 0);
-	// pthread_mutex_init(&data->lock_check, 0);
-	// pthread_mutex_init(&data->lock_create, 0);
+	data->get_last_eaten = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t)
+			* data->num_of_philo);
+	pthread_mutex_init(&data->death_lock, 0);
+	pthread_mutex_init(&data->time_lock, 0);
 	pthread_mutex_init(&data->lock_thread, 0);
-	if (!data->fork)
+	if (!data->fork || !data->get_last_eaten)
 		return (0);
 	while (data->fid < data->num_of_philo)
 	{
 		pthread_mutex_init(&data->fork[data->fid], 0);
+		pthread_mutex_init(&data->get_last_eaten[data->fid], 0);
 		data->fid++;
 	}
 	data->fidmax = --data->fid;
@@ -78,9 +78,7 @@ int	create_thread(t_data *data)
 	data->id = 0;
 	data->philo = (pthread_t *)malloc(sizeof(pthread_t) * data->num_of_philo);
 	if (!data->philo)
-	{
 		return (0);
-	}
 	while (i < num)
 	{
 		pthread_create(&data->philo[data->id], 0,
@@ -90,10 +88,10 @@ int	create_thread(t_data *data)
 		i = ++data->id;
 		pthread_mutex_unlock(&data->lock_thread);
 	}
-	pthread_mutex_lock(&data->lock_thread);
 	time_start(data);
 	data->idmax = --data->id;
+	pthread_mutex_lock(&data->death_lock);
 	data->death = 0;
-	pthread_mutex_unlock(&data->lock_thread);
+	pthread_mutex_unlock(&data->death_lock);
 	return (1);
 }

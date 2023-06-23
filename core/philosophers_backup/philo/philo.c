@@ -31,11 +31,9 @@ void	init_all(t_data *data)
 int	the_free(t_data *data, int i)
 {
 	free(data->fork);
-	pthread_mutex_destroy(&data->lock);
-	// pthread_mutex_destroy(&data->lock_eat);
-	// pthread_mutex_destroy(&data->lock_main);
-	// pthread_mutex_destroy(&data->lock_check);
-	// pthread_mutex_destroy(&data->lock_create);
+	free(data->get_last_eaten);
+	pthread_mutex_destroy(&data->death_lock);
+	pthread_mutex_destroy(&data->time_lock);
 	pthread_mutex_destroy(&data->lock_thread);
 	if (i == 1)
 		write(1, "Fork Malloc Error\n", 18);
@@ -59,52 +57,46 @@ int	the_free(t_data *data, int i)
 	return (0);
 }
 
-void	you_die(t_data *data, int i)
+void	main3(t_data *data, int i, unsigned long ded, int idm)
 {
-	unsigned long	time;
-
-	pthread_mutex_lock(&data->lock_thread);
-	time = time_end(data);
-	pthread_mutex_unlock(&data->lock_thread);
-	if (!eat_check(data) || !data->need_eat)
-		printf("%lu %d has died\n", time, i + 1);
+	while ((ded < data->time_die))
+	{
+		if (i == idm)
+		{
+			if (eat_check(data))
+			{
+				toggle_death(data);
+				break ;
+			}
+			usleep((data->time_die * 1000) / 2);
+			i = -1;
+		}
+		i++;
+		pthread_mutex_lock(&data->get_last_eaten[i]);
+		ded = time_end(data) - data->time_last_eat[i];
+		pthread_mutex_unlock(&data->get_last_eaten[i]);
+	}
 }
 
 void	main2(t_data *data, int i, int j)
 {
 	unsigned long	ded;
-	unsigned long	timeded;
-	int				def;
 	int				idm;
 
 	pthread_mutex_lock(&data->lock_thread);
 	ded = time_end(data) - data->time_last_eat[i];
-	timeded = data->time_die;
-	def = data->death;
 	idm = data->idmax;
 	pthread_mutex_unlock(&data->lock_thread);
-	while ((ded < timeded) && def == 0)
-	{
-		if (i == idm)
-		{
-			usleep(def * 1000);
-			i = -1;
-		}
-		i++;
-		pthread_mutex_lock(&data->lock_thread);
-		ded = time_end(data) - data->time_last_eat[i];
-		def = data->death;
-		pthread_mutex_unlock(&data->lock_thread);
-	}
-	pthread_mutex_lock(&data->lock_thread);
-	data->death = 1;
-	pthread_mutex_unlock(&data->lock_thread);
+	main3(data, i, ded, idm);
+	toggle_death(data);
 	you_die(data, i);
 	while (j < data->num_of_philo)
+		pthread_join(data->philo[j++], 0);
+	j = 0;
+	while (j < data->num_of_philo)
 	{
-		pthread_join(data->philo[j], 0);
 		pthread_mutex_destroy(&data->fork[j]);
-		j++;
+		pthread_mutex_destroy(&data->get_last_eaten[j++]);
 	}
 	the_free(data, 3);
 }

@@ -1,4 +1,4 @@
-SRC			= philo.c creation.c thread_stuff.c util.c \
+SRC			= philo.c creation.c thread_stuff.c util.c util2.c \
 
 
 CC			= gcc
