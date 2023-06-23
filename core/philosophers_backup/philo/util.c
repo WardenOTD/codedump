@@ -6,7 +6,7 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 11:01:36 by jteoh             #+#    #+#             */
-/*   Updated: 2023/06/23 11:20:21 by jteoh            ###   ########.fr       */
+/*   Updated: 2023/06/23 14:43:40 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,31 +53,41 @@ void	time_start(t_data *data)
 	data->tod_start = ((start.tv_sec * 1000) + (start.tv_usec / 1000));
 }
 
-void	time_end(t_data *data)
+unsigned long	time_end(t_data *data)
 {
 	struct timeval	end;
+	unsigned long	ret;
+	unsigned long	start;
 
-	pthread_mutex_lock(&data->lock);
 	gettimeofday(&end, 0);
-	data->tod_end = ((end.tv_sec * 1000) + (end.tv_usec / 1000))
-		- data->tod_start;
+	pthread_mutex_lock(&data->lock);
+	start = data->tod_start;
 	pthread_mutex_unlock(&data->lock);
+	ret = ((end.tv_sec * 1000) + (end.tv_usec / 1000))
+		- start;
+	return (ret);
 }
 
 int	eat_check(t_data *data)
 {
 	int	i;
+	int	j;
 	int	flag;
 
 	i = 0;
 	flag = 0;
-	while (i < data->num_of_philo)
+	pthread_mutex_lock(&data->lock_thread);
+	j = data->num_of_philo;
+	pthread_mutex_unlock(&data->lock_thread);
+	while (i < j)
 	{
+		pthread_mutex_lock(&data->lock_thread);
 		if (data->cur_eat_count[i] == data->num_of_eat)
 			flag++;
+		pthread_mutex_unlock(&data->lock_thread);
 		i++;
 	}
-	if (flag == data->num_of_philo)
+	if (flag == j)
 		return (1);
 	return (0);
 }

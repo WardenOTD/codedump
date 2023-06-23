@@ -19,7 +19,6 @@ void	init_all(t_data *data)
 	data->fid = 0;
 	data->fidmax = 0;
 	data->tod_start = 0;
-	data->tod_end = 0;
 	data->num_of_philo = 0;
 	data->num_of_eat = 0;
 	data->need_eat = 0;
@@ -33,6 +32,11 @@ int	the_free(t_data *data, int i)
 {
 	free(data->fork);
 	pthread_mutex_destroy(&data->lock);
+	// pthread_mutex_destroy(&data->lock_eat);
+	// pthread_mutex_destroy(&data->lock_main);
+	// pthread_mutex_destroy(&data->lock_check);
+	// pthread_mutex_destroy(&data->lock_create);
+	pthread_mutex_destroy(&data->lock_thread);
 	if (i == 1)
 		write(1, "Fork Malloc Error\n", 18);
 	else if (i == 2)
@@ -57,28 +61,44 @@ int	the_free(t_data *data, int i)
 
 void	you_die(t_data *data, int i)
 {
+	unsigned long	time;
+
+	pthread_mutex_lock(&data->lock_thread);
+	time = time_end(data);
+	pthread_mutex_unlock(&data->lock_thread);
 	if (!eat_check(data) || !data->need_eat)
-	{
-		time_end(data);
-		printf("%lu %d has died\n", data->tod_end, i + 1);
-	}
+		printf("%lu %d has died\n", time, i + 1);
 }
 
 void	main2(t_data *data, int i, int j)
 {
-	time_end(data);
-	while (((data->tod_end - data->time_last_eat[i]) < data->time_die)
-		&& data->death == 0)
+	unsigned long	ded;
+	unsigned long	timeded;
+	int				def;
+	int				idm;
+
+	pthread_mutex_lock(&data->lock_thread);
+	ded = time_end(data) - data->time_last_eat[i];
+	timeded = data->time_die;
+	def = data->death;
+	idm = data->idmax;
+	pthread_mutex_unlock(&data->lock_thread);
+	while ((ded < timeded) && def == 0)
 	{
-		if (i == data->idmax)
+		if (i == idm)
 		{
-			usleep(data->death * 1000);
+			usleep(def * 1000);
 			i = -1;
 		}
 		i++;
-		time_end(data);
+		pthread_mutex_lock(&data->lock_thread);
+		ded = time_end(data) - data->time_last_eat[i];
+		def = data->death;
+		pthread_mutex_unlock(&data->lock_thread);
 	}
+	pthread_mutex_lock(&data->lock_thread);
 	data->death = 1;
+	pthread_mutex_unlock(&data->lock_thread);
 	you_die(data, i);
 	while (j < data->num_of_philo)
 	{

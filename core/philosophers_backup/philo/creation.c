@@ -6,7 +6,7 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 10:38:21 by jteoh             #+#    #+#             */
-/*   Updated: 2023/06/23 11:19:45 by jteoh            ###   ########.fr       */
+/*   Updated: 2023/06/23 14:45:17 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,12 @@ int	create_fork(t_data *data)
 	data->fid = 0;
 	data->fork = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t)
 			* data->num_of_philo);
-	data->tod_end = pthread_mutex_init(&data->lock, 0);
+	pthread_mutex_init(&data->lock, 0);
+	// pthread_mutex_init(&data->lock_eat, 0);
+	// pthread_mutex_init(&data->lock_main, 0);
+	// pthread_mutex_init(&data->lock_check, 0);
+	// pthread_mutex_init(&data->lock_create, 0);
+	pthread_mutex_init(&data->lock_thread, 0);
 	if (!data->fork)
 		return (0);
 	while (data->fid < data->num_of_philo)
@@ -65,19 +70,30 @@ int	last_n_cur_eat(t_data *data)
 
 int	create_thread(t_data *data)
 {
+	int	i;
+	int	num;
+
+	i = 0;
+	num = data->num_of_philo;
 	data->id = 0;
 	data->philo = (pthread_t *)malloc(sizeof(pthread_t) * data->num_of_philo);
 	if (!data->philo)
+	{
 		return (0);
-	while (data->id < data->num_of_philo)
+	}
+	while (i < num)
 	{
 		pthread_create(&data->philo[data->id], 0,
 			(void *)thread_func, (void *)data);
-		time_start(data);
 		usleep(100);
-		data->id++;
+		pthread_mutex_lock(&data->lock_thread);
+		i = ++data->id;
+		pthread_mutex_unlock(&data->lock_thread);
 	}
+	pthread_mutex_lock(&data->lock_thread);
+	time_start(data);
 	data->idmax = --data->id;
 	data->death = 0;
+	pthread_mutex_unlock(&data->lock_thread);
 	return (1);
 }
