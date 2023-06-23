@@ -6,7 +6,7 @@
 /*   By: jteoh <jteoh@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 11:01:36 by jteoh             #+#    #+#             */
-/*   Updated: 2023/06/21 18:06:59 by jteoh            ###   ########.fr       */
+/*   Updated: 2023/06/23 11:20:21 by jteoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,27 @@ void	time_end(t_data *data)
 {
 	struct timeval	end;
 
+	pthread_mutex_lock(&data->lock);
 	gettimeofday(&end, 0);
-	data->tod_end = ((end.tv_sec * 1000) + (end.tv_usec / 1000)) - data->tod_start;
+	data->tod_end = ((end.tv_sec * 1000) + (end.tv_usec / 1000))
+		- data->tod_start;
+	pthread_mutex_unlock(&data->lock);
+}
+
+int	eat_check(t_data *data)
+{
+	int	i;
+	int	flag;
+
+	i = 0;
+	flag = 0;
+	while (i < data->num_of_philo)
+	{
+		if (data->cur_eat_count[i] == data->num_of_eat)
+			flag++;
+		i++;
+	}
+	if (flag == data->num_of_philo)
+		return (1);
+	return (0);
 }

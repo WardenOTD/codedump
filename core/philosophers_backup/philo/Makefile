@@ -1,4 +1,4 @@
-SRC			= philo_chua.c thread_stuff.c util.c \
+SRC			= philo.c creation.c thread_stuff.c util.c \
 
 
 CC			= gcc
@@ -12,7 +12,7 @@ NAME		= philo
 all: ${NAME}
 
 ${NAME}: ${SRC}
-	${CC} ${CFLAGS} ${SRC} -o ${NAME} && ${RM} ${DSYM}
+	${CC} ${CFLAGS} ${FSANITIZE} ${SRC} -o ${NAME} && ${RM} ${DSYM}
 
 clean:
 	${RM} *.o
