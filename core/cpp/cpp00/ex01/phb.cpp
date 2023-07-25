@@ -3,15 +3,15 @@
 void	Contact::set_info(int id, std::string info)
 {
 	if (id == 1)
-		info.append(firstname);
+		firstname.assign(info);
 	if (id == 2)
-		info.append(lastname);
+		lastname.assign(info);
 	if (id == 3)
-		info.append(nickname);
+		nickname.assign(info);
 	if (id == 4)
-		info.append(phonenum);
+		phonenum.assign(info);
 	if (id == 5)
-		info.append(darkestsecret);
+		darkestsecret.assign(info);
 }
 
 std::string	get_info(std::string word)
@@ -76,11 +76,100 @@ void	PhoneBook::addcontact()
 	cntc[i].set_info(4, get_hpn());
 	cntc[i].set_info(5, get_info("Darkest Secret: "));
 	last++;
+	if (current < 8)
+		current++;
+	if (!exist)
+		exist = 1;
+}
+
+void	Contact::display_info()
+{
+	std::cout << "First Name: " << firstname << std::endl;
+	std::cout << "Last Name: " << lastname << std::endl;
+	std::cout << "Nickname: " << nickname << std::endl;
+	std::cout << "Phone Number: " << phonenum << std::endl;
+	std::cout << "Darkest Secret: " << darkestsecret << std::endl << std::endl;
+}
+
+std::string	Contact::trunc(std::string str, int len, char repl)
+{
+	std::string	tmp;
+	if (!str.compare("firstname"))
+	{
+		if (len >= (int)firstname.length())
+			return (tmp.assign(firstname));
+		tmp = firstname.substr(0, (len - 1));
+		tmp.push_back(repl);
+		return (tmp);
+	}
+	if (!str.compare("lastname"))
+	{
+		if (len >= (int)lastname.length())
+			return (tmp.assign(lastname));
+		tmp = lastname.substr(0, (len - 1));
+		tmp.push_back(repl);
+		return (tmp);
+	}
+	if (!str.compare("nickname"))
+	{
+		if (len >= (int)nickname.length())
+			return (tmp.assign(nickname));
+		tmp = nickname.substr(0, (len - 1));
+		tmp.push_back(repl);
+		return (tmp);
+	}
+	return (NULL);
+}
+
+void	PhoneBook::searchcontact()
+{
+	unsigned int	i;
+	std::string		index;
+	unsigned int	id;
+
+	if (!exist)
+	{
+		std::cout << "Empty PhoneBook!" << std::endl;
+		return ;
+	}
+	i = 0;
+	std::cout << "|     INDEX|FIRST NAME| LAST NAME|  NICKNAME|" << std::endl;
+	while (i < 8)
+	{
+		if (i == current)
+			break ;
+		std::cout << "|" << std::setfill(' ') << std::setw(10) << (i+1) << "|";
+		std::cout << std::setfill(' ') << std::setw(10) << cntc[i].trunc("firstname", 10, '.') << "|";
+		std::cout << std::setfill(' ') << std::setw(10) << cntc[i].trunc("lastname", 10, '.') << "|";
+		std::cout << std::setfill(' ') << std::setw(10) << cntc[i].trunc("nickname", 10, '.') << "|" << std::endl;
+		i++;
+	}
+	while (1)
+	{
+		std::cout << "Index Of Requested Information: ";
+		getline(std::cin, index);
+		if (!isNumber(index))
+		{
+			std::cout << "Invalid Index" << std::endl;
+			continue ;
+		}
+		id = std::stoi(index);
+		id -= 1;
+		if (id < 0 || id >= i)
+		{
+			std::cout << "Invalid Index" << std::endl;
+			continue ;
+		}
+		cntc[id].display_info();
+		break ;
+	}
 }
 
 void	PhoneBook::init()
 {
 	last = 0;
+	current = 0;
+	exist = 0;
 }
 
 int	main()
@@ -96,9 +185,11 @@ int	main()
 			exit(1);
 		if (!AAAAAA.compare("ADD"))
 			cringe.addcontact();
+		if (!AAAAAA.compare("SEARCH"))
+			cringe.searchcontact();
 		else if (!AAAAAA.compare("EXIT"))
 			break ;
 		else
-			std::cout << "bruv" << std::endl;
+			std::cout << "Invalid Input" << std::endl;
 	}
 }

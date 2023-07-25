@@ -7,7 +7,9 @@
 
 class Contact {
 	public:
-		void	set_info(int id, std::string info);
+		void		set_info(int id, std::string info);
+		void		display_info();
+		std::string	trunc(std::string str, int len, char repl);
 	private:
 		std::string	firstname;
 		std::string	lastname;
@@ -23,7 +25,9 @@ class PhoneBook {
 		void	searchcontact();
 	private:
 		Contact	cntc[8];
-		int		last;
+		unsigned int	last;
+		unsigned int	current;
+		int				exist;
 
 };
 
