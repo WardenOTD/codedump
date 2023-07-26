@@ -16,11 +16,6 @@ void	Harl::complain(std::string level)
 Harl::Harl()
 {
 	std::cout << "Harl" << std::endl;
-	// void	(Harl::*functptr[])() = { &Harl::debug, &Harl::info, &Harl::warning, &Harl::error };
-	// (*functptr)[0] = &Harl::debug;
-	// (*functptr)[1] = &Harl::info;
-	// (*functptr)[2] = &Harl::warning;
-	// (*functptr)[3] = &Harl::error;
 }
 
 Harl::~Harl()

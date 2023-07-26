@@ -10,7 +10,6 @@ class Harl{
 		Harl();
 		~Harl();
 	private:
-		// void	(*functptr[4])();
 		void	debug(void);
 		void	info(void);
 		void	warning(void);
