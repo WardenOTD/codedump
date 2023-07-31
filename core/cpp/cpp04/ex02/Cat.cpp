@@ -8,6 +8,7 @@ Cat::Cat(){
 
 Cat::Cat(const Cat &c){
 	cout << "Copycat" << endl;
+	brain = new Brain();
 	*this = c;
 }
 
@@ -15,6 +16,8 @@ Cat &Cat::operator= (const Cat &c){
 	cout << "Cat cloning" << endl;
 	if (this != &c){
 		type = c.type;
+		for (int i = 0; i < 100; i++)
+			this->brain[i] = c.brain[i];
 	}
 	return (*this);
 }
