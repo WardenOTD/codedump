@@ -33,9 +33,9 @@ void	Animal::setType(string set){
 	type = set;
 }
 
-void	Animal::makeSound() const{
-	cout << "Conglomerate of random animal noises" << endl;
-}
+// void	Animal::makeSound() const{
+// 	cout << "Conglomerate of random animal noises" << endl;
+// }
 
 
 

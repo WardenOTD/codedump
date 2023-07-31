@@ -20,7 +20,7 @@ class Animal {
 		// Others
 		string	getType() const;
 		void	setType(string set);
-		virtual void	makeSound() const;
+		virtual void	makeSound() const = 0;
 	protected:
 		string	type;
 };

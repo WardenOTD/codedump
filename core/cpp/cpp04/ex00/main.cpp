@@ -2,7 +2,7 @@
 
 int main()
 {
-	const Animal* meta = new Animal();
+	// const Animal* meta = new Animal();
 	const Animal* j = new Dog();
 	const Animal* i = new Cat();
 	const WrongAnimal* h = new WrongCat();
@@ -14,9 +14,9 @@ int main()
 	i->makeSound();
 	j->makeSound();
 	h->makeSound();
-	meta->makeSound();
+	// meta->makeSound();
 
-	delete meta;
+	// delete meta;
 	delete j;
 	delete i;
 	delete h;
