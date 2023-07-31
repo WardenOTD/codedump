@@ -46,8 +46,20 @@ int main()
 // ex01 tests-2;
 	Dog dog;
 	Cat cat;
-	cout << dog.getIdeas(10);
-	cout << cat.getIdeas(10);
+	cout << dog.getIdeas(0);
+	cout << cat.getIdeas(0);
+
+	cat.setIdeas("cr", 0);
+	Cat cat2(cat);
+	cout << endl << "cat: " << cat.getIdeas(0);
+	cout << endl << "cat2: " << cat2.getIdeas(0);
+	cat2.setIdeas("cc", 0);
+	cout << endl << "cat: " << cat.getIdeas(0);
+	cout << endl << "cat2: " << cat2.getIdeas(0);
+	cout << endl << "cat: " << &cat << endl << "cat2: " << &cat2 << endl;
+	system("leaks animal");
+	exit(0);
+
 
 	for (int p = 0; p < 100; p++)
 	{
