@@ -3,14 +3,17 @@
 
 # include <iostream>
 # include <string>
-# include "Form.hpp"
+# include "AForm.hpp"
+# include "PresidentialPardonForm.hpp"
+# include "RobotomyRequestForm.hpp"
+# include "ShrubberyCreationForm.hpp"
 
 using std::string;
 using std::cout;
 using std::endl;
 
 class Bureaucrat;
-class Form;
+class AForm;
 
 class GradeTooHigh : public std::exception {
 	public:
@@ -39,7 +42,7 @@ class Bureaucrat {
 		int		getgrade() const;
 		void	increment();
 		void	decrement();
-		void	signForm(const Bureaucrat &be, Form &fo);
+		void	signForm(const Bureaucrat &be, AForm &fo);
 	private:
 		string	name;
 		int		grade;

@@ -11,9 +11,9 @@ Form::Form(){
 Form::Form(string name, int gradeSig, int gradeReq) : name(name) {
 	cout << "Form with params constructed" << endl;
 	if (gradeSig < 1 || gradeReq < 1)
-		throw (Form::GradeTooHighException);
+		throw (Form::FormGradeTooHighException);
 	if (gradeSig > 150 || gradeReq > 150)
-		throw (Form::GradeTooLowException);
+		throw (Form::FormGradeTooLowException);
 	this->gradeSig = gradeSig;
 	this->gradeReq = gradeReq;
 	this->sign = false;
@@ -62,14 +62,15 @@ std::ostream & operator<< (std::ostream &out, const Form &obj){
 	else
 		out << " Unsigned." << endl;
 	out << "Grade to sign: " << obj.getgradeSig() << endl;
-	out << "Grade to execute: " << obj.getgradeReq();
-	return ;
+	return (out << "Grade to execute: " << obj.getgradeReq());
 }
 
-void Form::beSigned(){
-
-}
-
-void Form::signForm(){
-	
+void Form::beSigned(const Bureaucrat &be){
+	if (be.getgrade() > this->getgradeSig())
+		throw (Form::FormGradeTooLowException);
+	else{
+		if (this->getSign())
+			throw (Form::FormIsSigned);
+		this->sign = true;
+	}
 }
