@@ -1,6 +1,6 @@
 #include "AForm.hpp"
 
-AForm::AForm() : gradeSig(1), gradeReq(1), sign(false), name("Bureau"){
+AForm::AForm() : name("Bureau"), gradeSig(1), gradeReq(1), sign(false){
 	cout << "AForm consructed" << endl;
 }
 
@@ -47,6 +47,18 @@ bool AForm::getSign() const{
 	return (this->sign);
 }
 
+void	AForm::setgradeSig(int sig){
+	this->gradeSig = sig;
+}
+
+void	AForm::setgradeReq(int req){
+	this->gradeReq = req;
+}
+
+void AForm::setSign(bool sig){
+	this->sign = sig;
+}
+
 std::ostream & operator<< (std::ostream &out, const AForm &obj){
 	out << "Form " << obj.getname() << ".";
 	if (obj.getSign() == true)
@@ -67,7 +79,7 @@ void AForm::beSigned(const Bureaucrat &be){
 	}
 }
 
-void	AForm::execute(Bureaucrat const &executor){
+void	AForm::execute(Bureaucrat const &executor) const{
 	if (!this->sign)
 		throw (AForm::FormIsNotSigned);
 	if (executor.getgrade() > this->getgradeReq())

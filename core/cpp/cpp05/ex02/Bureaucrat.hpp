@@ -43,6 +43,7 @@ class Bureaucrat {
 		void	increment();
 		void	decrement();
 		void	signForm(const Bureaucrat &be, AForm &fo);
+		void	executeForm(AForm const & form);
 	private:
 		string	name;
 		int		grade;

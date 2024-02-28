@@ -1,4 +1,4 @@
-#ifndef FORM_HPP
+	#ifndef FORM_HPP
 # define FORM_HPP
 
 # include <iostream>
@@ -53,9 +53,12 @@ class AForm {
 		int		getgradeSig() const;
 		int		getgradeReq() const;
 		bool	getSign() const;
+		void	setgradeSig(int sig);
+		void	setgradeReq(int req);
+		void	setSign(bool sig);
 		void	beSigned(const Bureaucrat &be);
-		void	execute(Bureaucrat const &executor);
-		virtual void	smtg() = 0;
+		void	execute(Bureaucrat const &executor) const;
+		virtual void	smtg() const = 0;
 	private:
 		string	name;
 		int		gradeSig;
