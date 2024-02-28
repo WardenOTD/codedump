@@ -2,6 +2,7 @@
 
 RobotomyRequestForm::RobotomyRequestForm() : target("Robotomy"){
 	cout << "Robotomy" << endl;
+	this->setname(target);
 	this->setgradeSig(72);
 	this->setgradeReq(45);
 	this->setSign(false);
@@ -9,6 +10,7 @@ RobotomyRequestForm::RobotomyRequestForm() : target("Robotomy"){
 
 RobotomyRequestForm::RobotomyRequestForm(string target) : target(target){
 	cout << "Robotomy form" << endl;
+	this->setname(target);
 	this->setgradeSig(72);
 	this->setgradeReq(45);
 	this->setSign(false);
@@ -17,6 +19,7 @@ RobotomyRequestForm::RobotomyRequestForm(string target) : target(target){
 RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &a){
 	cout << "Robotomy clone" << endl;
 	this->target = a.target;
+	this->setname(target);
 	this->setgradeSig(72);
 	this->setgradeReq(45);
 	this->setSign(false);
@@ -26,6 +29,7 @@ RobotomyRequestForm &RobotomyRequestForm::operator= (const RobotomyRequestForm &
 	cout << "Robotomy copy" << endl;
 	if (this != &a)
 		this->target = a.getTarget();
+	this->setname(target);
 	this->setgradeSig(72);
 	this->setgradeReq(45);
 	this->setSign(false);

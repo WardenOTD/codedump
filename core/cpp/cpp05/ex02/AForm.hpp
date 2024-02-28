@@ -53,6 +53,7 @@ class AForm {
 		int		getgradeSig() const;
 		int		getgradeReq() const;
 		bool	getSign() const;
+		void	setname(string nam);
 		void	setgradeSig(int sig);
 		void	setgradeReq(int req);
 		void	setSign(bool sig);

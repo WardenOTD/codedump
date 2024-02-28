@@ -2,6 +2,7 @@
 
 PresidentialPardonForm::PresidentialPardonForm() : target("me"){
 	cout << "President elected" << endl;
+	this->setname(target);
 	this->setgradeSig(25);
 	this->setgradeReq(5);
 	this->setSign(false);
@@ -9,6 +10,7 @@ PresidentialPardonForm::PresidentialPardonForm() : target("me"){
 
 PresidentialPardonForm::PresidentialPardonForm(string target) : target(target){
 	cout << "President that exists elected" << endl;
+	this->setname(target);
 	this->setgradeSig(25);
 	this->setgradeReq(5);
 	this->setSign(false);
@@ -17,6 +19,7 @@ PresidentialPardonForm::PresidentialPardonForm(string target) : target(target){
 PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm &a){
 	cout << "President stand in" << endl;
 	this->target = a.target;
+	this->setname(target);
 	this->setgradeSig(25);
 	this->setgradeReq(5);
 	this->setSign(false);
@@ -26,6 +29,7 @@ PresidentialPardonForm &PresidentialPardonForm::operator= (const PresidentialPar
 	cout << "president twin sibling" << endl;
 	if (this != &a)
 		this->target = a.getTarget();
+	this->setname(target);
 	this->setgradeSig(25);
 	this->setgradeReq(5);
 	this->setSign(false);

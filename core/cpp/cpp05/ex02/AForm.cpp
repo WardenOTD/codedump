@@ -47,6 +47,10 @@ bool AForm::getSign() const{
 	return (this->sign);
 }
 
+void AForm::setname(string nam){
+	this->name = nam;
+}
+
 void	AForm::setgradeSig(int sig){
 	this->gradeSig = sig;
 }
@@ -85,5 +89,5 @@ void	AForm::execute(Bureaucrat const &executor) const{
 	if (executor.getgrade() > this->getgradeReq())
 		throw (AForm::FormGradeTooLowException);
 	else
-		AForm::smtg();
+		this->smtg();
 }

@@ -2,6 +2,7 @@
 
 ShrubberyCreationForm::ShrubberyCreationForm() : target("Robotomy"){
 	cout << "Home owners association" << endl;
+	this->setname(target);
 	this->setgradeSig(145);
 	this->setgradeReq(137);
 	this->setSign(false);
@@ -9,6 +10,7 @@ ShrubberyCreationForm::ShrubberyCreationForm() : target("Robotomy"){
 
 ShrubberyCreationForm::ShrubberyCreationForm(string target) : target(target){
 	cout << "Home owners association at your house" << endl;
+	this->setname(target);
 	this->setgradeSig(145);
 	this->setgradeReq(137);
 	this->setSign(false);
@@ -17,6 +19,7 @@ ShrubberyCreationForm::ShrubberyCreationForm(string target) : target(target){
 ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &a){
 	cout << "Association rebranding" << endl;
 	this->target = a.target;
+	this->setname(target);
 	this->setgradeSig(145);
 	this->setgradeReq(137);
 	this->setSign(false);
@@ -26,6 +29,7 @@ ShrubberyCreationForm &ShrubberyCreationForm::operator= (const ShrubberyCreation
 	cout << "Same association, different name" << endl;
 	if (this != &a)
 		this->target = a.getTarget();
+	this->setname(target);
 	this->setgradeSig(145);
 	this->setgradeReq(137);
 	this->setSign(false);
