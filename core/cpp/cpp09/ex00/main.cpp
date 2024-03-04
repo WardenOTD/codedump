@@ -5,7 +5,6 @@ int	main(int argc, char **argv){
 		cout << "please provide input.txt" << endl;
 		exit (1);
 	}
-	(void) argv;
 	BitcoinExchange	btc;
 	btc.grabCsv();
 	cout << btc << endl;

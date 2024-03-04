@@ -105,7 +105,7 @@ void	BitcoinExchange::checkDate(){
 		string	year = inYear.substr(0, 4);
 		string	month = inYear.substr(5, 2);
 		string day = inYear.substr(8, 2);
-		int yea = std:: stoi(year);
+		int yea = std::stoi(year);
 		int	mon = std::stoi(month);
 		int	da = std::stoi(day);
 		if (yea < 1)
