@@ -6,6 +6,10 @@ int	main(int argc, char **argv){
 		exit (1);
 	}
 	string inp(argv[1]);
+	if (inp.empty()){
+		cout << "Error: empty string" << endl;
+		exit (1);
+	}
 	RPN polish;
 	polish.runRPN(inp);
 }
