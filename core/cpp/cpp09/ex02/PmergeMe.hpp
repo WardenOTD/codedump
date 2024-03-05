@@ -60,6 +60,7 @@ class	PMM{
 				void		createPairs();
 				void		recurSortPair();
 				bool		checkPairSort();
+				bool		checkSeen(vector<int> small);
 				void		runVec();
 
 			private:
@@ -69,6 +70,7 @@ class	PMM{
 				vector<int>::iterator itr;
 				bool	oddeven;
 				int		straggler;
+				string	seen = "0";
 				
 		}	pmmVector;
 

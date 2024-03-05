@@ -47,12 +47,12 @@ void	PMM::setTimeLst(double time){
 
 void	PMM::runPMM(){
 	gettimeofday(&start, NULL);
-	//run vec
+	pmmVector.runVec();
 	gettimeofday(&end, NULL);
 	setTimeVec((end.tv_sec - start.tv_sec) * 1000000.0 + (end.tv_usec - start.tv_usec));
 
 	gettimeofday(&start, NULL);
-	//run lst
+	//pmmList.runLst();
 	gettimeofday(&end, NULL);
 	setTimeLst((end.tv_sec - start.tv_sec) * 1000000.0 + (end.tv_usec - start.tv_usec));
 }
@@ -118,6 +118,7 @@ PMM::PmergeVector::PmergeVector(const PmergeVector &a){
 	this->pitr = a.pitr;
 	this->oddeven = a.oddeven;
 	this->straggler = a.straggler;
+	this->seen = a.seen;
 }
 
 PMM::PmergeVector &PMM::PmergeVector::operator=(const PmergeVector &a){
@@ -128,6 +129,7 @@ PMM::PmergeVector &PMM::PmergeVector::operator=(const PmergeVector &a){
 	this->pitr = a.pitr;
 	this->oddeven = a.oddeven;
 	this->straggler = a.straggler;
+	this->seen = a.seen;
 	return (*this);
 }
 
@@ -199,6 +201,16 @@ bool		PMM::PmergeVector::checkPairSort(){
 	return (true);
 }
 
+bool		PMM::PmergeVector::checkSeen(vector<int> small){
+	for (int size = (small.size() - 1); size >= 0; size--){
+		std::stringstream sstr;
+		sstr << size;
+		if (sstr.str().find_first_not_of(seen))
+			return (false);
+	}
+	return (true);
+}
+
 void		PMM::PmergeVector::runVec(){
 	//split vector into pairs
 	createPairs();
@@ -220,13 +232,57 @@ void		PMM::PmergeVector::runVec(){
 	//first containing all smaller numbers (  itr->first  )
 	//second containing all larger numbers (  itr->second  )
 	//larger vector is also the "return value" meaning work will be done on it
-	vector<int>big, small;
+	vector<int> big, small;
+
 	for (pitr = pairJohnson.begin(); pitr != pairJohnson.end(); pitr++){
 		big.push_back(pitr->second);
 		small.push_back(pitr->first);
 	}
 
+	//push small[0] to big[0] because it will always be smaller than the smallest large number
+	big.insert(big.begin(), big.front());
+
+	//using jacobsthal numbers to determine which index to access
+	//after operation, decrement by 1 and repeat
+	//until reaching the previous jacobsthal number
+	//go to the next jacobsthal number and repeat this process
+	int	n = 1, jacob = Jacobsthal(n);
+	vector<int> tmp;
+	vector<int>::iterator sitr = small.begin();
+	std::stringstream sstr;
+
+	//created a new vector to hold the sorted small vector
+	while (true){
+		if (jacob == Jacobsthal(n - 1)){
+			n++;
+			jacob = Jacobsthal(n);
+			continue ;
+		}
+		if (jacob >= (int)small.size()){
+			jacob--;
+			continue ;
+		}
+		if (checkSeen(small))
+			break ;
+		std::advance(sitr, jacob - 1);
+		tmp.push_back(*sitr);
+		sstr << jacob;
+		seen + sstr.str();
+		jacob--;
+	}
+
+	//binary search to find where to insert sorted smaller numbers
+	for (sitr = tmp.begin(); sitr < tmp.end(); ++sitr)
+		big.insert(std::lower_bound(big.begin(), big.end(), *sitr), *sitr);
+
+	//binary search to insert straggler if there is any
+	if (oddeven == true)
+		big.insert(std::lower_bound(big.begin(), big.end(), straggler), straggler);
 	
+	//clear and set Johnson ( my main vector ) with big, which has the sorted vector
+	Johnson.clear();
+	Johnson = big;
+	return ;
 }
 
 //PmergeList class;;
