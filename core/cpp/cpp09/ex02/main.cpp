@@ -28,5 +28,9 @@ int	main(int argc, char **argv){
 
 	PMM	pmm;
 	pmm.insertNum(ori);
-
+	pmm.runPMM();
+	cout << "before :\t " << ori << endl;
+	cout << "after  :\t " << pmm.pmmVector.getJohnson() << endl;
+	cout << "Time to process a range of " << ori.size() << " using std::vector : "
+		<< std::setprecision(5) << pmm.getTimeVec() << " µs" << endl;
 }

@@ -8,12 +8,22 @@ PMM::PMM(){
 
 PMM::PMM(const PMM &a){
 	cout << "PMM class copy constructor" << endl;
-	*this = a;
+	this->pmmList = a.pmmList;
+	this->pmmVector = a.pmmVector;
+	this->start = a.start;
+	this->end = a.end;
+	this->timeTaken_vec = a.timeTaken_vec;
+	this->timeTaken_lst = a.timeTaken_lst;
 }
 
 PMM &PMM::operator=(const PMM &a){
 	cout << "PMM class equal operator overload" << endl;
-	*this = a;
+	this->pmmList = a.pmmList;
+	this->pmmVector = a.pmmVector;
+	this->start = a.start;
+	this->end = a.end;
+	this->timeTaken_vec = a.timeTaken_vec;
+	this->timeTaken_lst = a.timeTaken_lst;
 	return (*this);
 }
 
@@ -49,21 +59,21 @@ void	PMM::runPMM(){
 	gettimeofday(&start, NULL);
 	pmmVector.runVec();
 	gettimeofday(&end, NULL);
-	setTimeVec((end.tv_sec - start.tv_sec) * 1000000.0 + (end.tv_usec - start.tv_usec));
+	setTimeVec((end.tv_sec - start.tv_sec) + ((end.tv_usec - start.tv_usec) % 1000000));
 
-	gettimeofday(&start, NULL);
-	//pmmList.runLst();
-	gettimeofday(&end, NULL);
-	setTimeLst((end.tv_sec - start.tv_sec) * 1000000.0 + (end.tv_usec - start.tv_usec));
+	// gettimeofday(&start, NULL);
+	// //pmmList.runLst();
+	// gettimeofday(&end, NULL);
+	// setTimeLst((end.tv_sec - start.tv_sec) * 1000000.0 + (end.tv_usec - start.tv_usec));
 }
 
 //operator<< overloads
 //
 std::ostream &operator<<(std::ostream &out, const PMM::PmergeVector &vect){
-	vector<pair<int, int>> ptmp = vect.getPairJohnson();
+	vector<pair<int, int> > ptmp = vect.getPairJohnson();
 	vector<int> tmp = vect.getJohnson();
 
-	vector<pair<int, int>>::iterator pitr = ptmp.begin();
+	vector<pair<int, int> >::iterator pitr = ptmp.begin();
 	vector<int>::iterator itr = tmp.begin();
 
 	for (; pitr < ptmp.end(); pitr++){
@@ -76,10 +86,10 @@ std::ostream &operator<<(std::ostream &out, const PMM::PmergeVector &vect){
 }
 
 std::ostream &operator<<(std::ostream &out, const PMM::PmergeList &lis){
-	list<pair<int, int>> ptmp = lis.getPairJohnson();
+	list<pair<int, int> > ptmp = lis.getPairJohnson();
 	list<int> tmp = lis.getJohnson();
 
-	list<pair<int, int>>::iterator pitr = ptmp.begin();
+	list<pair<int, int> >::iterator pitr = ptmp.begin();
 	list<int>::iterator itr = tmp.begin();
 
 	for (; pitr != ptmp.end(); pitr++){
@@ -91,9 +101,23 @@ std::ostream &operator<<(std::ostream &out, const PMM::PmergeList &lis){
 	return (out);
 }
 
+std::ostream &operator<<(std::ostream &out, vector<int> vect){
+	vector<int>::iterator itr;
+	for (itr = vect.begin(); itr != vect.end(); ++itr)
+		out << *itr << " ";
+	return (out);
+}
+
+std::ostream &operator<<(std::ostream &out, list<int> lis){
+	list<int>::iterator itr;
+	for (itr = lis.begin(); itr != lis.end(); ++itr)
+		out << *itr << " ";
+	return (out);
+}
+
 // n'th Jacobsthal number finder...
 // 0, 1, 1, 3, 5, 11, 21, 43, ...
-// 0 = 0, 1 = 1, 2 = 1, 3 = 3, 4 = 5, ...
+// 0 = 0, 1 = 1, 2 = 1, 4 = 3, 5 = 5, ...
 int Jacobsthal(int n)
 {
 	if (n == 0)
@@ -138,12 +162,12 @@ PMM::PmergeVector::~PmergeVector(){
 }
 
 //others
-vector<pair<int, int>>	PMM::PmergeVector::getPairJohnson() const{
+vector<pair<int, int> >	PMM::PmergeVector::getPairJohnson() const{
 	return (pairJohnson);
 }
 
 void		PMM::PmergeVector::setPairJohnson(int num1, int num2){
-	pairJohnson.push_back(pair<int, int> {num1, num2});
+	pairJohnson.push_back(pair<int, int> (num1, num2));
 }
 
 vector<int>	PMM::PmergeVector::getJohnson() const{
@@ -171,18 +195,22 @@ void		PMM::PmergeVector::createPairs(){
 }
 
 void		PMM::PmergeVector::recurSortPair(){
-	vector<pair<int, int>>::iterator tmp = pitr;
+	// vector<pair<int, int> >::iterator tmp = pitr;
+	if (checkPairSort() == true)
+		return ;
 	int	num1 = pitr->first;
 	int num2 = pitr->second;
 	pitr++;
-	if (num2 > pitr->second){
-		tmp->first = pitr->first;
-		tmp->second = pitr->second;
+	int num3 = pitr->first;
+	int num4 = pitr->second;
+	if (num2 > num4){
 		pitr->first = num1;
 		pitr->second = num2;
+		(pitr - 1)->first = num3;
+		(pitr - 1)->second = num4;
 	}
-	if (pitr == pairJohnson.end()){
-		if (checkPairSort())
+	if (pitr == pairJohnson.end() - 1){
+		if (checkPairSort() == true)
 			return ;
 		else
 			pitr = pairJohnson.begin();
@@ -191,23 +219,33 @@ void		PMM::PmergeVector::recurSortPair(){
 }
 
 bool		PMM::PmergeVector::checkPairSort(){
-	vector<pair<int, int>>::iterator tmp = pairJohnson.begin();
-	while (tmp < pairJohnson.end()){
+	vector<pair<int, int> >::iterator tmp = pairJohnson.begin();
+	while (tmp < pairJohnson.end() - 1){
 		int	num = tmp->second;
 		tmp++;
-		if (num > tmp->second)
+		if (num > tmp->second){
 			return (false);
+		}
 	}
 	return (true);
 }
 
 bool		PMM::PmergeVector::checkSeen(vector<int> small){
+	if (seen.empty())
+		return (false);
+	vector<int> str;
+	int	flag = 0;
 	for (int size = (small.size() - 1); size >= 0; size--){
-		std::stringstream sstr;
-		sstr << size;
-		if (sstr.str().find_first_not_of(seen))
-			return (false);
+		str.push_back(size);
 	}
+	reverse(str.begin(), str.end());
+	for (string::iterator i = seen.begin(); i < seen.end(); i++){
+		if (std::binary_search(str.begin(), str.end(), (*i - '0')) == false)
+			return (false);
+		flag++;
+	}
+	if (flag != (int)str.size())
+		return (false);
 	return (true);
 }
 
@@ -240,7 +278,8 @@ void		PMM::PmergeVector::runVec(){
 	}
 
 	//push small[0] to big[0] because it will always be smaller than the smallest large number
-	big.insert(big.begin(), big.front());
+	big.insert(big.begin(), small.front());
+	small.erase(small.begin());
 
 	//using jacobsthal numbers to determine which index to access
 	//after operation, decrement by 1 and repeat
@@ -248,26 +287,27 @@ void		PMM::PmergeVector::runVec(){
 	//go to the next jacobsthal number and repeat this process
 	int	n = 1, jacob = Jacobsthal(n);
 	vector<int> tmp;
-	vector<int>::iterator sitr = small.begin();
-	std::stringstream sstr;
+	vector<int>::iterator sitr;
+	seen = "";
 
 	//created a new vector to hold the sorted small vector
 	while (true){
+		std::stringstream sstr;
+		sitr = small.begin();
+		if (checkSeen(small))
+			break ;
 		if (jacob == Jacobsthal(n - 1)){
-			n++;
-			jacob = Jacobsthal(n);
+			jacob = Jacobsthal(++n);
 			continue ;
 		}
-		if (jacob >= (int)small.size()){
+		if (jacob > (int)small.size()){
 			jacob--;
 			continue ;
 		}
-		if (checkSeen(small))
-			break ;
 		std::advance(sitr, jacob - 1);
 		tmp.push_back(*sitr);
-		sstr << jacob;
-		seen + sstr.str();
+		sstr << (jacob - 1);
+		seen.append(sstr.str());
 		jacob--;
 	}
 
@@ -317,12 +357,12 @@ PMM::PmergeList::~PmergeList(){
 }
 
 //others
-list<pair<int, int>>	PMM::PmergeList::getPairJohnson() const{
+list<pair<int, int> >	PMM::PmergeList::getPairJohnson() const{
 	return (pairJohnson);
 }
 
 void		PMM::PmergeList::setPairJohnson(int num1, int num2){
-	pairJohnson.push_back(pair<int, int> {num1, num2});
+	pairJohnson.push_back(pair<int, int> (num1, num2));
 }
 
 list<int>	PMM::PmergeList::getJohnson() const{

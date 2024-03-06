@@ -53,7 +53,7 @@ class	PMM{
 				~PmergeVector();
 
 				//others
-				vector<pair<int, int>>	getPairJohnson() const;
+				vector<pair<int, int> >	getPairJohnson() const;
 				void		setPairJohnson(int num1, int num2);
 				vector<int>	getJohnson() const;
 				void		setJohnson(int num);
@@ -64,13 +64,13 @@ class	PMM{
 				void		runVec();
 
 			private:
-				vector<pair<int, int>> pairJohnson;
-				vector<pair<int, int>>::iterator pitr;
+				vector<pair<int, int> > pairJohnson;
+				vector<pair<int, int> >::iterator pitr;
 				vector<int> Johnson;
 				vector<int>::iterator itr;
 				bool	oddeven;
 				int		straggler;
-				string	seen = "0";
+				string	seen;
 				
 		}	pmmVector;
 
@@ -83,13 +83,13 @@ class	PMM{
 				~PmergeList();
 
 				//others
-				list<pair<int, int>>	getPairJohnson() const;
+				list<pair<int, int> >	getPairJohnson() const;
 				void		setPairJohnson(int num1, int num2);
 				list<int>	getJohnson() const;
 				void		setJohnson(int num);
 			private:
-				list<pair<int, int>> pairJohnson;
-				list<pair<int, int>>::iterator pitr;
+				list<pair<int, int> > pairJohnson;
+				list<pair<int, int> >::iterator pitr;
 				list<int> Johnson;
 				list<int>::iterator itr;
 				bool	oddeven;
@@ -100,5 +100,7 @@ class	PMM{
 int	Jacobsthal(int n);
 std::ostream &operator<<(std::ostream &out, const PMM::PmergeVector &vect);
 std::ostream &operator<<(std::ostream &out, const PMM::PmergeList &lis);
+std::ostream &operator<<(std::ostream &out, vector<int> vect);
+std::ostream &operator<<(std::ostream &out, list<int> lis);
 
 #endif
