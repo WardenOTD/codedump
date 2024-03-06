@@ -7,7 +7,6 @@
 # include <list>
 # include <vector>
 # include <utility>
-# include <sstream>
 # include <sys/time.h>
 # include <algorithm>
 # include <iomanip>
@@ -60,7 +59,7 @@ class	PMM{
 				void		createPairs();
 				void		recurSortPair();
 				bool		checkPairSort();
-				bool		checkSeen(vector<int> small);
+				// bool		checkSeen(vector<int> small);
 				void		runVec();
 
 			private:
@@ -70,7 +69,7 @@ class	PMM{
 				vector<int>::iterator itr;
 				bool	oddeven;
 				int		straggler;
-				string	seen;
+				// vector<int>	seen;
 				
 		}	pmmVector;
 
@@ -87,6 +86,10 @@ class	PMM{
 				void		setPairJohnson(int num1, int num2);
 				list<int>	getJohnson() const;
 				void		setJohnson(int num);
+				void		createPairs();
+				void		recurSortPair();
+				bool		checkPairSort();
+				void		runLst();
 			private:
 				list<pair<int, int> > pairJohnson;
 				list<pair<int, int> >::iterator pitr;

@@ -12,6 +12,10 @@ int	main(int argc, char **argv){
 		cout << "Error: provide list of numbers as seperate arguements" << endl;
 		exit (1);
 	}
+	if (argc == 2){
+		cout << "Error: only 1 number" << endl;
+		exit (1);
+	}
 
 	string	arv;
 	vector<int>	ori;	//original order of numbers passed into the program;;
@@ -29,8 +33,17 @@ int	main(int argc, char **argv){
 	PMM	pmm;
 	pmm.insertNum(ori);
 	pmm.runPMM();
+	cout << endl;
 	cout << "before :\t " << ori << endl;
 	cout << "after  :\t " << pmm.pmmVector.getJohnson() << endl;
 	cout << "Time to process a range of " << ori.size() << " using std::vector : "
 		<< std::setprecision(5) << pmm.getTimeVec() << " µs" << endl;
+	
+	cout << endl << endl;
+
+	cout << "before :\t " << ori << endl;
+	cout << "after  :\t " << pmm.pmmList.getJohnson() << endl;
+	cout << "Time to process a range of " << ori.size() << " using std::list : "
+		<< std::setprecision(5) << pmm.getTimeLst() << " µs" << endl;
+	cout << endl;
 }
