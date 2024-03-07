@@ -228,7 +228,7 @@ void		PMM::PmergeVector::recurSortPair(){
 
 bool		PMM::PmergeVector::checkPairSort(){
 	vector<pair<int, int> >::iterator tmp = pairJohnson.begin();
-	while (tmp != pairJohnson.end()){
+	while (tmp < pairJohnson.end()){
 		int	num = tmp->second;
 		tmp++;
 		if (tmp == pairJohnson.end())
