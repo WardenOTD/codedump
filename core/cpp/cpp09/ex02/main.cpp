@@ -37,13 +37,13 @@ int	main(int argc, char **argv){
 	cout << "before :\t " << ori << endl;
 	cout << "after  :\t " << pmm.pmmVector.getJohnson() << endl;
 	cout << "Time to process a range of " << ori.size() << " using std::vector : "
-		<< std::setprecision(5) << pmm.getTimeVec() << " µs" << endl;
+		<< std::fixed << pmm.getTimeVec() << " µs" << endl;
 	
 	cout << endl << endl;
 
 	cout << "before :\t " << ori << endl;
 	cout << "after  :\t " << pmm.pmmList.getJohnson() << endl;
 	cout << "Time to process a range of " << ori.size() << " using std::list : "
-		<< std::setprecision(5) << pmm.getTimeLst() << " µs" << endl;
+		<< std::fixed << pmm.getTimeLst() << " µs" << endl;
 	cout << endl;
 }

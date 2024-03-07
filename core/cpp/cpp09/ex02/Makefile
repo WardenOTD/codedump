@@ -3,7 +3,7 @@ SRC = main.cpp PmergeMe.cpp\
 NAME = PmergeMe
 
 ${NAME}: ${SRC}
-	g++ -Wall -Wextra -Werror -std=c++98 ${SRC} -o ${NAME}
+	g++ -Wall -Wextra -Werror -std=c++98 -fsanitize=address -g3 ${SRC} -o ${NAME} && rm -rf *.dSYM
 
 all: ${NAME}
 

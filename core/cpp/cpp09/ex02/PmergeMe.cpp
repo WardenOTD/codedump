@@ -59,12 +59,12 @@ void	PMM::runPMM(){
 	gettimeofday(&start, NULL);
 	pmmVector.runVec();
 	gettimeofday(&end, NULL);
-	setTimeVec(((end.tv_sec - start.tv_sec) * 1000) + ((end.tv_usec - start.tv_usec)));
+	setTimeVec(((end.tv_sec - start.tv_sec) * 1000) + ((end.tv_usec - start.tv_usec) % 1000));
 
 	gettimeofday(&start, NULL);
 	pmmList.runLst();
 	gettimeofday(&end, NULL);
-	setTimeLst(((end.tv_sec - start.tv_sec) * 1000) + ((end.tv_usec - start.tv_usec)));
+	setTimeLst(((end.tv_sec - start.tv_sec) * 1000) + ((end.tv_usec - start.tv_usec) % 1000));
 }
 
 //operator<< overloads
@@ -123,6 +123,8 @@ int Jacobsthal(int n)
 	int dp[n + 1];
 
 	dp[0] = 0;
+	if (n == 0)
+		return dp[n];
 	dp[1] = 1;
 
 	for (int i = 2; i <= n; i++)
@@ -203,9 +205,11 @@ void		PMM::PmergeVector::recurSortPair(){
 		return ;
 	int	num1 = pitr->first;
 	int num2 = pitr->second;
+	// cout << "pitr->second     : " << pitr->second << endl;
 	pitr++;
 	int num3 = pitr->first;
 	int num4 = pitr->second;
+	// cout << "pitr->second + 1 : " << pitr->second << endl;
 	if (num2 > num4){
 		pitr->first = num1;
 		pitr->second = num2;
@@ -218,14 +222,17 @@ void		PMM::PmergeVector::recurSortPair(){
 		else
 			pitr = pairJohnson.begin();
 	}
+	// cout << *this << endl;
 	recurSortPair();
 }
 
 bool		PMM::PmergeVector::checkPairSort(){
 	vector<pair<int, int> >::iterator tmp = pairJohnson.begin();
-	while (tmp < pairJohnson.end() - 1){
+	while (tmp != pairJohnson.end()){
 		int	num = tmp->second;
 		tmp++;
+		if (tmp == pairJohnson.end())
+			break ;
 		if (num > tmp->second){
 			return (false);
 		}
@@ -418,26 +425,26 @@ void		PMM::PmergeList::recurSortPair(){
 		pitr->first = num3;
 		pitr->second = num4;
 	}
-	++pitr; ++pitr;
+	++pitr;
 	if (pitr == pairJohnson.end()){
 		if (checkPairSort() == true)
 			return ;
-		else
+		else{
 			pitr = pairJohnson.begin();
+		}
 	}
-	--pitr;
+	else
+		--pitr;
 	recurSortPair();
 }
 
 bool		PMM::PmergeList::checkPairSort(){
 	list<pair<int, int> >::iterator tmp = pairJohnson.begin();
 	while (tmp != pairJohnson.end()){
-		if (++tmp == pairJohnson.end())
-			break ;
-		else
-			--tmp;
 		int	num = tmp->second;
 		tmp++;
+		if (tmp == pairJohnson.end())
+			break ;
 		if (num > tmp->second){
 			return (false);
 		}
