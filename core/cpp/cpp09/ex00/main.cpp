@@ -7,6 +7,6 @@ int	main(int argc, char **argv){
 	}
 	BitcoinExchange	btc;
 	btc.grabCsv();
-	cout << btc << endl;
+	// cout << btc << endl;
 	btc.readInput(argv[1]);
 }
