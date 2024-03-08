@@ -55,16 +55,44 @@ void	PMM::setTimeLst(double time){
 	timeTaken_lst = time;
 }
 
+void	PMM::checkSort(){
+	vector<int> vct = pmmVector.getJohnson();
+	list<int> lst = pmmList.getJohnson();
+
+	vector<int>::iterator vitr = vct.begin();
+	list<int>::iterator litr = lst.begin();
+	list<int>::iterator litr2;
+	list<int>::iterator limit = lst.end(); --limit;
+
+	while (vitr != vct.end() - 1){
+		if (*vitr > *(vitr + 1)){
+			cout << "Vector not sorted" << endl;
+			break ;
+		}
+		++vitr;
+	}
+	cout << "Vector sorted" << endl;
+	while (litr != limit){
+		litr2 = litr;
+		if (*litr2 > *litr){
+			cout << "List not sorted" << endl;
+			break ;
+		}
+		++litr;
+	}
+	cout << "List Sorted" << endl;
+}
+
 void	PMM::runPMM(){
 	gettimeofday(&start, NULL);
 	pmmVector.runVec();
 	gettimeofday(&end, NULL);
-	setTimeVec(((end.tv_sec - start.tv_sec) * 1000) + ((end.tv_usec - start.tv_usec) % 1000));
+	setTimeVec(((end.tv_sec - start.tv_sec) * 1000000) + (end.tv_usec - start.tv_usec));
 
 	gettimeofday(&start, NULL);
 	pmmList.runLst();
 	gettimeofday(&end, NULL);
-	setTimeLst(((end.tv_sec - start.tv_sec) * 1000) + ((end.tv_usec - start.tv_usec) % 1000));
+	setTimeLst(((end.tv_sec - start.tv_sec) * 1000000) + (end.tv_usec - start.tv_usec));
 }
 
 //operator<< overloads
@@ -199,46 +227,79 @@ void		PMM::PmergeVector::createPairs(){
 	}
 }
 
-void		PMM::PmergeVector::recurSortPair(){
-	// vector<pair<int, int> >::iterator tmp = pitr;
-	if (checkPairSort() == true)
-		return ;
-	int	num1 = pitr->first;
-	int num2 = pitr->second;
-	// cout << "pitr->second     : " << pitr->second << endl;
-	pitr++;
-	int num3 = pitr->first;
-	int num4 = pitr->second;
-	// cout << "pitr->second + 1 : " << pitr->second << endl;
-	if (num2 > num4){
-		pitr->first = num1;
-		pitr->second = num2;
-		(pitr - 1)->first = num3;
-		(pitr - 1)->second = num4;
-	}
-	if (pitr == pairJohnson.end() - 1){
-		if (checkPairSort() == true)
-			return ;
-		else
-			pitr = pairJohnson.begin();
-	}
-	// cout << *this << endl;
-	recurSortPair();
-}
+void		PMM::PmergeVector::mergePair(vector<pair<int, int> > &left,
+			vector<pair<int, int> > &right, vector<pair<int, int> > &vect){
 
-bool		PMM::PmergeVector::checkPairSort(){
-	vector<pair<int, int> >::iterator tmp = pairJohnson.begin();
-	while (tmp < pairJohnson.end()){
-		int	num = tmp->second;
-		tmp++;
-		if (tmp == pairJohnson.end())
-			break ;
-		if (num > tmp->second){
-			return (false);
+	vector<pair<int, int> >::iterator litr = left.begin();
+	vector<pair<int, int> >::iterator ritr = right.begin();
+
+	while (litr != left.end() && ritr != right.end()){
+		if (litr->second < ritr->second){
+			vect.push_back(*litr);
+			++litr;
+		}
+		else{
+			vect.push_back(*ritr);
+			++ritr;
 		}
 	}
-	return (true);
+	while (litr != left.end()){
+		vect.push_back(*litr);
+		++litr;
+	}
+	while (ritr != right.end()){
+		vect.push_back(*ritr);
+		++ritr;
+	}
 }
+
+void		PMM::PmergeVector::recurSortPair(vector<pair<int, int> > &vect){
+	if (vect.size() <= 1)
+		return ;
+
+	vector<pair<int, int> >::iterator mid = vect.begin();
+	std::advance(mid, (vect.size() / 2));
+
+	vector<pair<int, int> > left(vect.begin(), mid);
+	vector<pair<int, int> > right(mid, vect.end());
+
+	recurSortPair(left);
+	recurSortPair(right);
+
+	vect.clear();
+	mergePair(left, right, vect);
+}
+
+void		PMM::PmergeVector::recurSortPair(){
+	if (pairJohnson.size() <= 1)
+		return ;
+
+	vector<pair<int, int> >::iterator mid = pairJohnson.begin();
+	std::advance(mid, (pairJohnson.size() / 2));
+
+	vector<pair<int, int> > left(pairJohnson.begin(), mid);
+	vector<pair<int, int> > right(mid, pairJohnson.end());
+
+	recurSortPair(left);
+	recurSortPair(right);
+
+	pairJohnson.clear();
+	mergePair(left, right, pairJohnson);
+}
+
+// bool		PMM::PmergeVector::checkPairSort(){
+// 	vector<pair<int, int> >::iterator tmp = pairJohnson.begin();
+// 	while (tmp < pairJohnson.end()){
+// 		int	num = tmp->second;
+// 		tmp++;
+// 		if (tmp == pairJohnson.end())
+// 			break ;
+// 		if (num > tmp->second){
+// 			return (false);
+// 		}
+// 	}
+// 	return (true);
+// }
 
 //depreciated
 // bool		PMM::PmergeVector::checkSeen(vector<int> small){
@@ -284,7 +345,6 @@ void		PMM::PmergeVector::runVec(){
 	}
 
 	//recursive sorting of all the pairs by the larger number (  itr->second  )
-	pitr = pairJohnson.begin();
 	recurSortPair();
 
 	//splitting the pairs into 2 seperate vectors
@@ -410,47 +470,79 @@ void		PMM::PmergeList::createPairs(){
 	}
 }
 
-void		PMM::PmergeList::recurSortPair(){
-	if (checkPairSort() == true)
-		return ;
-	int	num1 = pitr->first;
-	int num2 = pitr->second;
-	pitr++;
-	int num3 = pitr->first;
-	int num4 = pitr->second;
-	if (num2 > num4){
-		pitr->first = num1;
-		pitr->second = num2;
-		--pitr;
-		pitr->first = num3;
-		pitr->second = num4;
-	}
-	++pitr;
-	if (pitr == pairJohnson.end()){
-		if (checkPairSort() == true)
-			return ;
+void		PMM::PmergeList::mergePair(list<pair<int, int> > &left,
+			list<pair<int, int> > &right, list<pair<int, int> > &lis){
+
+	list<pair<int, int> >::iterator litr = left.begin();
+	list<pair<int, int> >::iterator ritr = right.begin();
+
+	while (litr != left.end() && ritr != right.end()){
+		if (litr->second < ritr->second){
+			lis.push_back(*litr);
+			++litr;
+		}
 		else{
-			pitr = pairJohnson.begin();
+			lis.push_back(*ritr);
+			++ritr;
 		}
 	}
-	else
-		--pitr;
-	recurSortPair();
+	while (litr != left.end()){
+		lis.push_back(*litr);
+		++litr;
+	}
+	while (ritr != right.end()){
+		lis.push_back(*ritr);
+		++ritr;
+	}
 }
 
-bool		PMM::PmergeList::checkPairSort(){
-	list<pair<int, int> >::iterator tmp = pairJohnson.begin();
-	while (tmp != pairJohnson.end()){
-		int	num = tmp->second;
-		tmp++;
-		if (tmp == pairJohnson.end())
-			break ;
-		if (num > tmp->second){
-			return (false);
-		}
-	}
-	return (true);
+void		PMM::PmergeList::recurSortPair(list<pair<int, int> > &lis){
+	if (lis.size() <= 1)
+		return ;
+
+	list<pair<int, int> >::iterator mid = lis.begin();
+	std::advance(mid, (lis.size() / 2));
+
+	list<pair<int, int> > left(lis.begin(), mid);
+	list<pair<int, int> > right(mid, lis.end());
+
+	recurSortPair(left);
+	recurSortPair(right);
+
+	lis.clear();
+	mergePair(left, right, lis);
 }
+
+void		PMM::PmergeList::recurSortPair(){
+	if (pairJohnson.size() <= 1)
+		return ;
+
+	list<pair<int, int> >::iterator mid = pairJohnson.begin();
+	std::advance(mid, (pairJohnson.size() / 2));
+
+	list<pair<int, int> > left(pairJohnson.begin(), mid);
+	list<pair<int, int> > right(mid, pairJohnson.end());
+
+	recurSortPair(left);
+	recurSortPair(right);
+
+	pairJohnson.clear();
+	mergePair(left, right, pairJohnson);
+}
+
+// bool		PMM::PmergeList::checkPairSort(){
+// 	list<pair<int, int> >::iterator tmp = pairJohnson.begin();
+// 	while (tmp != pairJohnson.end()){
+// 		int	num = tmp->second;
+// 		tmp++;
+// 		if (tmp == pairJohnson.end())
+// 			break ;
+// 		if (num > tmp->second){
+// 			return (false);
+// 		}
+// 	}
+// 	return (true);
+// }
 
 void		PMM::PmergeList::runLst(){
 	if (Johnson.size() == 2){
@@ -477,7 +569,6 @@ void		PMM::PmergeList::runLst(){
 	}
 
 	//recursive sorting of all the pairs by the larger number (  itr->second  )
-	pitr = pairJohnson.begin();
 	recurSortPair();
 
 	//splitting the pairs into 2 seperate vectors

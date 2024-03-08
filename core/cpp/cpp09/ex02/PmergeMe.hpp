@@ -34,6 +34,8 @@ class	PMM{
 		void	setTimeVec(double time);
 		void	setTimeLst(double time);
 
+		void	checkSort();
+
 		void	runPMM();
 
 	private:
@@ -58,7 +60,10 @@ class	PMM{
 				void		setJohnson(int num);
 				void		createPairs();
 				void		recurSortPair();
-				bool		checkPairSort();
+				void		recurSortPair(vector<pair<int, int> > &vect);
+				void		mergePair(vector<pair<int, int> > &left,
+					vector<pair<int, int> > &right, vector<pair<int, int> > &vect);
+				// bool		checkPairSort();
 				// bool		checkSeen(vector<int> small);
 				void		runVec();
 
@@ -88,7 +93,10 @@ class	PMM{
 				void		setJohnson(int num);
 				void		createPairs();
 				void		recurSortPair();
-				bool		checkPairSort();
+				void		recurSortPair(list<pair<int, int> > &lis);
+				void		mergePair(list<pair<int, int> > &left,
+					list<pair<int, int> > &right, list<pair<int, int> > &lis);
+				// bool		checkPairSort();
 				void		runLst();
 			private:
 				list<pair<int, int> > pairJohnson;
