@@ -59,28 +59,14 @@ void	PMM::checkSort(){
 	vector<int> vct = pmmVector.getJohnson();
 	list<int> lst = pmmList.getJohnson();
 
-	vector<int>::iterator vitr = vct.begin();
-	list<int>::iterator litr = lst.begin();
-	list<int>::iterator litr2;
-	list<int>::iterator limit = lst.end(); --limit;
-
-	while (vitr != vct.end() - 1){
-		if (*vitr > *(vitr + 1)){
-			cout << "Vector not sorted" << endl;
-			break ;
-		}
-		++vitr;
-	}
-	cout << "Vector sorted" << endl;
-	while (litr != limit){
-		litr2 = litr;
-		if (*litr2 > *litr){
-			cout << "List not sorted" << endl;
-			break ;
-		}
-		++litr;
-	}
-	cout << "List Sorted" << endl;
+	if (pmmVector.checkSort() == false)
+		cout << "Vector not sorted" << endl;
+	else
+		cout << "Vector sorted" << endl;
+	if (pmmList.checkSort() == false)
+		cout << "List not sorted" << endl;
+	else
+		cout << "List Sorted" << endl;
 }
 
 void	PMM::runPMM(){
@@ -211,6 +197,16 @@ void		PMM::PmergeVector::setJohnson(int num){
 	Johnson.push_back(num);
 }
 
+bool	PMM::PmergeVector::checkSort(){
+	itr = Johnson.begin();
+	while (itr != Johnson.end() - 1){
+		if (*itr > *(itr + 1))
+			return (false);
+		++itr;
+	}
+	return (true);
+}
+
 void		PMM::PmergeVector::createPairs(){
 	int	num1 = 0, num2 = 0;
 
@@ -322,6 +318,8 @@ void		PMM::PmergeVector::recurSortPair(){
 // }
 
 void		PMM::PmergeVector::runVec(){
+	if (checkSort() == true)
+		return ;
 	if (Johnson.size() == 2){
 		vector<int>::iterator it = Johnson.begin();
 		if (*it > *(it + 1)){
@@ -454,6 +452,20 @@ void		PMM::PmergeList::setJohnson(int num){
 	Johnson.push_back(num);
 }
 
+bool	PMM::PmergeList::checkSort(){
+	itr = Johnson.begin();
+	list<int>::iterator litr2 = itr;
+	list<int>::iterator limit = Johnson.end(); --limit;
+
+	while (itr != limit){
+		if (*litr2 > *itr)
+			return (false);
+		litr2 = itr;
+		++itr;
+	}
+	return (true);
+}
+
 void		PMM::PmergeList::createPairs(){
 	int	num1 = 0, num2 = 0;
 
@@ -545,6 +557,8 @@ void		PMM::PmergeList::recurSortPair(){
 // }
 
 void		PMM::PmergeList::runLst(){
+	if (checkSort() == true)
+		return ;
 	if (Johnson.size() == 2){
 		list<int>::iterator it = Johnson.begin();
 		int num = *it++;

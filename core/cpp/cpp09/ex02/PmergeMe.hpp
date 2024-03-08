@@ -58,6 +58,7 @@ class	PMM{
 				void		setPairJohnson(int num1, int num2);
 				vector<int>	getJohnson() const;
 				void		setJohnson(int num);
+				bool		checkSort();
 				void		createPairs();
 				void		recurSortPair();
 				void		recurSortPair(vector<pair<int, int> > &vect);
@@ -91,6 +92,7 @@ class	PMM{
 				void		setPairJohnson(int num1, int num2);
 				list<int>	getJohnson() const;
 				void		setJohnson(int num);
+				bool		checkSort();
 				void		createPairs();
 				void		recurSortPair();
 				void		recurSortPair(list<pair<int, int> > &lis);
