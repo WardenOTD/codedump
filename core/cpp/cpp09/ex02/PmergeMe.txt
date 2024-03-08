@@ -14,7 +14,7 @@
 
 -- ex:
 
-	while (itr != left.end() && itr2 != right.end(){
+	while (itr != left.end() && itr2 != right.end()){
 		itr = left.begin(); itr2 = right.begin();
 		if (itr->second < itr2->second){
 			ori.push_back(*itr);
