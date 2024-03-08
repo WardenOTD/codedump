@@ -1,0 +1,141 @@
+[ 5 , 6 ] , [ 8 , 3 ] , [ 4 , 0 ] , [ 2 , 7 ] , [ 9 , 1 ] -- original
+
+..............................................
+
+[ 5 , 6 ] , [ 3 , 8 ] , [ 0 , 4 ] , [ 2 , 7 ] , [ 1 , 9 ] -- sort the individual pairs : [ smaller , larger ]
+
+..............................................
+
+-- using recursion, continuously split the vector down the middle into 2 smaller vectors, eventually reaching vector.size() == 1
+
+-- during every iteration of the split, merge the vectors back into the original vector by comparing which is larger
+
+-- sort by the larger of each pair : [ ... , smaller ] , ... , [ ... , larger ]
+
+-- ex:
+
+	while (itr != left.end() && itr2 != right.end(){
+		itr = left.begin(); itr2 = right.begin();
+		if (itr->second < itr2->second){
+			ori.push_back(*itr);
+			++itr;
+		}
+		else{
+			ori.push_back(*itr2);
+			++itr2;
+		}
+	}
+
+-- then append the remaining after one of them reaches the end
+
+-- ex:
+
+	while (itr != left.end()){
+		ori.push_back(*itr);
+		++itr;
+	}
+	while (itr2 != right.end()){
+		ori.push_back(*itr2);
+		++itr2;
+	}
+
+
+[ 0 , 4 ] , [ 5 , 6 ] , [ 2 , 7 ] , [ 3 , 8 ] , [ 1 , 9 ] -- after sorting the pairs : [ ... , smaller ] , ... , [ ... , larger ]
+
+..............................................
+
+0 , 5 , 2 , 3 , 1
+
+4 , 6 , 7 , 8 , 9  -- extract the larger numbers into a new array leaving behind the smaller numbers
+
+..............................................
+
+5 , 2 , 3 , 1
+
+0 , 4 , 6 , 7 , 8 , 9  -- smaller[0] will always be smaller than larger[0], instant insert [0], and erase from smaller
+
+..............................................
+
+
+jacobsthal numbers: -- a(n) = a(n-1) + (a(n-2) * 2)
+
+--:	0 , 1 , 1 , 3 , 5 , 11 , 21 , 43 , ...
+
+--:	5 = 3 + (1 * 2);   21 = 11 + (5 * 2);
+
+..............................................
+
+index using jacobsthal numbers, decrement until previous jacobsthal number, ignore initial 0 , 1.
+
+store the chosen number into a temporary container
+
+5 , 2 , 3 , 1
+
+jacobsthal: 1 , 3 , 5 , 11 , 21 , ...
+
+index: 1
+
+temp: 5
+
+..............................................
+
+[5] , 2 , 3 , 1
+
+next jacobsthal number is 3
+
+index: 3
+
+temp: 5 , 3
+
+..............................................
+
+[5] , 2 , [3] , 1
+
+--3 :: 2
+
+index: 2
+
+temp: 5 , 3 , 2
+
+..............................................
+
+[5] , [2] , [3] , 1
+
+--3 :: 1
+
+already sorted using 1
+
+next jacobsthal number is 5
+
+index: 5
+
+array of size [4] max;
+
+--5 :: 4
+
+index: 4
+
+temp: 5 , 3 , 2 , 1
+
+..............................................
+
+using binary insertion sort, insert { temp } into larger array;
+
+temp: 5 , 3 , 2 , 1
+
+0 , 4 , [5] , 6 , 7 , 8 , 9
+
+0 , [3] , 4 , [5] , 6 , 7 , 8 , 9
+
+0 , [2] , [3] , 4 , [5] , 6 , 7 , 8 , 9
+
+0 , [1] , [2] , [3] , 4 , [5] , 6 , 7 , 8 , 9
+
+..............................................
+
+sorted..
+
+
+
+
+
