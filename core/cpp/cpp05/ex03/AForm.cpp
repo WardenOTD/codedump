@@ -7,9 +7,9 @@ AForm::AForm() : name("Bureau"), gradeSig(1), gradeReq(1), sign(false){
 AForm::AForm(string name, int gradeSig, int gradeReq) : name(name), gradeSig(gradeSig), gradeReq(gradeReq), sign(false){
 	cout << "AForm with params constructed" << endl;
 	if (gradeSig < 1 || gradeReq < 1)
-		throw (AForm::FormGradeTooHighException);
+		throw (GradeTooHighForm());
 	if (gradeSig > 150 || gradeReq > 150)
-		throw (AForm::FormGradeTooLowException);
+		throw (GradeTooLowForm());
 }
 
 AForm::AForm(const AForm &a) : name(a.name), gradeSig(a.gradeSig), gradeReq(a.gradeReq), sign(a.sign){
@@ -75,19 +75,19 @@ std::ostream & operator<< (std::ostream &out, const AForm &obj){
 
 void AForm::beSigned(const Bureaucrat &be){
 	if (be.getgrade() > this->getgradeSig())
-		throw (AForm::FormGradeTooLowException);
+		throw (GradeTooLowForm());
 	else{
 		if (this->getSign())
-			throw (AForm::FormIsSigned);
+			throw (IsSigned());
 		this->sign = true;
 	}
 }
 
 void	AForm::execute(Bureaucrat const &executor) const{
 	if (!this->sign)
-		throw (AForm::FormIsNotSigned);
+		throw (IsNotSigned());
 	if (executor.getgrade() > this->getgradeReq())
-		throw (AForm::FormGradeTooLowException);
+		throw (GradeTooLowForm());
 	else
 		this->smtg();
 }

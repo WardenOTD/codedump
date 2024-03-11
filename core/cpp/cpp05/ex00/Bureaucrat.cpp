@@ -10,9 +10,9 @@ Bureaucrat::Bureaucrat(){
 Bureaucrat::Bureaucrat(string name, int grade) : name(name) {
 	cout << "Bureaucrat with params constructed" << endl;
 	if (grade < 1)
-		throw (Bureaucrat::GradeTooHighException);
+		throw (GradeTooHigh());
 	if (grade > 150)
-		throw (Bureaucrat::GradeTooLowException);
+		throw (GradeTooLow());
 	this->grade = grade;
 }
 
@@ -48,7 +48,7 @@ void Bureaucrat::increment() {
 	if (this->grade < 1)
 	{
 		delete this;
-		throw (Bureaucrat::GradeTooHighException);
+		throw (GradeTooHigh());
 	}
 }
 
@@ -57,7 +57,7 @@ void Bureaucrat::decrement() {
 	if (this->grade > 150)
 	{
 		delete this;
-		throw (Bureaucrat::GradeTooLowException);
+		throw (GradeTooLow());
 	}
 }
 

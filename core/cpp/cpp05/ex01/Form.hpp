@@ -52,9 +52,6 @@ class Form {
 		int		gradeSig;
 		int		gradeReq;
 		bool	sign;
-		GradeTooHighForm FormGradeTooHighException;
-		GradeTooLowForm FormGradeTooLowException;
-		IsSigned FormIsSigned;
 };
 
 std::ostream & operator<< (std::ostream &out, const Form &obj);

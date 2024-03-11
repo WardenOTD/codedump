@@ -44,8 +44,6 @@ class Bureaucrat {
 	private:
 		string	name;
 		int		grade;
-		GradeTooHigh GradeTooHighException;
-		GradeTooLow GradeTooLowException;
 };
 
 std::ostream & operator<< (std::ostream &out, const Bureaucrat &obj);

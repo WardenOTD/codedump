@@ -26,7 +26,6 @@ class Intern{
 		AForm	*makeForm(string name, string target);
 	private:
 		string		forms[3];
-		InvalidForm	InvalidForm;
 };
 
 #endif

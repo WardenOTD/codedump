@@ -45,7 +45,7 @@ AForm	*Intern::makeForm(string name, string target){
 		}
 		c++;
 		if (c == 3)
-			throw (Intern::InvalidForm);
+			throw (InvalidForm());
 	}
 	return (a);
 }
