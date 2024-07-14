@@ -38,18 +38,19 @@ class Span{
 		Span &operator=(const Span &a);
 		~Span();
 
-		void				addNumber(int i);
-		void				addMoreNumber(std::vector<int> input);
+		void				addNumber(unsigned int i);
+		void				addMoreNumber(std::vector<unsigned int> input);
 		int					shortestSpan();
 		int					longestSpan();
 
-		unsigned int		getN() const;
-		void				setN(unsigned int N);
-		std::vector<int>	getContain() const;
-		void				setContain(std::vector<int> contain);
+		unsigned int				getN() const;
+		void						setN(unsigned int N);
+		std::vector<unsigned int>	getContain() const;
+		void						setContain(std::vector<unsigned int> contain);
+
 	private:
 		unsigned int N;
-		std::vector<int> contain;
+		std::vector<unsigned int> contain;
 };
 
 #endif

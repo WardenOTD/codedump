@@ -23,17 +23,37 @@ Span::~Span(){
 }
 
 
-void	Span::addNumber(int i){
+void	Span::addNumber(unsigned int i){
 	if (contain.size() >= N)
 		throw Full();
 	contain.push_back(i);
 }
 
-void	Span::addMoreNumber(std::vector<int> input){
+void	Span::addMoreNumber(std::vector<unsigned int> input){
 	if (contain.size() + input.size() > N)
 		throw Full();
+	if (contain.empty() == false){
+		// std::copy(input.begin(), input.end(), contain.end());
 
-	std::copy(input.begin(), input.end(), contain.end());
+		for (std::vector<unsigned int>::iterator i = input.begin(); i < input.end(); i++){
+			contain.push_back(*i);
+		}
+	}
+	else{
+		// contain.push_back(*input.begin());
+		// std::copy(input.begin() + 1, input.end(), contain.end());
+
+		for (std::vector<unsigned int>::iterator i = input.begin(); i < input.end(); i++){
+			contain.push_back(*i);
+		}
+	}
+
+	// for (std::vector<int>::iterator i = input.begin(); i < input.end(); i++){
+	// 	cout << "input: " << *i << endl;
+	// }
+	// for (std::vector<int>::iterator i = contain.begin(); i < contain.end(); i++){
+	// 	cout << "contain: " << *i << endl;
+	// }
 }
 
 int	Span::shortestSpan(){
@@ -42,7 +62,7 @@ int	Span::shortestSpan(){
 
 	std::sort(contain.begin(), contain.end());
 	std::vector<int> diff;
-	for (std::vector<int>::iterator i = contain.begin(); i < (contain.end() - 1); i++){
+	for (std::vector<unsigned int>::iterator i = contain.begin(); i < (contain.end() - 1); i++){
 		(*i > *(i + 1)) ? diff.push_back((*i - *(i + 1))) : diff.push_back((*(i + 1) - *i));
 	}
 	return (*std::min_element(diff.begin(), diff.end()));
@@ -65,10 +85,10 @@ void	Span::setN(unsigned int N){
 	this->N = N;
 }
 
-std::vector<int>	Span::getContain() const{
+std::vector<unsigned int>	Span::getContain() const{
 	return (this->contain);
 }
 
-void	Span::setContain(std::vector<int> contain){
+void	Span::setContain(std::vector<unsigned int> contain){
 	std::copy(contain.begin(), contain.end(), this->contain.begin());
 }
