@@ -50,10 +50,11 @@ int main(int argc, char **argv){
 			cout << e.what() << endl;
 		}
 
-		cout << endl << "contain list: " << endl;
-		for (std::vector<unsigned int>::iterator i = span.getContain().begin(); i < span.getContain().end(); i++){
-			cout << *i << endl;
-		}
+		// cout << endl << "contain list: " << endl;
+		// std::vector<unsigned int> tmp = span.getContain();
+		// for (std::vector<unsigned int>::iterator i = tmp.begin(); i < tmp.end(); i++){
+		// 	cout << *i << endl;
+		// }
 		cout << endl;
 	}
 
@@ -101,7 +102,8 @@ int main(int argc, char **argv){
 		}
 
 		cout << endl << "contain list: " << endl;
-		for (std::vector<unsigned int>::iterator i = span.getContain().begin(); i < span.getContain().end(); i++){
+		std::vector<unsigned int> tmpp = span.getContain();
+		for (std::vector<unsigned int>::iterator i = tmpp.begin(); i < tmpp.end(); i++){
 			cout << *i << endl;
 		}
 		cout << endl;

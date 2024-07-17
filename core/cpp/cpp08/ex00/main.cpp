@@ -10,7 +10,7 @@ int main(){
 	for (int i = 0; i < 15; i++){
 		try{
 			std::vector<int>::iterator T = easyfind(contain, i);
-			cout << i << " found" << endl;
+			cout << *T << " found" << endl;
 		}
 		catch (std::exception &e){
 			cout << i << " " << e.what() << endl;
