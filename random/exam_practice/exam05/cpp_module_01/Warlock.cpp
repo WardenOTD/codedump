@@ -6,6 +6,10 @@ Warlock::Warlock(string name, string title) : cName(name), cTitle(title){
 
 Warlock::~Warlock(){
 	cout << cName << ": My job here is done!" << endl;
+	for (std::map<std::string, ASpell*>::iterator it = _SpellBook.begin(); it != _SpellBook.end(); ++it) {
+		delete it->second;
+	}
+	_SpellBook.clear();
 }
 
 void Warlock::introduce() const{

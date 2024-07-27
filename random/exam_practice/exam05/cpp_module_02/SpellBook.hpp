@@ -17,7 +17,7 @@ class SpellBook{
 		SpellBook();
 		~SpellBook();
 
-		void learnSpell(ASpell*);
-		void forgetSpell(string const &);
-		ASpell* createSpell(string const &);
+		void learnSpell(ASpell* spell);
+		void forgetSpell(string const &SpellName);
+		ASpell* createSpell(string const &SpellName);
 };
