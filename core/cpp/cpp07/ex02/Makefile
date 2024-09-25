@@ -1,14 +1,9 @@
-SRC = mymain.cpp\
-
-TEST = main.cpp\
+SRC = main.cpp\
 
 NAME = Array
 
-${NAME}: ${SRC} ${TEST}
+${NAME}: ${SRC}
 	g++ -Wall -Wextra -Werror -std=c++98 ${SRC} -o ${NAME}
-
-test: ${TEST}
-	g++ -Wall -Wextra -Werror -std=c++98 ${TEST} -o ${NAME}
 
 all: ${NAME}
 
