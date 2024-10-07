@@ -1,49 +1,63 @@
 version: '3'
 services:
   mariadb:
+    image: mariadb:user
     container_name: mariadb
     build: ./mariadb/
     volumes:
-      - /data/mysql:/var/lib/mysql
-    environment:
-      MYSQL_ROOT_PASSWORD: password
-      MYSQL_DATABASE: db
-      MYSQL_USER: user
-      MYSQL_PASSWORD: password
-    restart: on-failure
+      - mariadb:/var/lib/mysql
+    # ports:
+    #   - 3306:3306
+    env_file:
+      - .env
+    networks:
+      - inception
+    restart: always
+
   wordpress:
+    image: wordpress:user
     container_name: wordpress
     build: ./wordpress/
     volumes:
-      - /data/html:/var/www/html
+      - wordpress:/var/www/wordpress
+    ports:
+      - 9000:9000
     depends_on:
-      - mariadb
-    environment:
-      WORDPRESS_DB_HOST: mysql
-      MYSQL_ROOT_PASSWORD: password
-      WORDPRESS_DB_NAME: db
-      WORDPRESS_DB_USER: user
-      WORDPRESS_DB_PASSWORD: password
-      WORDPRESS_TABLE_PREFIX: wp_
-    restart: on-failure
+     - mariadb
+    env_file:
+     - .env
+    networks:
+     - inception
+    restart: always
+
   nginx:
+    image: nginx:user
     container_name: nginx
     build: ./nginx/
     volumes:
-      - /data/html:/var/www/html
+      - wordpress:/var/www/wordpress
     ports:
-      - 8000:80
-    restart: on-failure
+      - 443:443
+    depends_on:
+      - wordpress
+    networks:
+      - inception
+    restart: always
+
 volumes:
   mariadb:
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: /data
+      device: /home/data/mariadb
   wordpress:
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: /data
+      device: /home/data/wordpress
+
+networks:
+  inception:
+    name: Inception

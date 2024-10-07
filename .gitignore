@@ -7,6 +7,8 @@
 .gitignore
 .DS_Store
 
+.env
+
 # User-specific files
 *.rsuser
 *.suo
