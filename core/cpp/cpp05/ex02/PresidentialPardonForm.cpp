@@ -16,7 +16,7 @@ PresidentialPardonForm::PresidentialPardonForm(string target) : target(target){
 	this->setSign(false);
 }
 
-PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm &a){
+PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm &a) : AForm(a){
 	cout << "President stand in" << endl;
 	this->target = a.target;
 	this->setname(target);

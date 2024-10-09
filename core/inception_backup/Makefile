@@ -1,24 +1,24 @@
-WP_DATA = /home/data/wordpress
-MDB_DATA = /home/data/mariadb
+WP_DATA = /home/jteoh/data/wordpress
+MDB_DATA = /home/jteoh/data/mariadb
 
 all: up
 
 up: build
 		mkdir -p $(WP_DATA)
 		mkdir -p $(MDB_DATA)
-		docker compose -f ./docker_compose.yml up -d
+		docker compose -f ./srcs/docker_compose.yml up -d
 
 down:
-		docker compose -f ./docker_compose.yml down
+		docker compose -f ./srcs/docker_compose.yml down
 
 start:
-		docker compose -f ./docker_compose.yml start
+		docker compose -f ./srcs/docker_compose.yml start
 
 stop:
-		docker compose -f ./docker_compose.yml stop
+		docker compose -f ./srcs/docker_compose.yml stop
 
 build:
-		docker compose -f ./docker_compose.yml build
+		docker compose -f ./srcs/docker_compose.yml build
 
 fclean:
 		docker stop $$(docker ps -qa) || true

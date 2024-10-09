@@ -152,5 +152,11 @@ int main(){
 	cout << "constArr: ";
 	print_arr(constArr);
 
+	//size test
+	cout << endl << "Size test" << endl;
+	cout << "arr: " << arr.size() << endl;
+	cout << "arr2: " << arr2.size() << endl;
+	cout << "arr3: " << arr3.size() << endl;
+	
 	return (0);
 }

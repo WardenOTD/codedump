@@ -16,7 +16,7 @@ RobotomyRequestForm::RobotomyRequestForm(string target) : target(target){
 	this->setSign(false);
 }
 
-RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &a){
+RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &a) : AForm(a){
 	cout << "Robotomy clone" << endl;
 	this->target = a.target;
 	this->setname(target);

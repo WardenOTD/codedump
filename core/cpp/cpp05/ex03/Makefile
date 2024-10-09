@@ -10,3 +10,9 @@ all:
 
 clean:
 	rm -rf ${NAME}
+
+fclean: clean
+
+re: fclean all
+
+.PHONY: all

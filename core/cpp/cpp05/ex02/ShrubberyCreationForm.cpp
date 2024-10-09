@@ -16,7 +16,7 @@ ShrubberyCreationForm::ShrubberyCreationForm(string target) : target(target){
 	this->setSign(false);
 }
 
-ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &a){
+ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &a) : AForm(a){
 	cout << "Association rebranding" << endl;
 	this->target = a.target;
 	this->setname(target);
@@ -92,4 +92,4 @@ void	ShrubberyCreationForm::smtg() const{
 		out << "                              :@):.\n                             .:@:'." << endl;
 		out << "                           .::(@:." << endl << endl << endl;
 	}
-}	
+}

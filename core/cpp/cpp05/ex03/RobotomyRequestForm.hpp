@@ -2,6 +2,7 @@
 # define ROBOTOMYREQUESTFORM_HPP
 
 # include "Bureaucrat.hpp"
+# include <cstdlib>
 
 using std::string;
 using std::cout;
