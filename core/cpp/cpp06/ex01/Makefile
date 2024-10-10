@@ -1,6 +1,6 @@
-SRC = main.cpp ScalarConverter.cpp\
+SRC = main.cpp Serializer.cpp\
 
-NAME = Convert
+NAME = Serialize
 
 ${NAME}: ${SRC}
 	g++ -Wall -Wextra -Werror -std=c++98 ${SRC} -o ${NAME}
