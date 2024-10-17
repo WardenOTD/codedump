@@ -95,7 +95,7 @@ int main(int ac, char **av)
 							clients[fd].msg[j] = recv_buffer[i];
 							if (clients[fd].msg[j] == '\n')
 							{
-								clients[fd].msg[j] == '\0';
+								clients[fd].msg[j] = '\0';
 								sprintf(send_buffer, "client %d: %s\n", clients[fd].id, clients[fd].msg);
 								send_to_all(fd);
 								bzero(clients[fd].msg, strlen(clients[fd].msg));
