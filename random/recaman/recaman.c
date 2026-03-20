@@ -1,11 +1,20 @@
 #include <stdio.h>
-#define MAX 100
+#include <stdlib.h>
+// #define MAX 100
 #define BLUE "\e[0;34m"
 #define RESET "\e[0m"
 
-int main() {
+int main(int argc, char **argv) {
+	int MAX = 100;
+	if (argc > 1)
+		MAX = atoi(argv[1]);
 	int counter = 0;
-	int recaman[100] = {0};
+	int *recaman = malloc(MAX * sizeof(int));
+	if (recaman == NULL) {
+		fprintf(stderr, "Malloc Error\n");
+		return 1;
+	}
+	recaman[0] = 0;
 
 	for (counter; counter < MAX; counter++){
 		if (counter == 0)
@@ -31,5 +40,6 @@ int main() {
 		else
 			printf("\n");
 	}
+	free(recaman);
 	return 0;
 }
